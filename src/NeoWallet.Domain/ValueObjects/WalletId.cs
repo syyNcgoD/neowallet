@@ -1,11 +1,6 @@
 using NeoWallet.Domain.Common;
 
 namespace NeoWallet.Domain.ValueObjects;
-
-/// <summary>
-/// Strongly-typed identifier for a Wallet aggregate root.
-/// Prevents Primitive Obsession and prevents mixing up ID arguments.
-/// </summary>
 public readonly record struct WalletId : IComparable<WalletId>
 {
     public Guid Value { get; }

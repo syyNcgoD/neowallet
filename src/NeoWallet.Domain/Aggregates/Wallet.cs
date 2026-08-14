@@ -5,11 +5,6 @@ using NeoWallet.Domain.Events;
 using NeoWallet.Domain.ValueObjects;
 
 namespace NeoWallet.Domain.Aggregates;
-
-/// <summary>
-/// Event Sourced Aggregate Root representing a financial wallet.
-/// Encapsulates balance mutations, currency invariant enforcement, and lifecycle state changes.
-/// </summary>
 public sealed class Wallet : AggregateRoot<WalletId>
 {
     public OwnerId OwnerId { get; private set; }
@@ -18,17 +13,9 @@ public sealed class Wallet : AggregateRoot<WalletId>
     public WalletStatus Status { get; private set; }
     public DateTime CreatedAtUtc { get; private set; }
     public DateTime? LastModifiedAtUtc { get; private set; }
-
-    /// <summary>
-    /// Parameterless constructor required for Event Sourcing snapshotting and rehydration.
-    /// </summary>
     private Wallet()
     {
     }
-
-    /// <summary>
-    /// Factory method to initialize a new Wallet aggregate root.
-    /// </summary>
     public static Result<Wallet> Create(WalletId id, OwnerId ownerId, Currency currency)
     {
         if (id.Value == Guid.Empty)
@@ -52,10 +39,6 @@ public sealed class Wallet : AggregateRoot<WalletId>
 
         return Result.Success(wallet);
     }
-
-    /// <summary>
-    /// Deposits a monetary amount into the wallet.
-    /// </summary>
     public Result Deposit(
         TransactionId transactionId,
         Money amount,
@@ -83,10 +66,6 @@ public sealed class Wallet : AggregateRoot<WalletId>
 
         return Result.Success();
     }
-
-    /// <summary>
-    /// Withdraws a monetary amount from the wallet.
-    /// </summary>
     public Result Withdraw(
         TransactionId transactionId,
         Money amount,
@@ -119,10 +98,6 @@ public sealed class Wallet : AggregateRoot<WalletId>
 
         return Result.Success();
     }
-
-    /// <summary>
-    /// Transfers money out of this wallet to another wallet (P2P debit step).
-    /// </summary>
     public Result TransferOut(
         TransactionId transactionId,
         WalletId targetWalletId,
@@ -160,10 +135,6 @@ public sealed class Wallet : AggregateRoot<WalletId>
 
         return Result.Success();
     }
-
-    /// <summary>
-    /// Receives money transferred into this wallet from another wallet (P2P credit step).
-    /// </summary>
     public Result TransferIn(
         TransactionId transactionId,
         WalletId sourceWalletId,
@@ -196,10 +167,6 @@ public sealed class Wallet : AggregateRoot<WalletId>
 
         return Result.Success();
     }
-
-    /// <summary>
-    /// Locks the wallet preventing all debit and credit operations.
-    /// </summary>
     public Result Lock(string reason)
     {
         if (Status == WalletStatus.Locked)
@@ -217,10 +184,6 @@ public sealed class Wallet : AggregateRoot<WalletId>
 
         return Result.Success();
     }
-
-    /// <summary>
-    /// Unlocks a previously locked wallet back to active status.
-    /// </summary>
     public Result Unlock(string reason)
     {
         if (Status == WalletStatus.Active)
@@ -238,10 +201,6 @@ public sealed class Wallet : AggregateRoot<WalletId>
 
         return Result.Success();
     }
-
-    /// <summary>
-    /// Dispatches domain events to aggregate state mutators.
-    /// </summary>
     protected override void When(IDomainEvent domainEvent)
     {
         switch (domainEvent)

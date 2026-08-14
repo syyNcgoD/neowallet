@@ -1,10 +1,6 @@
 using NeoWallet.Domain.Enums;
 
 namespace NeoWallet.Infrastructure.ReadModels;
-
-/// <summary>
-/// CQRS Read Model representing an indexed historical transaction entry.
-/// </summary>
 public sealed class TransactionHistory
 {
     public Guid Id { get; set; }

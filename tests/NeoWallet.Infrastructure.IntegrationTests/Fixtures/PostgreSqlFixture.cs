@@ -4,10 +4,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Testcontainers.PostgreSql;
 
 namespace NeoWallet.Infrastructure.IntegrationTests.Fixtures;
-
-/// <summary>
-/// Test fixture managing PostgreSQL container lifecycle via Testcontainers.
-/// </summary>
 public sealed class PostgreSqlFixture : IAsyncLifetime
 {
     private PostgreSqlContainer? _container;

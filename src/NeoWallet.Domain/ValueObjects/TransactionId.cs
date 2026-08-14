@@ -1,10 +1,6 @@
 using NeoWallet.Domain.Common;
 
 namespace NeoWallet.Domain.ValueObjects;
-
-/// <summary>
-/// Strongly-typed identifier for a financial transaction.
-/// </summary>
 public readonly record struct TransactionId : IComparable<TransactionId>
 {
     public Guid Value { get; }

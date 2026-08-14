@@ -1,9 +1,4 @@
 namespace NeoWallet.Domain.Common;
-
-/// <summary>
-/// Base class for all domain entities, defined by their unique identity.
-/// </summary>
-/// <typeparam name="TId">The type of the entity identifier.</typeparam>
 public abstract class Entity<TId> : IEquatable<Entity<TId>>
     where TId : notnull
 {

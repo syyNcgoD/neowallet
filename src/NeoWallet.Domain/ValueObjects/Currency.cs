@@ -2,10 +2,6 @@ using System.Text.RegularExpressions;
 using NeoWallet.Domain.Common;
 
 namespace NeoWallet.Domain.ValueObjects;
-
-/// <summary>
-/// Value object representing an ISO-4217 currency.
-/// </summary>
 public sealed partial record Currency : IComparable<Currency>
 {
     private static readonly Regex CurrencyCodeRegex = Iso4217Regex();

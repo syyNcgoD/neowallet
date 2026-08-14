@@ -13,10 +13,6 @@ using NeoWallet.Infrastructure.ReadModels;
 using Weasel.Core;
 
 namespace NeoWallet.Infrastructure;
-
-/// <summary>
-/// Service collection extension methods for registering infrastructure dependencies.
-/// </summary>
 public static class DependencyInjection
 {
     public static IServiceCollection AddNeoWalletInfrastructure(

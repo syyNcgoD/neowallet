@@ -1,11 +1,6 @@
 using NeoWallet.Domain.Enums;
 
 namespace NeoWallet.Infrastructure.ReadModels;
-
-/// <summary>
-/// CQRS Read Model representing the current projected state of a wallet.
-/// Optimized for high-throughput balance queries and dashboard views.
-/// </summary>
 public sealed class WalletSummary
 {
     public Guid Id { get; set; }

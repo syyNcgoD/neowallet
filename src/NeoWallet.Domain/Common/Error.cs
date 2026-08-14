@@ -1,8 +1,4 @@
 namespace NeoWallet.Domain.Common;
-
-/// <summary>
-/// Categorizes domain errors to facilitate appropriate application/HTTP response mapping.
-/// </summary>
 public enum ErrorType
 {
     Failure = 0,
@@ -12,10 +8,6 @@ public enum ErrorType
     Unauthorized = 4,
     Forbidden = 5
 }
-
-/// <summary>
-/// Encapsulates domain error details without relying on exceptions for business control flow.
-/// </summary>
 public sealed record Error
 {
     public static readonly Error None = new(string.Empty, string.Empty, ErrorType.Failure);

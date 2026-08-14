@@ -2,10 +2,6 @@ using NeoWallet.Domain.Common;
 using NeoWallet.Domain.ValueObjects;
 
 namespace NeoWallet.Domain.Events;
-
-/// <summary>
-/// Domain event emitted when a new wallet aggregate is initialized.
-/// </summary>
 public sealed record WalletCreated(
     Guid EventId,
     WalletId WalletId,

@@ -4,10 +4,6 @@ using NeoWallet.Domain.Events;
 using NeoWallet.Infrastructure.ReadModels;
 
 namespace NeoWallet.Infrastructure.Projections;
-
-/// <summary>
-/// Real-time Marten projection computing the WalletSummary read model from the wallet event stream.
-/// </summary>
 public sealed class WalletSummaryProjection : SingleStreamProjection<WalletSummary, Guid>
 {
     public static WalletSummary Create(WalletCreated @event)

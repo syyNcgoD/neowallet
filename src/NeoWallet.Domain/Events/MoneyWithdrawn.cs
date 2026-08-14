@@ -2,10 +2,6 @@ using NeoWallet.Domain.Common;
 using NeoWallet.Domain.ValueObjects;
 
 namespace NeoWallet.Domain.Events;
-
-/// <summary>
-/// Domain event emitted when money is withdrawn from a wallet.
-/// </summary>
 public sealed record MoneyWithdrawn(
     Guid EventId,
     WalletId WalletId,

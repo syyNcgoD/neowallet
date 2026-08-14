@@ -1,10 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 
 namespace NeoWallet.Domain.Common;
-
-/// <summary>
-/// Represents the outcome of an operation, encapsulating success or failure without throwing exceptions.
-/// </summary>
 public class Result
 {
     public bool IsSuccess { get; }
@@ -56,11 +52,6 @@ public class Result
 
     public static implicit operator Result(Error error) => Failure(error);
 }
-
-/// <summary>
-/// Represents the typed outcome of an operation containing a return value on success or an error on failure.
-/// </summary>
-/// <typeparam name="TValue">The underlying payload value type.</typeparam>
 public sealed class Result<TValue> : Result
 {
     private readonly TValue? _value;

@@ -1,8 +1,4 @@
 namespace NeoWallet.Domain.Common;
-
-/// <summary>
-/// Provides defensive precondition validation methods (Guard Clauses).
-/// </summary>
 public static class Guard
 {
     public static T AgainstNull<T>(T? input, string parameterName)

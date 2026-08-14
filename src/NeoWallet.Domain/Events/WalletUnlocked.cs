@@ -2,10 +2,6 @@ using NeoWallet.Domain.Common;
 using NeoWallet.Domain.ValueObjects;
 
 namespace NeoWallet.Domain.Events;
-
-/// <summary>
-/// Domain event emitted when a locked wallet is unlocked back to active status.
-/// </summary>
 public sealed record WalletUnlocked(
     Guid EventId,
     WalletId WalletId,

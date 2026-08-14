@@ -1,10 +1,6 @@
 using NeoWallet.Domain.Common;
 
 namespace NeoWallet.Domain.ValueObjects;
-
-/// <summary>
-/// Strongly-typed identifier for the owner (user/account) of a wallet.
-/// </summary>
 public readonly record struct OwnerId : IComparable<OwnerId>
 {
     public Guid Value { get; }

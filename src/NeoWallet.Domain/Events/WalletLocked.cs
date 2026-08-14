@@ -2,10 +2,6 @@ using NeoWallet.Domain.Common;
 using NeoWallet.Domain.ValueObjects;
 
 namespace NeoWallet.Domain.Events;
-
-/// <summary>
-/// Domain event emitted when a wallet is locked to prevent further financial operations.
-/// </summary>
 public sealed record WalletLocked(
     Guid EventId,
     WalletId WalletId,

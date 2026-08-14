@@ -5,10 +5,6 @@ using NeoWallet.Domain.Events;
 using NeoWallet.Infrastructure.ReadModels;
 
 namespace NeoWallet.Infrastructure.Projections;
-
-/// <summary>
-/// Event projection capturing all monetary events into searchable TransactionHistory documents.
-/// </summary>
 public sealed class TransactionHistoryProjection : EventProjection
 {
     public void Project(MoneyDeposited @event, IDocumentOperations ops)

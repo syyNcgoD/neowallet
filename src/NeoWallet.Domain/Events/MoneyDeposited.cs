@@ -2,10 +2,6 @@ using NeoWallet.Domain.Common;
 using NeoWallet.Domain.ValueObjects;
 
 namespace NeoWallet.Domain.Events;
-
-/// <summary>
-/// Domain event emitted when money is deposited into a wallet.
-/// </summary>
 public sealed record MoneyDeposited(
     Guid EventId,
     WalletId WalletId,

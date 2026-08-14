@@ -8,11 +8,6 @@ using NeoWallet.Domain.Repositories;
 using NeoWallet.Domain.ValueObjects;
 
 namespace NeoWallet.Infrastructure.Persistence.Repositories;
-
-/// <summary>
-/// Marten-backed Event Store repository implementation for the Wallet aggregate root.
-/// Enforces Optimistic Concurrency Control, rehydration, and stream existence tracking.
-/// </summary>
 public sealed class MartenWalletRepository : IWalletRepository
 {
     private readonly IDocumentSession _session;

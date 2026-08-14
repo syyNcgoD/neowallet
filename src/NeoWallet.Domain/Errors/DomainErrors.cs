@@ -2,10 +2,6 @@ using NeoWallet.Domain.Common;
 using NeoWallet.Domain.ValueObjects;
 
 namespace NeoWallet.Domain.Errors;
-
-/// <summary>
-/// Centralized repository of domain-specific business error definitions.
-/// </summary>
 public static class DomainErrors
 {
     public static class Wallet

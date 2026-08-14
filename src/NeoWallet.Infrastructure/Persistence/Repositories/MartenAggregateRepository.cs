@@ -6,10 +6,6 @@ using NeoWallet.Domain.Errors;
 using NeoWallet.Domain.Repositories;
 
 namespace NeoWallet.Infrastructure.Persistence.Repositories;
-
-/// <summary>
-/// Generic Marten-backed Event Store repository implementation for any Event Sourced aggregate root.
-/// </summary>
 public class MartenAggregateRepository<TAggregate, TId> : IAggregateRepository<TAggregate, TId>
     where TAggregate : AggregateRoot<TId>
     where TId : notnull

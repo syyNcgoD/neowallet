@@ -5,10 +5,6 @@ using NeoWallet.Domain.Errors;
 using NeoWallet.Domain.ValueObjects;
 
 namespace NeoWallet.Domain.Services;
-
-/// <summary>
-/// Domain service implementing cross-aggregate transfer invariants and state transitions.
-/// </summary>
 public sealed class TransferService : ITransferService
 {
     public Result Transfer(

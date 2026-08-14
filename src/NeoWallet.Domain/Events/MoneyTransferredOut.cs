@@ -2,10 +2,6 @@ using NeoWallet.Domain.Common;
 using NeoWallet.Domain.ValueObjects;
 
 namespace NeoWallet.Domain.Events;
-
-/// <summary>
-/// Domain event emitted when money is transferred out of a source wallet to another wallet.
-/// </summary>
 public sealed record MoneyTransferredOut(
     Guid EventId,
     WalletId SourceWalletId,

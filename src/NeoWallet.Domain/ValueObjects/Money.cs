@@ -2,11 +2,6 @@ using System.Globalization;
 using NeoWallet.Domain.Common;
 
 namespace NeoWallet.Domain.ValueObjects;
-
-/// <summary>
-/// Immutable value object representing a monetary amount with an associated currency.
-/// Enforces business invariants: currency homogeneity, precision control, and overflow prevention.
-/// </summary>
 public sealed record Money : IComparable<Money>
 {
     public decimal Amount { get; }
