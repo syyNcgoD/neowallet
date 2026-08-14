@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/NeoWallet.Domain/NeoWallet.Domain.csproj" />
+    <Project Path="src/NeoWallet.Infrastructure/NeoWallet.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/NeoWallet.Domain.UnitTests/NeoWallet.Domain.UnitTests.csproj" />
+    <Project Path="tests/NeoWallet.Infrastructure.IntegrationTests/NeoWallet.Infrastructure.IntegrationTests.csproj" />
+  </Folder>
+</Solution>

@@ -1,0 +1,27 @@
+## .NET & Visual Studio
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+*.user
+*.userosscache
+*.sln.docstates
+.vs/
+.idea/
+*.suo
+*.userprefs
+TestResults/
+*.cobertura.xml
+coverage*
+*.dotCover
+
+## OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+## Temporary files
+*.tmp
+*.log
+marten_types.txt
+lifecycles.txt
