@@ -2,6 +2,7 @@ using Marten;
 using Marten.Events.Projections;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NeoWallet.Application.Common.Interfaces;
 using NeoWallet.Domain.Aggregates;
 using NeoWallet.Domain.Events;
 using NeoWallet.Domain.Repositories;
@@ -84,6 +85,11 @@ public static class DependencyInjection
         services.AddSingleton<IJwtProvider, JwtProvider>();
         services.AddSingleton<ITotpProvider, TotpProvider>();
         services.AddSingleton<IApiKeyService, ApiKeyService>();
+
+        // Domain Services & Read Services
+        services.AddScoped<NeoWallet.Domain.Services.ITransferService, NeoWallet.Domain.Services.TransferService>();
+        services.AddScoped<NeoWallet.Application.Common.Interfaces.IWalletReadService, NeoWallet.Infrastructure.Services.MartenWalletReadService>();
+        services.AddSingleton<NeoWallet.Application.Common.Interfaces.IIdempotencyStore, NeoWallet.Infrastructure.Services.MemoryIdempotencyStore>();
 
         // Repositories
         services.AddScoped<IWalletRepository, MartenWalletRepository>();

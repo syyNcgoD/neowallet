@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 using System.Text;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using NeoWallet.Application.Common.Interfaces;
 using NeoWallet.Domain.Aggregates;
 using NeoWallet.Infrastructure.Authentication.Options;
 

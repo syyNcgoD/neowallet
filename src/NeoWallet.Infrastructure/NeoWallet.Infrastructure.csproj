@@ -1,7 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
     <ProjectReference Include="..\NeoWallet.Domain\NeoWallet.Domain.csproj" />
+    <ProjectReference Include="..\NeoWallet.Application\NeoWallet.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>

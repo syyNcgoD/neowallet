@@ -1,5 +1,6 @@
 using System.Buffers.Binary;
 using System.Security.Cryptography;
+using NeoWallet.Application.Common.Interfaces;
 using NeoWallet.Domain.Common;
 using NeoWallet.Domain.ValueObjects;
 

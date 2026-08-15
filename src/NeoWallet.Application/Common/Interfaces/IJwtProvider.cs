@@ -1,7 +1,7 @@
 using System.Security.Claims;
 using NeoWallet.Domain.Aggregates;
 
-namespace NeoWallet.Infrastructure.Authentication;
+namespace NeoWallet.Application.Common.Interfaces;
 
 public interface IJwtProvider
 {

@@ -1,6 +1,6 @@
 using NeoWallet.Domain.ValueObjects;
 
-namespace NeoWallet.Infrastructure.Authentication;
+namespace NeoWallet.Application.Common.Interfaces;
 
 public interface ITotpProvider
 {

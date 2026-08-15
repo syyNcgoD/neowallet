@@ -1,5 +1,6 @@
 using System.Security.Cryptography;
 using System.Text;
+using NeoWallet.Application.Common.Interfaces;
 
 namespace NeoWallet.Infrastructure.Authentication;
 
