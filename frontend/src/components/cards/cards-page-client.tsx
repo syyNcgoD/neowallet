@@ -1,53 +1,90 @@
-"use client"
+"use client";
 
-import { useState, useCallback } from "react"
-import { cardsData, type CardData } from "@/data/seed"
-import { InteractiveCard } from "@/components/cards/interactive-card"
-import { CardControls } from "@/components/cards/card-controls"
-import { VirtualCardGenerator } from "@/components/cards/virtual-card-generator"
-import { CardList } from "@/components/cards/card-list"
+import { useState, useCallback, useEffect } from "react";
+import { cardsData, type CardData } from "@/data/seed";
+import { InteractiveCard } from "@/components/cards/interactive-card";
+import { CardControls } from "@/components/cards/card-controls";
+import { VirtualCardGenerator } from "@/components/cards/virtual-card-generator";
+import { CardList } from "@/components/cards/card-list";
+import { useAuth } from "@/contexts/auth-context";
+import { useWalletSummary, useLockWallet, useUnlockWallet } from "@/hooks/use-wallets";
 
 export function CardsPageClient() {
-  const [cards, setCards] = useState<CardData[]>(cardsData)
-  const [activeCardId, setActiveCardId] = useState<string>(cardsData[0].id)
+  const { user } = useAuth();
+  const walletId = user?.id;
+  const { data: walletSummary } = useWalletSummary(walletId);
+  const lockMutation = useLockWallet(walletId || "");
+  const unlockMutation = useUnlockWallet(walletId || "");
+
+  const [cards, setCards] = useState<CardData[]>(cardsData);
+  const [activeCardId, setActiveCardId] = useState<string>(cardsData[0].id);
   const [frozenMap, setFrozenMap] = useState<Record<string, boolean>>(() => {
-    const map: Record<string, boolean> = {}
+    const map: Record<string, boolean> = {};
     for (const c of cardsData) {
-      map[c.id] = c.frozen
+      map[c.id] = c.frozen;
     }
-    return map
-  })
-  const [dailyLimits, setDailyLimits] = useState<Record<string, number>>(
-    () => {
-      const map: Record<string, number> = {}
-      for (const c of cardsData) {
-        map[c.id] = c.dailyLimit
-      }
-      return map
-    },
-  )
+    return map;
+  });
+  const [dailyLimits, setDailyLimits] = useState<Record<string, number>>(() => {
+    const map: Record<string, number> = {};
+    for (const c of cardsData) {
+      map[c.id] = c.dailyLimit;
+    }
+    return map;
+  });
 
-  const activeCard = cards.find((c) => c.id === activeCardId) ?? cards[0]
+  // Synchronize first card with live backend wallet state
+  useEffect(() => {
+    if (walletSummary) {
+      setCards((prev) => [
+        {
+          ...prev[0],
+          balance: walletSummary.balance,
+          frozen: walletSummary.status === "Locked",
+          name: `${user?.email?.split("@")[0].toUpperCase() || "NEOWALLET"} PRIMARY`,
+        },
+        ...prev.slice(1),
+      ]);
+      setFrozenMap((prev) => ({
+        ...prev,
+        [cardsData[0].id]: walletSummary.status === "Locked",
+      }));
+    }
+  }, [walletSummary, user]);
 
-  const toggleFreeze = useCallback(() => {
+  const activeCard = cards.find((c) => c.id === activeCardId) ?? cards[0];
+
+  const toggleFreeze = useCallback(async () => {
+    const currentStatus = frozenMap[activeCardId] ?? false;
+    const nextStatus = !currentStatus;
+
     setFrozenMap((prev) => ({
       ...prev,
-      [activeCardId]: !prev[activeCardId],
-    }))
-  }, [activeCardId])
+      [activeCardId]: nextStatus,
+    }));
+
+    // If active card is primary wallet card, sync lock state with backend
+    if (activeCardId === cardsData[0].id && walletId) {
+      if (nextStatus) {
+        await lockMutation.mutateAsync("User froze card from Cards page");
+      } else {
+        await unlockMutation.mutateAsync("User unfroze card from Cards page");
+      }
+    }
+  }, [activeCardId, frozenMap, walletId, lockMutation, unlockMutation]);
 
   const handleDailyLimitChange = useCallback(
     (val: number) => {
-      setDailyLimits((prev) => ({ ...prev, [activeCardId]: val }))
+      setDailyLimits((prev) => ({ ...prev, [activeCardId]: val }));
     },
-    [activeCardId],
-  )
+    [activeCardId]
+  );
 
   const handleCardCreated = useCallback((card: CardData) => {
-    setCards((prev) => [...prev, card])
-    setFrozenMap((prev) => ({ ...prev, [card.id]: false }))
-    setDailyLimits((prev) => ({ ...prev, [card.id]: card.dailyLimit }))
-  }, [])
+    setCards((prev) => [...prev, card]);
+    setFrozenMap((prev) => ({ ...prev, [card.id]: false }));
+    setDailyLimits((prev) => ({ ...prev, [card.id]: card.dailyLimit }));
+  }, []);
 
   return (
     <div className="space-y-6">
@@ -85,5 +122,5 @@ export function CardsPageClient() {
         </div>
       </div>
     </div>
-  )
+  );
 }
