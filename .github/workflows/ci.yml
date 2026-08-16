@@ -1,0 +1,33 @@
+name: NeoWallet CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    name: Build, Test & Architecture Verification
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Source Code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET 8 SDK
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Restore NuGet Packages
+      run: dotnet restore
+
+    - name: Build Solution (Release)
+      run: dotnet build --no-restore --configuration Release
+
+    - name: Run All Tests (Domain, Application, Infrastructure, Api, Architecture)
+      run: dotnet test --no-build --configuration Release --verbosity normal --collect:"XPlat Code Coverage"
+
+    - name: Verify Docker Build
+      run: docker build -t neowallet-api:ci .

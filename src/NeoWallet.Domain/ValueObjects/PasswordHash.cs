@@ -6,7 +6,8 @@ public sealed record PasswordHash
 {
     public string Value { get; }
 
-    private PasswordHash(string value)
+    [System.Text.Json.Serialization.JsonConstructor]
+    public PasswordHash(string value)
     {
         Value = value;
     }

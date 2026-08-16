@@ -7,7 +7,8 @@ public readonly record struct OwnerId : IComparable<OwnerId>
 
     public static OwnerId Empty => new(Guid.Empty);
 
-    private OwnerId(Guid value)
+    [System.Text.Json.Serialization.JsonConstructor]
+    public OwnerId(Guid value)
     {
         Value = value;
     }

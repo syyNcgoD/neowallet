@@ -7,7 +7,8 @@ public readonly record struct TransactionId : IComparable<TransactionId>
 
     public static TransactionId Empty => new(Guid.Empty);
 
-    private TransactionId(Guid value)
+    [System.Text.Json.Serialization.JsonConstructor]
+    public TransactionId(Guid value)
     {
         Value = value;
     }

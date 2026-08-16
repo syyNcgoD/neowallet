@@ -11,11 +11,12 @@ public sealed record Money : IComparable<Money>
     public bool IsPositive => Amount > 0m;
     public bool IsNegative => Amount < 0m;
 
-    private Money(decimal amount, Currency currency)
+    [System.Text.Json.Serialization.JsonConstructor]
+    public Money(decimal amount, Currency currency)
     {
         Currency = currency;
         // Normalize amount to currency's decimal precision
-        Amount = Math.Round(amount, currency.DecimalPlaces, MidpointRounding.AwayFromZero);
+        Amount = currency is not null ? Math.Round(amount, currency.DecimalPlaces, MidpointRounding.AwayFromZero) : amount;
     }
 
     public static Money Zero(Currency currency)

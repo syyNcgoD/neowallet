@@ -33,10 +33,9 @@ public sealed class MartenWalletRepository : IWalletRepository
 
         try
         {
-            var eventStream = await _session.Events.FetchStreamAsync(
-                id.Value,
-                version: expectedVersion ?? 0,
-                token: cancellationToken);
+            var eventStream = expectedVersion.HasValue && expectedVersion.Value > 0
+                ? await _session.Events.FetchStreamAsync(id.Value, version: expectedVersion.Value + 1, token: cancellationToken)
+                : await _session.Events.FetchStreamAsync(id.Value, token: cancellationToken);
 
             if (eventStream is null || eventStream.Count == 0)
             {
@@ -67,7 +66,7 @@ public sealed class MartenWalletRepository : IWalletRepository
         catch (Exception ex)
         {
             _logger.LogError(ex, "Unexpected error loading wallet stream for {WalletId}", id.Value);
-            return Result.Failure<Wallet>(Error.Failure("Wallet.LoadFailed", "Failed to load wallet from event store."));
+            return Result.Failure<Wallet>(Error.Failure("Wallet.LoadFailed", $"Failed to load wallet: {ex.Message} ({ex.InnerException?.Message})"));
         }
     }
 
@@ -97,9 +96,9 @@ public sealed class MartenWalletRepository : IWalletRepository
             }
             else
             {
-                // In Marten, expected stream version is 1-based total committed events count
-                var expectedStreamVersion = initialVersion + 1;
-                _session.Events.Append(wallet.Id.Value, expectedStreamVersion, uncommittedEvents);
+                // In Marten, expected starting version is 1-based index of the first new event
+                var expectedStartingVersion = initialVersion + 2;
+                _session.Events.Append(wallet.Id.Value, expectedStartingVersion, uncommittedEvents);
             }
 
             await _session.SaveChangesAsync(cancellationToken);
@@ -122,8 +121,18 @@ public sealed class MartenWalletRepository : IWalletRepository
 
             return Result.Failure(DomainErrors.Concurrency.Conflict);
         }
-        catch (MartenCommandException ex) when (ex.InnerException?.Message.Contains("concurrency", StringComparison.OrdinalIgnoreCase) == true
-                                            || ex.Message.Contains("concurrency", StringComparison.OrdinalIgnoreCase))
+        catch (Exception ex) when (
+            (ex is MartenException && (
+                ex.Message.Contains("version", StringComparison.OrdinalIgnoreCase) ||
+                ex.Message.Contains("expected", StringComparison.OrdinalIgnoreCase) ||
+                ex.Message.Contains("concurrency", StringComparison.OrdinalIgnoreCase) ||
+                ex.Message.Contains("collision", StringComparison.OrdinalIgnoreCase))) ||
+            ex.Message.Contains("version", StringComparison.OrdinalIgnoreCase) ||
+            ex.Message.Contains("expected", StringComparison.OrdinalIgnoreCase) ||
+            ex.Message.Contains("concurrency", StringComparison.OrdinalIgnoreCase) ||
+            ex.InnerException?.Message.Contains("concurrency", StringComparison.OrdinalIgnoreCase) == true ||
+            ex.InnerException?.Message.Contains("duplicate key", StringComparison.OrdinalIgnoreCase) == true ||
+            ex.InnerException?.Message.Contains("unique", StringComparison.OrdinalIgnoreCase) == true)
         {
             _logger.LogWarning(
                 ex,
@@ -135,7 +144,7 @@ public sealed class MartenWalletRepository : IWalletRepository
         catch (Exception ex)
         {
             _logger.LogError(ex, "Unexpected failure storing events for wallet {WalletId}", wallet.Id.Value);
-            return Result.Failure(Error.Failure("Wallet.StoreFailed", "Failed to persist wallet events to event store."));
+            return Result.Failure(Error.Failure("Wallet.StoreFailed", $"Failed to persist wallet events: {ex.Message} ({ex.InnerException?.Message})"));
         }
     }
 

@@ -7,7 +7,8 @@ public readonly record struct WalletId : IComparable<WalletId>
 
     public static WalletId Empty => new(Guid.Empty);
 
-    private WalletId(Guid value)
+    [System.Text.Json.Serialization.JsonConstructor]
+    public WalletId(Guid value)
     {
         Value = value;
     }

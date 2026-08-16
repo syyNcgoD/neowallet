@@ -6,7 +6,8 @@ public sealed record PaymentId
 {
     public Guid Value { get; }
 
-    private PaymentId(Guid value)
+    [System.Text.Json.Serialization.JsonConstructor]
+    public PaymentId(Guid value)
     {
         Value = value;
     }

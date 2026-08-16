@@ -1,0 +1,76 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: neowallet-postgres
+    environment:
+      POSTGRES_DB: neowallet
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespassword123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d neowallet"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - neowallet-network
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: neowallet-api
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__Postgres=Host=postgres;Port=5432;Database=neowallet;Username=postgres;Password=postgrespassword123;
+      - Marten__ConnectionString=Host=postgres;Port=5432;Database=neowallet;Username=postgres;Password=postgrespassword123;
+      - Marten__SchemaName=public
+      - Marten__AutoCreateSchemaObjects=true
+      - Jwt__Secret=SuperSecretKeyForNeoWalletEnterpriseDistributedEventSourcedWalletSystem2026!
+      - OpenTelemetry__OtlpEndpoint=http://jaeger:4317
+    ports:
+      - "5000:8080"
+    networks:
+      - neowallet-network
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: neowallet-jaeger
+    ports:
+      - "16686:16686" # Web UI
+      - "4317:4317"   # OTLP gRPC receiver
+    networks:
+      - neowallet-network
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: neowallet-prometheus
+    volumes:
+      - ./deploy/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - "9090:9090"
+    networks:
+      - neowallet-network
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: neowallet-grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    networks:
+      - neowallet-network
+
+networks:
+  neowallet-network:
+    driver: bridge
+
+volumes:
+  postgres_data:

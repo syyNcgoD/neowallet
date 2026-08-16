@@ -10,5 +10,7 @@
     <Project Path="tests/NeoWallet.Application.UnitTests/NeoWallet.Application.UnitTests.csproj" />
     <Project Path="tests/NeoWallet.Infrastructure.IntegrationTests/NeoWallet.Infrastructure.IntegrationTests.csproj" />
     <Project Path="tests/NeoWallet.Api.IntegrationTests/NeoWallet.Api.IntegrationTests.csproj" />
+    <Project Path="tests/NeoWallet.ArchitectureTests/NeoWallet.ArchitectureTests.csproj" />
+    <Project Path="tests/NeoWallet.Benchmarks/NeoWallet.Benchmarks.csproj" />
   </Folder>
 </Solution>

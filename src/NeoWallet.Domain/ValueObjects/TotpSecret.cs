@@ -9,7 +9,8 @@ public sealed record TotpSecret
 
     public string Value { get; }
 
-    private TotpSecret(string value)
+    [System.Text.Json.Serialization.JsonConstructor]
+    public TotpSecret(string value)
     {
         Value = value;
     }

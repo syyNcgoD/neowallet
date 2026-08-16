@@ -9,7 +9,8 @@ public sealed partial record Email : IComparable<Email>
 
     public string Value { get; }
 
-    private Email(string value)
+    [System.Text.Json.Serialization.JsonConstructor]
+    public Email(string value)
     {
         Value = value;
     }

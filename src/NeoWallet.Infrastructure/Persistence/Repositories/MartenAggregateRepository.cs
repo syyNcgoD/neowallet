@@ -34,10 +34,9 @@ public class MartenAggregateRepository<TAggregate, TId> : IAggregateRepository<T
 
         try
         {
-            var eventStream = await Session.Events.FetchStreamAsync(
-                guidId,
-                version: expectedVersion ?? 0,
-                token: cancellationToken);
+            var eventStream = expectedVersion.HasValue && expectedVersion.Value > 0
+                ? await Session.Events.FetchStreamAsync(guidId, version: expectedVersion.Value + 1, token: cancellationToken)
+                : await Session.Events.FetchStreamAsync(guidId, token: cancellationToken);
 
             if (eventStream is null || eventStream.Count == 0)
             {
@@ -93,8 +92,9 @@ public class MartenAggregateRepository<TAggregate, TId> : IAggregateRepository<T
             }
             else
             {
-                var expectedStreamVersion = initialVersion + 1;
-                Session.Events.Append(guidId, expectedStreamVersion, uncommittedEvents);
+                // In Marten, expected starting version is 1-based index of the first new event
+                var expectedStartingVersion = initialVersion + 2;
+                Session.Events.Append(guidId, expectedStartingVersion, uncommittedEvents);
             }
 
             await Session.SaveChangesAsync(cancellationToken);
@@ -106,8 +106,18 @@ public class MartenAggregateRepository<TAggregate, TId> : IAggregateRepository<T
         {
             return Result.Failure(DomainErrors.Concurrency.Conflict);
         }
-        catch (MartenCommandException ex) when (ex.InnerException?.Message.Contains("concurrency", StringComparison.OrdinalIgnoreCase) == true
-                                            || ex.Message.Contains("concurrency", StringComparison.OrdinalIgnoreCase))
+        catch (Exception ex) when (
+            (ex is MartenException && (
+                ex.Message.Contains("version", StringComparison.OrdinalIgnoreCase) ||
+                ex.Message.Contains("expected", StringComparison.OrdinalIgnoreCase) ||
+                ex.Message.Contains("concurrency", StringComparison.OrdinalIgnoreCase) ||
+                ex.Message.Contains("collision", StringComparison.OrdinalIgnoreCase))) ||
+            ex.Message.Contains("version", StringComparison.OrdinalIgnoreCase) ||
+            ex.Message.Contains("expected", StringComparison.OrdinalIgnoreCase) ||
+            ex.Message.Contains("concurrency", StringComparison.OrdinalIgnoreCase) ||
+            ex.InnerException?.Message.Contains("concurrency", StringComparison.OrdinalIgnoreCase) == true ||
+            ex.InnerException?.Message.Contains("duplicate key", StringComparison.OrdinalIgnoreCase) == true ||
+            ex.InnerException?.Message.Contains("unique", StringComparison.OrdinalIgnoreCase) == true)
         {
             return Result.Failure(DomainErrors.Concurrency.Conflict);
         }
@@ -145,8 +155,10 @@ public class MartenAggregateRepository<TAggregate, TId> : IAggregateRepository<T
         return id switch
         {
             Guid guid => guid,
-            IComparable => Guid.TryParse(id.ToString(), out var parsed) ? parsed : Guid.Empty,
-            _ => Guid.Empty
+            NeoWallet.Domain.ValueObjects.WalletId walletId => walletId.Value,
+            NeoWallet.Domain.ValueObjects.OwnerId ownerId => ownerId.Value,
+            NeoWallet.Domain.ValueObjects.PaymentId paymentId => paymentId.Value,
+            _ => Guid.TryParse(id?.ToString(), out var parsed) ? parsed : Guid.Empty
         };
     }
 }

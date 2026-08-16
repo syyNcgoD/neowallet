@@ -29,7 +29,8 @@ public sealed partial record Currency : IComparable<Currency>
     public string Symbol { get; }
     public int DecimalPlaces { get; }
 
-    private Currency(string code, string symbol, int decimalPlaces)
+    [System.Text.Json.Serialization.JsonConstructor]
+    public Currency(string code, string symbol, int decimalPlaces)
     {
         Code = code.ToUpperInvariant();
         Symbol = symbol;

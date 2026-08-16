@@ -47,7 +47,7 @@ public sealed class MartenIntegrationTests : IClassFixture<PostgreSqlFixture>
         var loadResult = await repository.LoadAsync(walletId);
 
         // Assert
-        loadResult.IsSuccess.Should().BeTrue();
+        loadResult.IsSuccess.Should().BeTrue(loadResult.Error?.Description ?? "no error");
         var loadedWallet = loadResult.Value;
         loadedWallet.Id.Should().Be(walletId);
         loadedWallet.OwnerId.Should().Be(ownerId);
@@ -64,18 +64,24 @@ public sealed class MartenIntegrationTests : IClassFixture<PostgreSqlFixture>
             return;
         }
 
+        // Arrange: Create and save initial wallet in setup scope
+        var walletId = WalletId.New();
+        var ownerId = OwnerId.New();
+        var currency = Currency.USD;
+
+        using (var initScope = _fixture.ServiceProvider.CreateScope())
+        {
+            var initRepo = initScope.ServiceProvider.GetRequiredService<IWalletRepository>();
+            var initialWallet = Wallet.Create(walletId, ownerId, currency).Value;
+            initialWallet.Deposit(TransactionId.New(), Money.Create(1000m, currency).Value);
+            var initStore = await initRepo.StoreAsync(initialWallet);
+            initStore.IsSuccess.Should().BeTrue();
+        }
+
         using var scope1 = _fixture.ServiceProvider.CreateScope();
         using var scope2 = _fixture.ServiceProvider.CreateScope();
         var repo1 = scope1.ServiceProvider.GetRequiredService<IWalletRepository>();
         var repo2 = scope2.ServiceProvider.GetRequiredService<IWalletRepository>();
-
-        // Arrange: Create and save initial wallet
-        var walletId = WalletId.New();
-        var ownerId = OwnerId.New();
-        var currency = Currency.USD;
-        var initialWallet = Wallet.Create(walletId, ownerId, currency).Value;
-        initialWallet.Deposit(TransactionId.New(), Money.Create(1000m, currency).Value);
-        await repo1.StoreAsync(initialWallet);
 
         // Act: Load same wallet in two concurrent scopes
         var user1Wallet = (await repo1.LoadAsync(walletId)).Value;
@@ -84,7 +90,7 @@ public sealed class MartenIntegrationTests : IClassFixture<PostgreSqlFixture>
         // User 1 withdraws and saves successfully
         user1Wallet.Withdraw(TransactionId.New(), Money.Create(200m, currency).Value);
         var user1SaveResult = await repo1.StoreAsync(user1Wallet);
-        user1SaveResult.IsSuccess.Should().BeTrue();
+        user1SaveResult.IsSuccess.Should().BeTrue(user1SaveResult.Error?.Description ?? "no error");
 
         // User 2 tries to withdraw from stale state and save -> should trigger OCC conflict!
         user2Wallet.Withdraw(TransactionId.New(), Money.Create(300m, currency).Value);
