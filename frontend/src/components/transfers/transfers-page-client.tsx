@@ -1,39 +1,59 @@
-"use client"
+"use client";
 
-import { useMemo, useState } from "react"
+import { useMemo, useState } from "react";
+import { transferRecords, type TransferRecord } from "@/data/seed";
+import { cn } from "@/lib/utils";
+import { TransferStats } from "@/components/transfers/transfer-stats";
+import { TransferList } from "@/components/transfers/transfer-list";
+import { QuickSend } from "@/components/transfers/quick-send";
+import { useAuth } from "@/contexts/auth-context";
+import { useWalletTransactions } from "@/hooks/use-wallets";
 
-import { transferRecords, type TransferRecord } from "@/data/seed"
-import { cn } from "@/lib/utils"
-import { TransferStats } from "@/components/transfers/transfer-stats"
-import { TransferList } from "@/components/transfers/transfer-list"
-import { QuickSend } from "@/components/transfers/quick-send"
-
-type TabKey = "all" | "sent" | "received" | "scheduled"
+type TabKey = "all" | "sent" | "received" | "scheduled";
 
 const tabs: { key: TabKey; label: string }[] = [
   { key: "all", label: "All" },
   { key: "sent", label: "Sent" },
   { key: "received", label: "Received" },
   { key: "scheduled", label: "Scheduled" },
-]
+];
 
 export function TransfersPageClient() {
-  const [activeTab, setActiveTab] = useState<TabKey>("all")
-  const [transfers, setTransfers] = useState<TransferRecord[]>(transferRecords)
+  const { user } = useAuth();
+  const { data: liveTransactions } = useWalletTransactions(user?.id);
+  const [activeTab, setActiveTab] = useState<TabKey>("all");
+  const [localTransfers, setLocalTransfers] = useState<TransferRecord[]>([]);
+
+  const mergedTransfers = useMemo(() => {
+    const liveTransfers: TransferRecord[] = (liveTransactions || [])
+      .filter((tx) => tx.type === "TransferIn" || tx.type === "TransferOut")
+      .map((tx) => ({
+        id: tx.id,
+        type: tx.type === "TransferOut" ? ("sent" as const) : ("received" as const),
+        contactName: tx.description || (tx.type === "TransferOut" ? `Recipient (Wallet ${tx.relatedWalletId?.slice(-4) || "P2P"})` : `Sender (Wallet ${tx.relatedWalletId?.slice(-4) || "P2P"})`),
+        contactAvatar: "/avatars/1.jpg",
+        amount: Math.abs(tx.amount),
+        date: new Date(tx.occurredAtUtc).toLocaleDateString("en-US", { month: "short", day: "2-digit", year: "numeric" }),
+        status: "completed" as const,
+        note: tx.reference || undefined,
+      }));
+
+    return [...localTransfers, ...liveTransfers, ...transferRecords];
+  }, [liveTransactions, localTransfers]);
 
   const filtered = useMemo(() => {
-    if (activeTab === "all") return transfers
-    return transfers.filter((t) => t.type === activeTab)
-  }, [activeTab, transfers])
+    if (activeTab === "all") return mergedTransfers;
+    return mergedTransfers.filter((t) => t.type === activeTab);
+  }, [activeTab, mergedTransfers]);
 
   function handleCancel(id: string) {
-    setTransfers((prev) => prev.filter((t) => t.id !== id))
+    setLocalTransfers((prev) => prev.filter((t) => t.id !== id));
   }
 
   return (
     <div className="flex flex-col gap-4">
       {/* Stats */}
-      <TransferStats transfers={transfers} />
+      <TransferStats transfers={mergedTransfers} />
 
       {/* Tab filter bar */}
       <div className="flex items-center gap-1 rounded-lg bg-muted p-1">
@@ -59,9 +79,9 @@ export function TransfersPageClient() {
       {/* Quick send */}
       <QuickSend
         onSend={(record) =>
-          setTransfers((prev) => [record, ...prev])
+          setLocalTransfers((prev) => [record, ...prev])
         }
       />
     </div>
-  )
+  );
 }
