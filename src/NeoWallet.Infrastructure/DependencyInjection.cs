@@ -84,11 +84,6 @@ public static class DependencyInjection
             options.Projections.Add<TransactionHistoryProjection>(JasperFx.Events.Projections.ProjectionLifecycle.Inline);
             options.Projections.Add<UserSummaryProjection>(JasperFx.Events.Projections.ProjectionLifecycle.Inline);
 
-            // Aggregate Snapshotting
-            options.Projections.Snapshot<Wallet>(Marten.Events.Projections.SnapshotLifecycle.Inline);
-            options.Projections.Snapshot<User>(Marten.Events.Projections.SnapshotLifecycle.Inline);
-            options.Projections.Snapshot<Payment>(Marten.Events.Projections.SnapshotLifecycle.Inline);
-
             // Document Schema configurations & indexes
             options.Schema.For<WalletSummary>().Identity(x => x.Id).Index(x => x.OwnerId);
             options.Schema.For<TransactionHistory>().Identity(x => x.Id).Index(x => x.WalletId);
