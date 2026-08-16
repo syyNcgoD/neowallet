@@ -1,17 +1,25 @@
+using JasperFx.Events.Projections;
 using Marten;
 using Marten.Events.Projections;
+using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NeoWallet.Application.Common.Interfaces;
+using NeoWallet.Application.Features.Sagas.Payment;
+using NeoWallet.Application.Features.Sagas.Payment.Consumers;
+using NeoWallet.Application.Features.Sagas.Transfer;
+using NeoWallet.Application.Features.Sagas.Transfer.Consumers;
 using NeoWallet.Domain.Aggregates;
 using NeoWallet.Domain.Events;
 using NeoWallet.Domain.Repositories;
 using NeoWallet.Infrastructure.Authentication;
 using NeoWallet.Infrastructure.Authentication.Options;
+using NeoWallet.Infrastructure.Gateways;
 using NeoWallet.Infrastructure.Persistence.Options;
 using NeoWallet.Infrastructure.Persistence.Repositories;
 using NeoWallet.Infrastructure.Projections;
 using NeoWallet.Infrastructure.ReadModels;
+using NeoWallet.Infrastructure.Services;
 
 namespace NeoWallet.Infrastructure;
 
@@ -65,14 +73,21 @@ public static class DependencyInjection
             options.Events.AddEventType(typeof(ApiKeyCreated));
             options.Events.AddEventType(typeof(ApiKeyRevoked));
 
+            // Register Payment Domain Event Types
+            options.Events.AddEventType(typeof(PaymentInitiated));
+            options.Events.AddEventType(typeof(PaymentVerified));
+            options.Events.AddEventType(typeof(PaymentSettled));
+            options.Events.AddEventType(typeof(PaymentFailed));
+
             // Register Real-time Inline CQRS Projections
             options.Projections.Add<WalletSummaryProjection>(JasperFx.Events.Projections.ProjectionLifecycle.Inline);
             options.Projections.Add<TransactionHistoryProjection>(JasperFx.Events.Projections.ProjectionLifecycle.Inline);
             options.Projections.Add<UserSummaryProjection>(JasperFx.Events.Projections.ProjectionLifecycle.Inline);
 
             // Aggregate Snapshotting
-            options.Projections.Snapshot<Wallet>(SnapshotLifecycle.Inline);
-            options.Projections.Snapshot<User>(SnapshotLifecycle.Inline);
+            options.Projections.Snapshot<Wallet>(Marten.Events.Projections.SnapshotLifecycle.Inline);
+            options.Projections.Snapshot<User>(Marten.Events.Projections.SnapshotLifecycle.Inline);
+            options.Projections.Snapshot<Payment>(Marten.Events.Projections.SnapshotLifecycle.Inline);
 
             // Document Schema configurations & indexes
             options.Schema.For<WalletSummary>().Identity(x => x.Id).Index(x => x.OwnerId);
@@ -88,13 +103,35 @@ public static class DependencyInjection
 
         // Domain Services & Read Services
         services.AddScoped<NeoWallet.Domain.Services.ITransferService, NeoWallet.Domain.Services.TransferService>();
-        services.AddScoped<NeoWallet.Application.Common.Interfaces.IWalletReadService, NeoWallet.Infrastructure.Services.MartenWalletReadService>();
-        services.AddSingleton<NeoWallet.Application.Common.Interfaces.IIdempotencyStore, NeoWallet.Infrastructure.Services.MemoryIdempotencyStore>();
+        services.AddScoped<IWalletReadService, MartenWalletReadService>();
+        services.AddSingleton<IIdempotencyStore, MemoryIdempotencyStore>();
+        services.AddSingleton<IPaymentGateway, MockPaymentGateway>();
 
         // Repositories
         services.AddScoped<IWalletRepository, MartenWalletRepository>();
         services.AddScoped<IUserRepository, MartenUserRepository>();
         services.AddScoped(typeof(IAggregateRepository<,>), typeof(MartenAggregateRepository<,>));
+
+        // MassTransit Saga State Machines and Consumers
+        services.AddMassTransit(x =>
+        {
+            x.AddConsumer<DeductSourceWalletConsumer>();
+            x.AddConsumer<CreditTargetWalletConsumer>();
+            x.AddConsumer<CompensateSourceWalletConsumer>();
+            x.AddConsumer<InitiateGatewayPaymentConsumer>();
+            x.AddConsumer<CreditWalletAfterPaymentConsumer>();
+
+            x.AddSagaStateMachine<TransferStateMachine, TransferState>()
+                .InMemoryRepository();
+
+            x.AddSagaStateMachine<DepositPaymentStateMachine, DepositPaymentState>()
+                .InMemoryRepository();
+
+            x.UsingInMemory((context, cfg) =>
+            {
+                cfg.ConfigureEndpoints(context);
+            });
+        });
 
         return services;
     }
