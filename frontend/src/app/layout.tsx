@@ -4,6 +4,7 @@ import { ThemeProvider } from "next-themes";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "@/contexts/auth-context";
 import { QueryProvider } from "@/providers/query-provider";
+import { SignalRProvider } from "@/providers/signalr-provider";
 import { Toaster } from "sonner";
 import "./globals.css";
 
@@ -39,8 +40,10 @@ export default function RootLayout({
           <TooltipProvider>
             <QueryProvider>
               <AuthProvider>
-                {children}
-                <Toaster position="top-right" richColors />
+                <SignalRProvider>
+                  {children}
+                  <Toaster position="top-right" richColors />
+                </SignalRProvider>
               </AuthProvider>
             </QueryProvider>
           </TooltipProvider>
