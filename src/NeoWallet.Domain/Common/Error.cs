@@ -6,7 +6,8 @@ public enum ErrorType
     NotFound = 2,
     Conflict = 3,
     Unauthorized = 4,
-    Forbidden = 5
+    Forbidden = 5,
+    Critical = 6
 }
 public sealed record Error
 {
@@ -41,6 +42,9 @@ public sealed record Error
 
     public static Error Forbidden(string code, string description) =>
         new(code, description, ErrorType.Forbidden);
+
+    public static Error Critical(string code, string description) =>
+        new(code, description, ErrorType.Critical);
 
     public override string ToString() => $"[{Code}] {Description}";
 }

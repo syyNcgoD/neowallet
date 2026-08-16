@@ -93,6 +93,7 @@ public static class DependencyInjection
             options.Schema.For<WalletSummary>().Identity(x => x.Id).Index(x => x.OwnerId);
             options.Schema.For<TransactionHistory>().Identity(x => x.Id).Index(x => x.WalletId);
             options.Schema.For<UserSummary>().Identity(x => x.Id).Index(x => x.Email);
+            options.Schema.For<NeoWallet.Domain.Entities.AuditLogEntry>().Identity(x => x.Id).Index(x => x.AggregateId).Index(x => x.SequenceNumber);
         }).UseLightweightSessions();
 
         // Authentication & Security Services
@@ -106,6 +107,11 @@ public static class DependencyInjection
         services.AddScoped<IWalletReadService, MartenWalletReadService>();
         services.AddSingleton<IIdempotencyStore, MemoryIdempotencyStore>();
         services.AddSingleton<IPaymentGateway, MockPaymentGateway>();
+
+        // Audit & Reconciliation Services
+        services.AddScoped<IAuditStore, NeoWallet.Infrastructure.Audit.MartenAuditStore>();
+        services.AddScoped<IReconciliationService, NeoWallet.Infrastructure.Reconciliation.ReconciliationService>();
+        services.AddSingleton<IDiscrepancyNotifier, NeoWallet.Infrastructure.Notifications.LoggingDiscrepancyNotifier>();
 
         // Repositories
         services.AddScoped<IWalletRepository, MartenWalletRepository>();

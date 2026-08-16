@@ -90,4 +90,16 @@ public static class DomainErrors
         public static readonly Error ApiKeyExpired =
             Error.Unauthorized("Identity.ApiKeyExpired", "The API key has expired.");
     }
+
+    public static class Audit
+    {
+        public static readonly Error HashChainTampered =
+            Error.Critical("Audit.HashChainTampered", "Cryptographic hash chain integrity check failed. The audit trail has been tampered with.");
+
+        public static readonly Error DiscrepancyDetected =
+            Error.Critical("Audit.DiscrepancyDetected", "Financial discrepancy detected between event stream transactions and wallet balances.");
+
+        public static readonly Error ReconciliationFailed =
+            Error.Failure("Audit.ReconciliationFailed", "Reconciliation run failed to execute.");
+    }
 }
