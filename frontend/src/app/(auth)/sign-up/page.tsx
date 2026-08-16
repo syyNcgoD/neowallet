@@ -1,9 +1,8 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Image from "next/image"
-import Link from "next/link"
-import { motion } from "motion/react"
+import { useState } from "react";
+import Link from "next/link";
+import { motion } from "motion/react";
 import {
   LandmarkIcon,
   MailIcon,
@@ -14,20 +13,23 @@ import {
   CheckIcon,
   ShieldCheckIcon,
   UserIcon,
-} from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
   InputGroupButton,
-} from "@/components/ui/input-group"
-import dynamic from "next/dynamic"
+} from "@/components/ui/input-group";
+import dynamic from "next/dynamic";
+import { useAuth } from "@/contexts/auth-context";
+import { toast } from "sonner";
+import axios from "axios";
 
 const GlobeDemo = dynamic(() => import("@/components/globe-demo"), {
   ssr: false,
-})
+});
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -35,7 +37,7 @@ const containerVariants = {
     opacity: 1,
     transition: { staggerChildren: 0.06, delayChildren: 0.1 },
   },
-}
+};
 
 const itemVariants = {
   hidden: { opacity: 0, y: 12 },
@@ -47,24 +49,50 @@ const itemVariants = {
       ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
     },
   },
-}
+};
 
 export default function SignUpPage() {
-  const [showPassword, setShowPassword] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
-  const [isSuccess, setIsSuccess] = useState(false)
-  const [agreed, setAgreed] = useState(false)
+  const { register } = useAuth();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [agreed, setAgreed] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!agreed) return
-    setIsLoading(true)
-    setTimeout(() => {
-      setIsLoading(false)
-      setIsSuccess(true)
-      setTimeout(() => setIsSuccess(false), 2000)
-    }, 1500)
-  }
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!agreed) {
+      toast.error("Please agree to the Terms of Service.");
+      return;
+    }
+    if (!email || !password) {
+      toast.error("Please fill in all required fields.");
+      return;
+    }
+    if (password.length < 8) {
+      toast.error("Password must be at least 8 characters long.");
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      await register(email, password);
+      setIsSuccess(true);
+      toast.success("Account created successfully! Welcome to NeoWallet.");
+    } catch (err: unknown) {
+      if (axios.isAxiosError(err)) {
+        const problem = err.response?.data;
+        const msg = problem?.detail || problem?.title || err.message || "Failed to create account.";
+        toast.error(msg);
+      } else {
+        toast.error("An unexpected error occurred during registration.");
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="flex min-h-svh">
@@ -76,7 +104,7 @@ export default function SignUpPage() {
             <LandmarkIcon className="size-4" />
           </div>
           <span className="text-sm font-semibold text-white">
-            Shadcn Fintech
+            NeoWallet Platform
           </span>
         </Link>
 
@@ -85,15 +113,14 @@ export default function SignUpPage() {
           <GlobeDemo />
         </div>
 
-        {/* Quote overlay — pinned to bottom */}
+        {/* Quote overlay */}
         <div className="relative z-20 mt-auto p-8">
           <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
             <blockquote className="text-sm leading-relaxed text-white/80">
-              &ldquo;Compound interest is the eighth wonder of the world. He who
-              understands it, earns it; he who doesn&apos;t, pays it.&rdquo;
+              &ldquo;Bank-grade event-sourced architecture engineered for high-throughput distributed scale.&rdquo;
             </blockquote>
             <p className="mt-3 text-xs text-white/50">
-              &mdash; Albert Einstein
+              &mdash; NeoWallet Security
             </p>
           </div>
         </div>
@@ -123,51 +150,12 @@ export default function SignUpPage() {
               Create your account
             </h1>
             <p className="mt-1.5 text-sm text-muted-foreground">
-              Start managing your finances today
+              Start managing your distributed wallet today
             </p>
           </motion.div>
 
-          {/* Social buttons */}
-          <motion.div
-            className="mt-8 grid grid-cols-2 gap-3"
-            variants={itemVariants}
-          >
-            <Button variant="outline" size="lg" className="gap-2">
-              <Image
-                src="/logos/google-com.png"
-                alt="Google"
-                width={16}
-                height={16}
-                className="size-4"
-              />
-              <span className="text-sm">Google</span>
-            </Button>
-            <Button variant="outline" size="lg" className="gap-2">
-              <Image
-                src="/logos/apple-com.png"
-                alt="Apple"
-                width={16}
-                height={16}
-                className="size-4"
-              />
-              <span className="text-sm">Apple</span>
-            </Button>
-          </motion.div>
-
-          {/* Divider */}
-          <motion.div
-            className="relative my-6 flex items-center"
-            variants={itemVariants}
-          >
-            <div className="flex-1 border-t border-border" />
-            <span className="mx-3 text-xs text-muted-foreground">
-              or continue with
-            </span>
-            <div className="flex-1 border-t border-border" />
-          </motion.div>
-
           {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="mt-8 space-y-4">
             <motion.div variants={itemVariants}>
               <label
                 htmlFor="name"
@@ -182,8 +170,9 @@ export default function SignUpPage() {
                 <InputGroupInput
                   id="name"
                   type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   placeholder="John Doe"
-                  required
                 />
               </InputGroup>
             </motion.div>
@@ -202,6 +191,8 @@ export default function SignUpPage() {
                 <InputGroupInput
                   id="email"
                   type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="name@example.com"
                   required
                 />
@@ -222,11 +213,14 @@ export default function SignUpPage() {
                 <InputGroupInput
                   id="password"
                   type={showPassword ? "text" : "password"}
-                  placeholder="Create a password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Create a strong password"
                   required
                 />
                 <InputGroupAddon align="inline-end">
                   <InputGroupButton
+                    type="button"
                     size="icon-xs"
                     variant="ghost"
                     onClick={() => setShowPassword(!showPassword)}
@@ -249,7 +243,7 @@ export default function SignUpPage() {
               <Checkbox
                 id="terms"
                 checked={agreed}
-                onCheckedChange={(checked) => setAgreed(checked)}
+                onCheckedChange={(checked) => setAgreed(!!checked)}
                 className="mt-0.5"
               />
               <label htmlFor="terms" className="text-sm text-muted-foreground">
@@ -319,5 +313,5 @@ export default function SignUpPage() {
         </motion.div>
       </div>
     </div>
-  )
+  );
 }

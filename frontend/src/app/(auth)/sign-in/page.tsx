@@ -1,9 +1,8 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Image from "next/image"
-import Link from "next/link"
-import { motion } from "motion/react"
+import { useState } from "react";
+import Link from "next/link";
+import { motion } from "motion/react";
 import {
   LandmarkIcon,
   MailIcon,
@@ -13,19 +12,22 @@ import {
   Loader2Icon,
   CheckIcon,
   ShieldCheckIcon,
-} from "lucide-react"
-import { Button } from "@/components/ui/button"
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
   InputGroupButton,
-} from "@/components/ui/input-group"
-import dynamic from "next/dynamic"
+} from "@/components/ui/input-group";
+import dynamic from "next/dynamic";
+import { useAuth } from "@/contexts/auth-context";
+import { toast } from "sonner";
+import axios from "axios";
 
 const GlobeDemo = dynamic(() => import("@/components/globe-demo"), {
   ssr: false,
-})
+});
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -33,7 +35,7 @@ const containerVariants = {
     opacity: 1,
     transition: { staggerChildren: 0.06, delayChildren: 0.1 },
   },
-}
+};
 
 const itemVariants = {
   hidden: { opacity: 0, y: 12 },
@@ -45,22 +47,40 @@ const itemVariants = {
       ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
     },
   },
-}
+};
 
 export default function SignInPage() {
-  const [showPassword, setShowPassword] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
-  const [isSuccess, setIsSuccess] = useState(false)
+  const { login } = useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
-    setTimeout(() => {
-      setIsLoading(false)
-      setIsSuccess(true)
-      setTimeout(() => setIsSuccess(false), 2000)
-    }, 1500)
-  }
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email || !password) {
+      toast.error("Please enter both email and password.");
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      await login(email, password);
+      setIsSuccess(true);
+      toast.success("Welcome back to NeoWallet!");
+    } catch (err: unknown) {
+      if (axios.isAxiosError(err)) {
+        const problem = err.response?.data;
+        const msg = problem?.detail || problem?.title || err.message || "Failed to sign in. Please check your credentials.";
+        toast.error(msg);
+      } else {
+        toast.error("An unexpected error occurred during sign in.");
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="flex min-h-svh">
@@ -72,7 +92,7 @@ export default function SignInPage() {
             <LandmarkIcon className="size-4" />
           </div>
           <span className="text-sm font-semibold text-white">
-            Shadcn Fintech
+            NeoWallet Platform
           </span>
         </Link>
 
@@ -81,15 +101,14 @@ export default function SignInPage() {
           <GlobeDemo />
         </div>
 
-        {/* Quote overlay — pinned to bottom */}
+        {/* Quote overlay */}
         <div className="relative z-20 mt-auto p-8">
           <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
             <blockquote className="text-sm leading-relaxed text-white/80">
-              &ldquo;The best time to start investing was yesterday. The second
-              best time is now.&rdquo;
+              &ldquo;Distributed high-frequency event-sourced ledger with zero-loss financial guarantees.&rdquo;
             </blockquote>
             <p className="mt-3 text-xs text-white/50">
-              &mdash; Financial Wisdom
+              &mdash; NeoWallet Architecture
             </p>
           </div>
         </div>
@@ -119,51 +138,12 @@ export default function SignInPage() {
               Welcome back
             </h1>
             <p className="mt-1.5 text-sm text-muted-foreground">
-              Sign in to your account
+              Sign in to your NeoWallet account
             </p>
           </motion.div>
 
-          {/* Social buttons */}
-          <motion.div
-            className="mt-8 grid grid-cols-2 gap-3"
-            variants={itemVariants}
-          >
-            <Button variant="outline" size="lg" className="gap-2">
-              <Image
-                src="/logos/google-com.png"
-                alt="Google"
-                width={16}
-                height={16}
-                className="size-4"
-              />
-              <span className="text-sm">Google</span>
-            </Button>
-            <Button variant="outline" size="lg" className="gap-2">
-              <Image
-                src="/logos/apple-com.png"
-                alt="Apple"
-                width={16}
-                height={16}
-                className="size-4"
-              />
-              <span className="text-sm">Apple</span>
-            </Button>
-          </motion.div>
-
-          {/* Divider */}
-          <motion.div
-            className="relative my-6 flex items-center"
-            variants={itemVariants}
-          >
-            <div className="flex-1 border-t border-border" />
-            <span className="mx-3 text-xs text-muted-foreground">
-              or continue with
-            </span>
-            <div className="flex-1 border-t border-border" />
-          </motion.div>
-
           {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="mt-8 space-y-4">
             <motion.div variants={itemVariants}>
               <label
                 htmlFor="email"
@@ -178,7 +158,9 @@ export default function SignInPage() {
                 <InputGroupInput
                   id="email"
                   type="email"
-                  placeholder="name@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="admin@neowallet.com"
                   required
                 />
               </InputGroup>
@@ -189,12 +171,6 @@ export default function SignInPage() {
                 <label htmlFor="password" className="text-sm font-medium">
                   Password
                 </label>
-                <Link
-                  href="#"
-                  className="text-xs text-muted-foreground transition-colors hover:text-foreground"
-                >
-                  Forgot password?
-                </Link>
               </div>
               <InputGroup>
                 <InputGroupAddon align="inline-start">
@@ -203,11 +179,14 @@ export default function SignInPage() {
                 <InputGroupInput
                   id="password"
                   type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter your password"
                   required
                 />
                 <InputGroupAddon align="inline-end">
                   <InputGroupButton
+                    type="button"
                     size="icon-xs"
                     variant="ghost"
                     onClick={() => setShowPassword(!showPassword)}
@@ -267,10 +246,10 @@ export default function SignInPage() {
             variants={itemVariants}
           >
             <ShieldCheckIcon className="size-3.5" />
-            <span>256-bit SSL encrypted</span>
+            <span>256-bit SHA-512 & JWT encrypted</span>
           </motion.div>
         </motion.div>
       </div>
     </div>
-  )
+  );
 }
