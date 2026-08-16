@@ -1,13 +1,14 @@
-"use client"
+"use client";
 
-import { useMemo, useState } from "react"
-
-import { bankAccounts, type BankAccount } from "@/data/seed"
-import { cn } from "@/lib/utils"
-import { AccountSummary } from "@/components/accounts/account-summary"
-import { AccountCard } from "@/components/accounts/account-grid"
-import { AddAccount } from "@/components/accounts/add-account"
-import { EmptyState } from "@/components/empty-state"
+import { useMemo, useState, useEffect } from "react";
+import { bankAccounts, type BankAccount } from "@/data/seed";
+import { cn } from "@/lib/utils";
+import { AccountSummary } from "@/components/accounts/account-summary";
+import { AccountCard } from "@/components/accounts/account-grid";
+import { AddAccount } from "@/components/accounts/add-account";
+import { EmptyState } from "@/components/empty-state";
+import { useAuth } from "@/contexts/auth-context";
+import { useWalletSummary, useCreateWallet } from "@/hooks/use-wallets";
 
 const filterTabs = [
   { value: "all", label: "All" },
@@ -15,13 +16,39 @@ const filterTabs = [
   { value: "savings", label: "Savings" },
   { value: "crypto", label: "Crypto" },
   { value: "investment", label: "Investment" },
-] as const
+] as const;
 
-type AccountType = (typeof filterTabs)[number]["value"]
+type AccountType = (typeof filterTabs)[number]["value"];
 
 export function AccountsPageClient() {
-  const [selectedType, setSelectedType] = useState<AccountType>("all")
-  const [accounts, setAccounts] = useState<BankAccount[]>(bankAccounts)
+  const { user } = useAuth();
+  const walletId = user?.id;
+  const { data: walletSummary } = useWalletSummary(walletId);
+  const createWalletMutation = useCreateWallet();
+
+  const [selectedType, setSelectedType] = useState<AccountType>("all");
+  const [accounts, setAccounts] = useState<BankAccount[]>(bankAccounts);
+
+  useEffect(() => {
+    if (walletSummary) {
+      const primaryAccount: BankAccount = {
+        id: `wallet-${walletSummary.id}`,
+        name: `NeoWallet Core (${walletSummary.currency})`,
+        type: "checking",
+        institution: "NeoWallet Distributed Ledger",
+        institutionLogo: "/logos/stripe-com.png",
+        accountNumber: `****${walletSummary.id.slice(-4)}`,
+        balance: walletSummary.balance,
+        currency: walletSummary.currency === "EUR" ? "€" : "$",
+        change: 12.4,
+        changePercent: 12.4,
+        lastActivity: "Just now",
+        color: "bg-primary",
+      };
+
+      setAccounts([primaryAccount, ...bankAccounts]);
+    }
+  }, [walletSummary]);
 
   const filtered = useMemo(
     () =>
@@ -29,11 +56,21 @@ export function AccountsPageClient() {
         ? accounts
         : accounts.filter((a) => a.type === selectedType),
     [accounts, selectedType]
-  )
+  );
 
-  function handleAddAccount(account: BankAccount) {
-    setAccounts((prev) => [...prev, account])
-  }
+  const handleAddAccount = async (account: BankAccount) => {
+    if (user?.id) {
+      try {
+        await createWalletMutation.mutateAsync({
+          ownerId: user.id,
+          currency: account.currency === "€" ? "EUR" : "USD",
+        });
+      } catch {
+        // Handled in mutation
+      }
+    }
+    setAccounts((prev) => [account, ...prev]);
+  };
 
   return (
     <div className="flex flex-col gap-4">
@@ -74,5 +111,5 @@ export function AccountsPageClient() {
         </div>
       )}
     </div>
-  )
+  );
 }
