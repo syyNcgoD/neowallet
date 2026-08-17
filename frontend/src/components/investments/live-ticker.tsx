@@ -1,6 +1,8 @@
 "use client"
 
 import { useMemo } from "react"
+import { useQuery } from "@tanstack/react-query"
+import { apiClient } from "@/lib/api/client"
 import { cn } from "@/lib/utils"
 import { holdings, watchlistItems } from "@/data/seed"
 
@@ -10,8 +12,42 @@ type TickerEntry = {
   change: number
 }
 
+interface StockQuoteApi {
+  symbol: string
+  companyName: string
+  currentPrice: number
+  change: number
+  percentChange: number
+  highPriceOfDay: number
+  lowPriceOfDay: number
+  openPriceOfDay: number
+  previousClosePrice: number
+}
+
 export function LiveTicker() {
+  const { data: liveStocks } = useQuery<StockQuoteApi[]>({
+    queryKey: ["live-stock-quotes"],
+    queryFn: async () => {
+      try {
+        const res = await apiClient.get<StockQuoteApi[]>("/market/stocks")
+        return res.data
+      } catch {
+        return []
+      }
+    },
+    refetchInterval: 30000,
+    staleTime: 20000,
+  })
+
   const entries = useMemo<TickerEntry[]>(() => {
+    if (liveStocks && liveStocks.length > 0) {
+      return liveStocks.map((s) => ({
+        symbol: s.symbol,
+        price: s.currentPrice,
+        change: s.percentChange,
+      }))
+    }
+
     const fromHoldings: TickerEntry[] = holdings.map((h) => ({
       symbol: h.symbol,
       price: h.currentPrice,
@@ -26,7 +62,7 @@ export function LiveTicker() {
       change: w.dayChange,
     }))
     return [...fromHoldings, ...fromWatchlist]
-  }, [])
+  }, [liveStocks])
 
   const tickerItems = entries.map((e, i) => {
     const positive = e.change >= 0
@@ -65,7 +101,6 @@ export function LiveTicker() {
           {tickerItems}
         </div>
       </div>
-
     </div>
   )
 }

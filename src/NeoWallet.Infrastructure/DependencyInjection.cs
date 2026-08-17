@@ -118,7 +118,33 @@ public static class DependencyInjection
         services.AddScoped<IUserRepository, MartenUserRepository>();
         services.AddScoped(typeof(IAggregateRepository<,>), typeof(MartenAggregateRepository<,>));
 
+        // Live Market & Email Services
+        services.AddHttpClient<IMarketService, MarketService>();
+        services.AddSingleton<IEmailService, ResendEmailService>();
+
+        // Redis Distributed Cache
+        var redisConn = configuration["Redis:ConnectionString"]
+            ?? configuration["REDIS_URL"]
+            ?? Environment.GetEnvironmentVariable("REDIS_URL");
+
+        if (!string.IsNullOrWhiteSpace(redisConn))
+        {
+            services.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = redisConn;
+                options.InstanceName = "NeoWallet_";
+            });
+        }
+        else
+        {
+            services.AddDistributedMemoryCache();
+        }
+
         // MassTransit Saga State Machines and Consumers
+        var rabbitMqUri = configuration["RabbitMQ:Uri"]
+            ?? configuration["CLOUDAMQP_URL"]
+            ?? Environment.GetEnvironmentVariable("CLOUDAMQP_URL");
+
         services.AddMassTransit(x =>
         {
             x.AddConsumer<DeductSourceWalletConsumer>();
@@ -133,10 +159,21 @@ public static class DependencyInjection
             x.AddSagaStateMachine<DepositPaymentStateMachine, DepositPaymentState>()
                 .InMemoryRepository();
 
-            x.UsingInMemory((context, cfg) =>
+            if (!string.IsNullOrWhiteSpace(rabbitMqUri))
             {
-                cfg.ConfigureEndpoints(context);
-            });
+                x.UsingRabbitMq((context, cfg) =>
+                {
+                    cfg.Host(new Uri(rabbitMqUri));
+                    cfg.ConfigureEndpoints(context);
+                });
+            }
+            else
+            {
+                x.UsingInMemory((context, cfg) =>
+                {
+                    cfg.ConfigureEndpoints(context);
+                });
+            }
         });
 
         return services;
