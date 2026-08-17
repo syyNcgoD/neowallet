@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using NeoWallet.Api.Common;
 using NeoWallet.Application.Features.Identity.Commands.CreateApiKey;
 using NeoWallet.Application.Features.Identity.Commands.DisableTwoFactor;
@@ -12,6 +13,7 @@ using NeoWallet.Domain.Enums;
 
 namespace NeoWallet.Api.Controllers;
 
+[EnableRateLimiting("auth-limit")]
 public sealed class AuthController : ApiController
 {
     public sealed record RegisterRequest(string Email, string Password, UserRole Role = UserRole.Customer);

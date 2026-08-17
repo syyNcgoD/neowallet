@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using NeoWallet.Api.Common;
 using NeoWallet.Application.Features.Wallets.Commands.CreateWallet;
 using NeoWallet.Application.Features.Wallets.Commands.DepositMoney;
@@ -11,6 +12,7 @@ using NeoWallet.Application.Features.Wallets.Queries.GetWalletSummary;
 
 namespace NeoWallet.Api.Controllers;
 
+[EnableRateLimiting("tx-limit")]
 public sealed class WalletsController : ApiController
 {
     public sealed record CreateWalletRequest(Guid OwnerId, string Currency);

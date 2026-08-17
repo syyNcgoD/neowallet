@@ -1,5 +1,7 @@
 using System.Text;
+using System.Threading.RateLimiting;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.IdentityModel.Tokens;
 using NeoWallet.Api.Extensions;
 using NeoWallet.Api.Hubs;
@@ -32,15 +34,44 @@ builder.Services.AddHsts(options =>
     options.MaxAge = TimeSpan.FromDays(365);
 });
 
-// CORS for Frontend Integration
+// Strict CORS for Production & Frontend Domains
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
     {
-        policy.SetIsOriginAllowed(_ => true)
-              .AllowAnyHeader()
-              .AllowAnyMethod()
-              .AllowCredentials();
+        policy.WithOrigins(
+            "https://www.maniiai.ir",
+            "https://maniiai.ir",
+            "https://frontend-khaki-eta-q0o1goip7w.vercel.app",
+            "https://frontend-kn99r28rz-manis-projects-3bb0f689.vercel.app",
+            "https://neowallet-five.vercel.app",
+            "http://localhost:3000",
+            "http://localhost:3001"
+        )
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowCredentials();
+    });
+});
+
+// Built-in .NET 8 Rate Limiting
+builder.Services.AddRateLimiter(options =>
+{
+    options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+
+    options.AddFixedWindowLimiter("auth-limit", opt =>
+    {
+        opt.Window = TimeSpan.FromMinutes(1);
+        opt.PermitLimit = 15;
+        opt.QueueLimit = 0;
+    });
+
+    options.AddSlidingWindowLimiter("tx-limit", opt =>
+    {
+        opt.Window = TimeSpan.FromSeconds(10);
+        opt.PermitLimit = 10;
+        opt.SegmentsPerWindow = 2;
+        opt.QueueLimit = 0;
     });
 });
 
@@ -105,6 +136,9 @@ app.Use(async (context, next) =>
 
 // Enable CORS
 app.UseCors();
+
+// Rate Limiter Middleware
+app.UseRateLimiter();
 
 // Custom Middlewares
 app.UseMiddleware<CorrelationIdMiddleware>();
