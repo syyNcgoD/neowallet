@@ -52,7 +52,7 @@ export function AccountCards() {
 
   const [cards, setCards] = useState([
     {
-      id: "1",
+      id: "card-usd-primary",
       label: "USD Primary Wallet",
       balance: walletSummary ? walletSummary.balance.toLocaleString("en-US", { minimumFractionDigits: 2 }) : "84,765.00",
       currency: "$",
@@ -64,6 +64,7 @@ export function AccountCards() {
     },
     {
       ...accountCards[0],
+      id: "card-eur-vault",
       style: "bg-muted text-foreground",
       icon: <EuroIcon className="size-5 opacity-30" />,
       chipColor: "bg-foreground/10",
@@ -71,6 +72,7 @@ export function AccountCards() {
     },
     {
       ...accountCards[1],
+      id: "card-crypto-vault",
       style: "bg-card text-card-foreground ring-1 ring-border",
       icon: <BitcoinIcon className="size-5 opacity-30" />,
       chipColor: "bg-foreground/10",
