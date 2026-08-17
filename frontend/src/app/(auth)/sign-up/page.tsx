@@ -97,24 +97,24 @@ export default function SignUpPage() {
   return (
     <div className="flex min-h-svh">
       {/* Left panel - Globe */}
-      <div className="relative hidden w-1/2 flex-col justify-between bg-zinc-950 lg:flex">
+      <div className="relative hidden w-1/2 flex-col justify-between bg-zinc-950 lg:flex select-none">
         {/* Logo */}
-        <Link href="/dashboard" className="relative z-20 flex items-center gap-2.5 p-8">
+        <div className="relative z-20 flex items-center gap-2.5 p-8">
           <div className="flex size-8 items-center justify-center rounded-lg bg-white text-black">
             <LandmarkIcon className="size-4" />
           </div>
           <span className="text-sm font-semibold text-white">
             NeoWallet Platform
           </span>
-        </Link>
+        </div>
 
-        {/* Globe */}
-        <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
+        {/* Globe Background */}
+        <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none select-none">
           <GlobeDemo />
         </div>
 
         {/* Quote overlay */}
-        <div className="relative z-20 mt-auto p-8">
+        <div className="relative z-20 mt-auto p-8 pointer-events-none">
           <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
             <blockquote className="text-sm leading-relaxed text-white/80">
               &ldquo;Bank-grade event-sourced architecture engineered for high-throughput distributed scale.&rdquo;
@@ -215,7 +215,7 @@ export default function SignUpPage() {
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Create a strong password"
+                  placeholder="Create a strong password (min 8 chars)"
                   required
                 />
                 <InputGroupAddon align="inline-end">
@@ -247,20 +247,7 @@ export default function SignUpPage() {
                 className="mt-0.5"
               />
               <label htmlFor="terms" className="text-sm text-muted-foreground">
-                I agree to the{" "}
-                <Link
-                  href="#"
-                  className="font-medium text-foreground underline-offset-4 hover:underline"
-                >
-                  Terms of Service
-                </Link>{" "}
-                and{" "}
-                <Link
-                  href="#"
-                  className="font-medium text-foreground underline-offset-4 hover:underline"
-                >
-                  Privacy Policy
-                </Link>
+                I agree to the Terms of Service and Privacy Policy
               </label>
             </motion.div>
 

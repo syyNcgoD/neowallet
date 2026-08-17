@@ -24,6 +24,18 @@ Log.Logger = new LoggerConfiguration()
 
 builder.Host.UseSerilog();
 
+// CORS for Frontend Integration
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.SetIsOriginAllowed(_ => true)
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials();
+    });
+});
+
 // Application & Infrastructure Services
 builder.Services.AddNeoWalletApplication();
 builder.Services.AddNeoWalletInfrastructure(builder.Configuration);
@@ -66,6 +78,9 @@ builder.Services.AddControllers();
 
 var app = builder.Build();
 
+// Enable CORS
+app.UseCors();
+
 // Custom Middlewares
 app.UseMiddleware<CorrelationIdMiddleware>();
 app.UseMiddleware<ExceptionHandlingMiddleware>();
@@ -83,6 +98,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 app.MapHub<WalletHub>("/hubs/wallets");
+app.MapHub<WalletHub>("/hubs/wallet");
 app.MapPrometheusScrapingEndpoint();
 
 app.MapGet("/", () => Results.Ok(new
