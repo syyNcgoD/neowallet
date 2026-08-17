@@ -58,7 +58,6 @@ public static class DependencyInjection
         {
             options.Connection(martenSettings.ConnectionString);
             options.DatabaseSchemaName = martenSettings.SchemaName;
-            options.AutoCreateSchemaObjects = JasperFx.CodeGeneration.AutoCreate.All;
 
             // Register Wallet Domain Event Types
             options.Events.AddEventType(typeof(WalletCreated));
