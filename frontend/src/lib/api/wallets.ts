@@ -15,6 +15,11 @@ export const walletApi = {
     return res.data;
   },
 
+  getUserWallets: async (ownerId: string): Promise<WalletSummaryDto[]> => {
+    const res = await apiClient.get<WalletSummaryDto[]>(`/wallets/user/${ownerId}`);
+    return res.data;
+  },
+
   create: async (data: CreateWalletRequest): Promise<WalletCreatedResponse> => {
     const res = await apiClient.post<WalletCreatedResponse>("/wallets", data);
     return res.data;

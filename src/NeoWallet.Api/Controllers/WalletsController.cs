@@ -26,6 +26,13 @@ public sealed class WalletsController : ApiController
         return HandleResult(result, StatusCodes.Status201Created);
     }
 
+    [HttpGet("user/{ownerId:guid}")]
+    public async Task<IActionResult> GetUserWallets(Guid ownerId, CancellationToken ct)
+    {
+        var result = await Mediator.Send(new NeoWallet.Application.Features.Wallets.Queries.GetUserWallets.GetUserWalletsQuery(ownerId), ct);
+        return HandleResult(result);
+    }
+
     [HttpGet("{id:guid}/summary")]
     public async Task<IActionResult> GetSummary(Guid id, CancellationToken ct)
     {

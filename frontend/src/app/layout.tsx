@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "@/contexts/auth-context";
+import { WalletProvider } from "@/contexts/wallet-context";
 import { QueryProvider } from "@/providers/query-provider";
 import { SignalRProvider } from "@/providers/signalr-provider";
 import { Toaster } from "sonner";
@@ -19,7 +20,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://shadcn-fintech.vercel.app"),
+  metadataBase: new URL("https://frontend-khaki-eta-q0o1goip7w.vercel.app"),
   title: "NeoWallet — Enterprise Distributed Fintech Platform",
   description: "Next.js frontend connected to NeoWallet Event-Sourced & Distributed CQRS .NET 8 Backend.",
 };
@@ -40,10 +41,12 @@ export default function RootLayout({
           <TooltipProvider>
             <QueryProvider>
               <AuthProvider>
-                <SignalRProvider>
-                  {children}
-                  <Toaster position="top-right" richColors />
-                </SignalRProvider>
+                <WalletProvider>
+                  <SignalRProvider>
+                    {children}
+                    <Toaster position="top-right" richColors />
+                  </SignalRProvider>
+                </WalletProvider>
               </AuthProvider>
             </QueryProvider>
           </TooltipProvider>

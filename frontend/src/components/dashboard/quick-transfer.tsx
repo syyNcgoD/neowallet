@@ -8,203 +8,146 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
-import { contacts } from "@/data/seed";
 import {
-  ChevronRightIcon,
   SendIcon,
   LoaderCircleIcon,
   CheckCircle2Icon,
+  ArrowRightIcon,
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
-import { useAuth } from "@/contexts/auth-context";
-import { useTransfer } from "@/hooks/use-wallets";
-import { v4 as uuidv4 } from "uuid";
-import Link from "next/link";
-
-type SendState = "idle" | "sending" | "success";
+import { useWallet } from "@/contexts/wallet-context";
+import { toast } from "sonner";
+import { cn } from "@/lib/utils";
 
 export function QuickTransfer() {
-  const { user } = useAuth();
-  const sourceWalletId = user?.id || "";
-  const transferMutation = useTransfer(sourceWalletId);
+  const { activeWallet, wallets, transfer, isMutating } = useWallet();
+  const [recipientWalletId, setRecipientWalletId] = useState("");
+  const [amount, setAmount] = useState("100");
+  const [description, setDescription] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
 
-  const [selectedContact, setSelectedContact] = useState(contacts[0].id);
-  const [amount, setAmount] = useState("250.00");
-  const [sendState, setSendState] = useState<SendState>("idle");
-  const selected = contacts.find((c) => c.id === selectedContact);
+  // Filter other wallets owned by user for quick internal transfers
+  const otherWallets = wallets.filter((w) => w.id !== activeWallet?.id);
 
   const handleSend = async () => {
-    if (sendState !== "idle" || !amount || parseFloat(amount) <= 0) return;
-    setSendState("sending");
+    const num = parseFloat(amount);
+    if (!recipientWalletId.trim()) {
+      toast.error("Please enter a recipient Wallet ID.");
+      return;
+    }
+    if (!num || num <= 0) {
+      toast.error("Please enter a valid transfer amount.");
+      return;
+    }
+    if (activeWallet && num > activeWallet.balance) {
+      toast.error("Insufficient balance in active wallet.");
+      return;
+    }
 
     try {
-      if (sourceWalletId) {
-        await transferMutation.mutateAsync({
-          data: {
-            targetWalletId: uuidv4(), // Mock recipient wallet ID for quick contacts
-            amount: parseFloat(amount),
-            currency: "USD",
-            reference: `TRF-QUICK-${Date.now()}`,
-            description: `Transfer to ${selected?.name}`,
-          },
-          idempotencyKey: uuidv4(),
-        });
-      }
-      setSendState("success");
+      await transfer(recipientWalletId.trim(), num, description || "P2P Quick Transfer");
+      setIsSuccess(true);
       setTimeout(() => {
-        setSendState("idle");
-      }, 2000);
+        setIsSuccess(false);
+        setRecipientWalletId("");
+        setAmount("100");
+        setDescription("");
+      }, 2500);
     } catch {
-      // Fallback visual simulation for demo contact transfers
-      setTimeout(() => {
-        setSendState("success");
-        setTimeout(() => setSendState("idle"), 2000);
-      }, 800);
+      // Handled in context toast
     }
   };
 
   return (
-    <Card>
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
-        <CardTitle className="text-base font-semibold">
-          Quick Transfer
+    <Card className="h-full flex flex-col justify-between p-5 bg-card/60 backdrop-blur-sm border-border/40">
+      <CardHeader className="p-0 pb-3 border-b border-border/40 flex flex-row items-center justify-between">
+        <CardTitle className="text-sm font-semibold flex items-center gap-2">
+          <SendIcon className="size-4 text-primary" />
+          Live P2P Transfer (Saga)
         </CardTitle>
-        <Button variant="ghost" size="sm" className="h-auto gap-1 px-0 text-xs text-muted-foreground" render={<Link href="/transfers" />}>
-          All Transfers
-          <ChevronRightIcon className="size-3" />
-        </Button>
+        <span className="text-[10px] font-medium text-muted-foreground">
+          From: {activeWallet?.currency || "USD"} Wallet
+        </span>
       </CardHeader>
-      <CardContent className="space-y-4">
-        {/* Contact avatars row */}
-        <div className="flex items-center gap-2">
-          <div className="flex items-center py-2">
-            {contacts.slice(0, 6).map((contact) => {
-              const isSelected = selectedContact === contact.id;
-              return (
-                <motion.button
-                  key={contact.id}
-                  onClick={() => {
-                    if (sendState === "idle") setSelectedContact(contact.id);
-                  }}
-                  className="relative shrink-0 rounded-full"
-                  animate={{
-                    scale: isSelected ? 1.2 : 0.9,
-                    marginLeft: isSelected ? 6 : -4,
-                    marginRight: isSelected ? 6 : -4,
-                    zIndex: isSelected ? 10 : 1,
-                    opacity: isSelected ? 1 : 0.7,
-                  }}
-                  whileHover={{ scale: isSelected ? 1.2 : 1, opacity: 1 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+
+      <CardContent className="p-0 py-4 space-y-3 flex-1 flex flex-col justify-center">
+        {/* Quick select other user wallets */}
+        {otherWallets.length > 0 && (
+          <div className="space-y-1.5">
+            <span className="text-[11px] text-muted-foreground font-medium">Transfer to your other wallet:</span>
+            <div className="flex gap-1.5 flex-wrap">
+              {otherWallets.map((w) => (
+                <button
+                  key={w.id}
+                  onClick={() => setRecipientWalletId(w.id)}
+                  className={cn(
+                    "text-xs px-2.5 py-1 rounded-md border transition-all",
+                    recipientWalletId === w.id
+                      ? "border-primary bg-primary/10 text-primary font-semibold"
+                      : "border-border/60 hover:bg-muted/50 text-muted-foreground"
+                  )}
                 >
-                  <Avatar
-                    className={
-                      isSelected
-                        ? "size-11 ring-2 ring-primary ring-offset-2 ring-offset-background"
-                        : "size-10"
-                    }
-                  >
-                    <AvatarImage src={contact.avatar} alt={contact.name} />
-                    <AvatarFallback className="text-xs">
-                      {contact.name.split(" ").map((n) => n[0]).join("")}
-                    </AvatarFallback>
-                  </Avatar>
-                </motion.button>
-              );
-            })}
+                  {w.currency} Wallet ({w.id.slice(0, 6)}...)
+                </button>
+              ))}
+            </div>
           </div>
-          <Button
-            variant="outline"
-            size="icon"
-            className="size-10 shrink-0 rounded-full"
-            render={<Link href="/transfers" />}
-          >
-            <ChevronRightIcon className="size-4" />
-          </Button>
+        )}
+
+        {/* Recipient Wallet ID Input */}
+        <div className="space-y-1">
+          <label className="text-xs font-medium text-muted-foreground">Recipient Wallet ID (UUID):</label>
+          <Input
+            value={recipientWalletId}
+            onChange={(e) => setRecipientWalletId(e.target.value)}
+            placeholder="e.g. 6d5c357c-6537-4323-bb36-..."
+            className="text-xs font-mono"
+          />
         </div>
 
-        {/* Selected contact name */}
-        <AnimatePresence mode="wait">
-          <motion.p
-            key={selectedContact}
-            initial={{ opacity: 0, y: 4 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -4 }}
-            transition={{ duration: 0.15 }}
-            className="text-xs text-muted-foreground"
-          >
-            Sending to{" "}
-            <span className="font-medium text-foreground">
-              {selected?.name}
+        {/* Amount Input */}
+        <div className="space-y-1">
+          <div className="flex justify-between items-center">
+            <label className="text-xs font-medium text-muted-foreground">Amount ({activeWallet?.currency || "USD"}):</label>
+            <span className="text-[11px] text-muted-foreground">
+              Avail: ${activeWallet?.balance.toLocaleString() || "0.00"}
             </span>
-          </motion.p>
-        </AnimatePresence>
-
-        {/* Amount + Send */}
-        <AnimatePresence mode="wait">
-          {sendState === "success" ? (
-            <motion.div
-              key="success"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              className="flex flex-col items-center gap-2 py-3"
-            >
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20, delay: 0.1 }}
-              >
-                <CheckCircle2Icon className="size-10 text-emerald-500" />
-              </motion.div>
-              <p className="text-sm font-semibold">
-                ${parseFloat(amount).toLocaleString("en-US", { minimumFractionDigits: 2 })} sent!
-              </p>
-              <p className="text-xs text-muted-foreground">
-                To {selected?.name}
-              </p>
-            </motion.div>
-          ) : (
-            <motion.div
-              key="form"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="flex items-end gap-3"
-            >
-              <div className="flex-1 space-y-1.5">
-                <label className="text-xs text-muted-foreground">Amount</label>
-                <div className="relative">
-                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm font-semibold text-muted-foreground">
-                    $
-                  </span>
-                  <Input
-                    type="text"
-                    value={amount}
-                    onChange={(e) => setAmount(e.target.value)}
-                    disabled={sendState === "sending"}
-                    className="h-10 pl-7 text-lg font-semibold tabular-nums"
-                  />
-                </div>
-              </div>
-              <Button
-                className="h-10 gap-2 px-6"
-                disabled={sendState === "sending"}
-                onClick={handleSend}
-              >
-                {sendState === "sending" ? (
-                  <LoaderCircleIcon className="size-4 animate-spin" />
-                ) : (
-                  <SendIcon className="size-4" />
-                )}
-                {sendState === "sending" ? "Sending..." : "Send"}
-              </Button>
-            </motion.div>
-          )}
-        </AnimatePresence>
+          </div>
+          <Input
+            type="number"
+            min="1"
+            step="any"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+            placeholder="Amount"
+            className="text-sm font-semibold"
+          />
+        </div>
       </CardContent>
+
+      <Button
+        onClick={handleSend}
+        disabled={isMutating || isSuccess || !activeWallet || (activeWallet.balance <= 0)}
+        className="w-full font-medium h-9 text-xs gap-2"
+      >
+        {isMutating ? (
+          <>
+            <LoaderCircleIcon className="size-3.5 animate-spin" />
+            Executing Saga State Machine...
+          </>
+        ) : isSuccess ? (
+          <>
+            <CheckCircle2Icon className="size-3.5 text-emerald-400" />
+            Transfer Settled & Verified!
+          </>
+        ) : (
+          <>
+            <ArrowRightIcon className="size-3.5" />
+            Send {activeWallet?.currency || "$"} {amount || "0"} Now
+          </>
+        )}
+      </Button>
     </Card>
   );
 }

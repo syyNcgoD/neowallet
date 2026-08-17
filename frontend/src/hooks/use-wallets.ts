@@ -11,9 +11,18 @@ import axios from "axios";
 
 export const WALLET_KEYS = {
   all: ["wallets"] as const,
+  user: (ownerId: string) => ["wallets", "user", ownerId] as const,
   summary: (id: string) => ["wallets", "summary", id] as const,
   transactions: (id: string) => ["wallets", "transactions", id] as const,
 };
+
+export function useUserWallets(ownerId?: string) {
+  return useQuery({
+    queryKey: ownerId ? WALLET_KEYS.user(ownerId) : ["wallets", "user", "none"],
+    queryFn: () => (ownerId ? walletApi.getUserWallets(ownerId) : Promise.resolve([])),
+    enabled: Boolean(ownerId),
+  });
+}
 
 export function useWalletSummary(walletId?: string) {
   return useQuery({

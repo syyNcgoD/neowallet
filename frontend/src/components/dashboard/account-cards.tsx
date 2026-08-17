@@ -1,13 +1,10 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
-import { accountCards, walletBalance } from "@/data/seed";
+import { useState } from "react";
 import {
-  CreditCardIcon,
   PlusIcon,
   TrendingUpIcon,
   EuroIcon,
-  BitcoinIcon,
   ChartLineIcon,
   NfcIcon,
   XIcon,
@@ -16,6 +13,9 @@ import {
   LockIcon,
   UnlockIcon,
   ArrowDownLeftIcon,
+  ArrowUpRightIcon,
+  WalletIcon,
+  RefreshCwIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -29,354 +29,360 @@ import {
 } from "@/components/ui/select";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
-import { useAuth } from "@/contexts/auth-context";
-import { useWalletSummary, useDeposit, useLockWallet, useUnlockWallet, useCreateWallet } from "@/hooks/use-wallets";
-import { v4 as uuidv4 } from "uuid";
+import { useWallet } from "@/contexts/wallet-context";
 
-type AddState = "idle" | "form" | "adding" | "success" | "deposit";
+type ModalState = "idle" | "create-wallet" | "deposit" | "withdraw" | "lock";
 
-const newCardOptions = [
-  { value: "USD", label: "USD Core Wallet", currency: "$", style: "bg-primary text-primary-foreground", icon: <ChartLineIcon className="size-5 opacity-30" />, chipColor: "bg-primary-foreground/20" },
-  { value: "EUR", label: "Euro Eurozone Wallet", currency: "€", style: "bg-muted text-foreground", icon: <EuroIcon className="size-5 opacity-30" />, chipColor: "bg-foreground/10" },
-  { value: "GBP", label: "British Pound Wallet", currency: "£", style: "bg-emerald-600 text-white", icon: <TrendingUpIcon className="size-5 opacity-30" />, chipColor: "bg-white/20" },
+const CURRENCY_OPTIONS = [
+  { value: "USD", label: "USD Core Wallet", symbol: "$", style: "bg-primary text-primary-foreground", icon: <ChartLineIcon className="size-5 opacity-30" /> },
+  { value: "EUR", label: "EUR European Vault", symbol: "€", style: "bg-zinc-900 text-zinc-100 border border-zinc-700", icon: <EuroIcon className="size-5 opacity-30" /> },
+  { value: "GBP", label: "GBP British Sterling", symbol: "£", style: "bg-emerald-800 text-white", icon: <TrendingUpIcon className="size-5 opacity-30" /> },
 ];
 
 export function AccountCards() {
-  const { user } = useAuth();
-  const walletId = user?.id;
-  const { data: walletSummary, isLoading: isSummaryLoading } = useWalletSummary(walletId);
-  const depositMutation = useDeposit(walletId || "");
-  const lockMutation = useLockWallet(walletId || "");
-  const unlockMutation = useUnlockWallet(walletId || "");
-  const createWalletMutation = useCreateWallet();
+  const {
+    wallets,
+    activeWallet,
+    setActiveWalletId,
+    isLoading,
+    isMutating,
+    createWallet,
+    deposit,
+    withdraw,
+    toggleLock,
+    refresh,
+  } = useWallet();
 
-  const [cards, setCards] = useState([
-    {
-      id: "card-usd-primary",
-      label: "USD Primary Wallet",
-      balance: walletSummary ? walletSummary.balance.toLocaleString("en-US", { minimumFractionDigits: 2 }) : "84,765.00",
-      currency: "$",
-      variant: "primary" as const,
-      style: "bg-primary text-primary-foreground",
-      icon: <ChartLineIcon className="size-5 opacity-30" />,
-      chipColor: "bg-primary-foreground/20",
-      last4: "2026",
-    },
-    {
-      ...accountCards[0],
-      id: "card-eur-vault",
-      style: "bg-muted text-foreground",
-      icon: <EuroIcon className="size-5 opacity-30" />,
-      chipColor: "bg-foreground/10",
-      last4: "4589",
-    },
-    {
-      ...accountCards[1],
-      id: "card-crypto-vault",
-      style: "bg-card text-card-foreground ring-1 ring-border",
-      icon: <BitcoinIcon className="size-5 opacity-30" />,
-      chipColor: "bg-foreground/10",
-      last4: "7321",
-    },
-  ]);
-
-  const [order, setOrder] = useState(() => [0, 1, 2]);
-  const [addState, setAddState] = useState<AddState>("idle");
-  const [newCardType, setNewCardType] = useState("USD");
-  const [depositAmount, setDepositAmount] = useState("500.00");
-
-  useEffect(() => {
-    if (walletSummary) {
-      setCards((prev) => [
-        {
-          ...prev[0],
-          balance: walletSummary.balance.toLocaleString("en-US", { minimumFractionDigits: 2 }),
-          label: `${walletSummary.currency} ${walletSummary.status === "Locked" ? "(Locked)" : "Wallet"}`,
-        },
-        ...prev.slice(1),
-      ]);
-    }
-  }, [walletSummary]);
-
-  const cycle = useCallback(() => {
-    setOrder((prev) => {
-      const next = [...prev];
-      const front = next.pop()!;
-      next.unshift(front);
-      return next;
-    })
-  }, []);
-
-  useEffect(() => {
-    if (addState !== "idle") return;
-    const id = setInterval(cycle, 3500);
-    return () => clearInterval(id);
-  }, [cycle, addState]);
-
-  const handleDeposit = async () => {
-    if (!walletId || !depositAmount || parseFloat(depositAmount) <= 0) return;
-    setAddState("adding");
-    try {
-      await depositMutation.mutateAsync({
-        data: {
-          amount: parseFloat(depositAmount),
-          currency: walletSummary?.currency || "USD",
-          reference: `DEP-${Date.now()}`,
-          description: "Quick Dashboard Top-up",
-        },
-        idempotencyKey: uuidv4(),
-      });
-      setAddState("success");
-      setTimeout(() => setAddState("idle"), 1500);
-    } catch {
-      setAddState("idle");
-    }
-  };
-
-  const toggleLock = async () => {
-    if (!walletId) return;
-    if (walletSummary?.status === "Locked") {
-      await unlockMutation.mutateAsync("User requested unlock from dashboard");
-    } else {
-      await lockMutation.mutateAsync("User locked wallet from dashboard");
-    }
-  };
+  const [modal, setModal] = useState<ModalState>("idle");
+  const [selectedCurrency, setSelectedCurrency] = useState("USD");
+  const [amountInput, setAmountInput] = useState("500");
+  const [lockReason, setLockReason] = useState("User manual security freeze");
 
   const handleCreateWallet = async () => {
-    if (!user?.id) return;
-    setAddState("adding");
-    try {
-      await createWalletMutation.mutateAsync({
-        ownerId: user.id,
-        currency: newCardType,
-      });
-      setAddState("success");
-      setTimeout(() => setAddState("idle"), 1500);
-    } catch {
-      setAddState("idle");
-    }
+    await createWallet(selectedCurrency);
+    setModal("idle");
   };
 
-  const currentBalance = walletSummary
-    ? walletSummary.balance
-    : walletBalance.amount;
+  const handleDeposit = async () => {
+    const num = parseFloat(amountInput);
+    if (!num || num <= 0) return;
+    await deposit(num, `Direct Deposit into ${activeWallet?.currency} Wallet`);
+    setModal("idle");
+    setAmountInput("500");
+  };
+
+  const handleWithdraw = async () => {
+    const num = parseFloat(amountInput);
+    if (!num || num <= 0) return;
+    await withdraw(num, `Direct Withdrawal from ${activeWallet?.currency} Wallet`);
+    setModal("idle");
+    setAmountInput("100");
+  };
+
+  const handleToggleLock = async () => {
+    await toggleLock(lockReason);
+    setModal("idle");
+  };
+
+  // If loading or no wallets
+  if (isLoading) {
+    return (
+      <Card className="h-full flex items-center justify-center p-8 bg-card/60 backdrop-blur-sm border-border/40">
+        <div className="flex flex-col items-center gap-3 text-muted-foreground">
+          <LoaderCircleIcon className="size-8 animate-spin text-primary" />
+          <p className="text-sm font-medium">Connecting to Event Store...</p>
+        </div>
+      </Card>
+    );
+  }
+
+  // If user has 0 wallets yet
+  if (wallets.length === 0) {
+    return (
+      <Card className="h-full flex flex-col justify-between p-6 bg-gradient-to-br from-card/80 to-card border-dashed border-primary/30">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <WalletIcon className="size-5 text-primary" />
+            <span className="font-semibold text-sm">Real Multi-Currency Ledger</span>
+          </div>
+          <Button variant="ghost" size="sm" onClick={refresh} className="h-8 w-8 p-0">
+            <RefreshCwIcon className="size-4" />
+          </Button>
+        </div>
+
+        <div className="my-6 text-center">
+          <div className="mx-auto size-12 rounded-full bg-primary/10 flex items-center justify-center mb-3">
+            <PlusIcon className="size-6 text-primary" />
+          </div>
+          <h3 className="font-semibold text-base">No active wallets found</h3>
+          <p className="text-xs text-muted-foreground mt-1 max-w-[260px] mx-auto">
+            Create your first event-sourced multi-currency wallet to start depositing and transferring real funds.
+          </p>
+        </div>
+
+        <Button
+          onClick={() => createWallet("USD")}
+          disabled={isMutating}
+          className="w-full font-medium"
+        >
+          {isMutating ? <LoaderCircleIcon className="size-4 animate-spin mr-2" /> : <PlusIcon className="size-4 mr-2" />}
+          Create Primary USD Wallet
+        </Button>
+      </Card>
+    );
+  }
+
+  const isLocked = String(activeWallet?.status) === "2" || String(activeWallet?.status).toLowerCase() === "locked";
 
   return (
-    <Card>
-      <CardContent className="flex flex-col gap-5 pt-6">
-        <AnimatePresence mode="wait">
-          {addState === "idle" ? (
-            <motion.div
-              key="cards"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            >
-              {/* Stacked cards */}
-              <div className="relative h-[200px]">
-                {order.map((cardIndex, stackPos) => {
-                  const c = cards[cardIndex];
-                  if (!c) return null;
-                  const isFront = stackPos === order.length - 1;
-                  const maxOffset = 48 / Math.max(order.length - 1, 1);
-                  return (
-                    <motion.button
-                      key={c.id}
-                      onClick={cycle}
-                      layout
-                      animate={{
-                        y: stackPos * Math.min(maxOffset, 16),
-                        scale: 1 - (order.length - 1 - stackPos) * (0.12 / Math.max(order.length - 1, 1)),
-                        zIndex: stackPos,
-                      }}
-                      transition={{ type: "spring", stiffness: 400, damping: 28 }}
-                      className={cn(
-                        "absolute inset-x-0 flex h-[152px] cursor-pointer flex-col justify-between rounded-2xl px-5 py-4 text-left",
-                        c.style,
-                        isFront ? "shadow-xl" : "shadow-md"
-                      )}
-                    >
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm font-semibold tracking-wide">{c.label}</span>
-                        {c.icon}
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <div className={cn("h-7 w-10 rounded-md", c.chipColor)} />
-                        <NfcIcon className="size-4 opacity-20" />
-                      </div>
-                      <div className="flex items-end justify-between">
-                        <span className="font-mono text-[10px] tracking-widest opacity-40">
-                          **** {c.last4}
-                        </span>
-                        <p className="text-xl font-bold tabular-nums tracking-tight">
-                          {c.currency === "BTC"
-                            ? `${c.balance} ${c.currency}`
-                            : `${c.currency}${c.balance}`}
-                        </p>
-                      </div>
-                    </motion.button>
-                  );
-                })}
-              </div>
-            </motion.div>
-          ) : addState === "deposit" ? (
-            <motion.div
-              key="deposit-flow"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              className="flex h-[200px] flex-col justify-between"
-            >
-              <div className="flex items-center justify-between">
-                <p className="text-sm font-semibold">Quick Deposit to Wallet</p>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="size-7"
-                  onClick={() => setAddState("idle")}
-                >
-                  <XIcon className="size-4" />
-                </Button>
-              </div>
-              <div className="space-y-1.5">
-                <label className="text-xs text-muted-foreground">Amount ({walletSummary?.currency || "USD"})</label>
-                <Input
-                  type="number"
-                  value={depositAmount}
-                  onChange={(e) => setDepositAmount(e.target.value)}
-                  className="h-10 text-lg font-semibold tabular-nums"
-                />
-              </div>
-              <Button
-                className="h-10 gap-2 text-xs"
-                onClick={handleDeposit}
-                disabled={depositMutation.isPending}
-              >
-                <ArrowDownLeftIcon className="size-4" />
-                Confirm Deposit
-              </Button>
-            </motion.div>
-          ) : (
-            <motion.div
-              key="add-flow"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              className="flex h-[200px] flex-col"
-            >
-              {addState === "success" ? (
-                <div className="flex flex-1 flex-col items-center justify-center gap-2">
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  >
-                    <CheckCircle2Icon className="size-10 text-emerald-500" />
-                  </motion.div>
-                  <p className="text-sm font-semibold">Operation Completed!</p>
-                </div>
-              ) : addState === "adding" ? (
-                <div className="flex flex-1 flex-col items-center justify-center gap-3">
-                  <LoaderCircleIcon className="size-8 animate-spin text-muted-foreground" />
-                  <p className="text-sm text-muted-foreground">Processing with Event Store...</p>
-                </div>
-              ) : (
-                <div className="flex flex-1 flex-col gap-3">
-                  <div className="flex items-center justify-between">
-                    <p className="text-sm font-semibold">Add Currency Wallet</p>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="size-7"
-                      onClick={() => setAddState("idle")}
-                    >
-                      <XIcon className="size-4" />
-                    </Button>
-                  </div>
-                  <Select value={newCardType} onValueChange={(v) => v && setNewCardType(v)}>
-                    <SelectTrigger className="h-9 text-xs">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {newCardOptions.map((o) => (
-                        <SelectItem key={o.value} value={o.value}>
-                          {o.label} ({o.value})
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <Button className="h-9 gap-2 text-xs" onClick={handleCreateWallet}>
-                    <PlusIcon className="size-3.5" />
-                    Initialize Wallet Stream
-                  </Button>
-                </div>
-              )}
-            </motion.div>
-          )}
-        </AnimatePresence>
+    <div className="flex flex-col gap-4">
+      {/* Wallet Stack Card */}
+      <Card className="relative overflow-hidden bg-card/60 backdrop-blur-sm border-border/40 p-5">
+        <div className="flex items-center justify-between pb-3 border-b border-border/40">
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Active Ledger</span>
+            <span className={cn(
+              "px-2 py-0.5 rounded-full text-[10px] font-semibold",
+              isLocked ? "bg-rose-500/20 text-rose-500 border border-rose-500/30" : "bg-emerald-500/20 text-emerald-500 border border-emerald-500/30"
+            )}>
+              {isLocked ? "FROZEN" : "ACTIVE"} (v{activeWallet?.version || 1})
+            </span>
+          </div>
 
-        {/* Quick action buttons: Deposit & Freeze */}
-        <div className="flex items-center justify-between gap-2">
           <div className="flex items-center gap-1.5">
             <Button
               variant="outline"
               size="sm"
-              className="h-8 gap-1.5 text-xs"
-              onClick={() => setAddState("deposit")}
+              onClick={() => setModal("create-wallet")}
+              className="h-7 text-xs px-2.5 gap-1"
             >
-              <ArrowDownLeftIcon className="size-3.5 text-emerald-600 dark:text-emerald-400" />
-              Deposit
+              <PlusIcon className="size-3" />
+              New Wallet
             </Button>
             <Button
-              variant="outline"
+              variant="ghost"
               size="sm"
-              className="h-8 gap-1.5 text-xs"
-              onClick={toggleLock}
-              disabled={lockMutation.isPending || unlockMutation.isPending}
+              onClick={refresh}
+              className="h-7 w-7 p-0 text-muted-foreground"
             >
-              {walletSummary?.status === "Locked" ? (
-                <>
-                  <UnlockIcon className="size-3.5 text-amber-500" />
-                  Unlock
-                </>
-              ) : (
-                <>
-                  <LockIcon className="size-3.5 text-muted-foreground" />
-                  Freeze
-                </>
-              )}
+              <RefreshCwIcon className={cn("size-3.5", isMutating && "animate-spin")} />
             </Button>
           </div>
-          <Button
-            variant="outline"
-            size="icon"
-            className="size-8 rounded-full"
-            onClick={() => addState === "idle" && setAddState("form")}
-            title="Add Currency Wallet"
-          >
-            <PlusIcon className="size-4" />
-          </Button>
         </div>
 
-        {/* Wallet balance */}
-        <div className="space-y-1.5 border-t pt-5">
-          <div className="flex items-center justify-between">
-            <p className="text-xs font-medium text-muted-foreground">Live Total Balance</p>
-            {walletSummary && (
-              <span className="font-mono text-[10px] text-muted-foreground">
-                v{walletSummary.version} OCC
-              </span>
-            )}
-          </div>
-          <p className="text-3xl font-bold tabular-nums tracking-tight">
-            ${currentBalance.toLocaleString("en-US", { minimumFractionDigits: 2 })}
-          </p>
-          <div className="flex items-center gap-1.5 text-sm font-medium text-emerald-600 dark:text-emerald-400">
-            <TrendingUpIcon className="size-4" />
-            <span>+12.4% this month</span>
+        {/* Card Body */}
+        <div className="pt-4 pb-2">
+          {/* Wallet Selector Tabs */}
+          {wallets.length > 1 && (
+            <div className="flex gap-2 mb-4 overflow-x-auto pb-1">
+              {wallets.map((w) => (
+                <button
+                  key={w.id}
+                  onClick={() => setActiveWalletId(w.id)}
+                  className={cn(
+                    "px-3 py-1 rounded-lg text-xs font-medium transition-all whitespace-nowrap",
+                    w.id === activeWallet?.id
+                      ? "bg-primary text-primary-foreground shadow-sm"
+                      : "bg-muted/60 text-muted-foreground hover:bg-muted"
+                  )}
+                >
+                  {w.currency} Wallet (${w.balance.toLocaleString()})
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* Active Balance Display */}
+          <div className="space-y-1">
+            <div className="text-xs text-muted-foreground font-medium">
+              {activeWallet?.currency === "USD" ? "United States Dollar" : activeWallet?.currency === "EUR" ? "Euro" : "British Pound"} (ID: {activeWallet?.id.slice(0, 8)}...)
+            </div>
+            <div className="text-3xl font-bold tracking-tight">
+              {activeWallet?.currency === "USD" ? "$" : activeWallet?.currency === "EUR" ? "€" : "£"}
+              {activeWallet?.balance.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+            </div>
           </div>
         </div>
-      </CardContent>
-    </Card>
+
+        {/* Quick Financial Actions */}
+        <div className="grid grid-cols-3 gap-2 pt-4 border-t border-border/40 mt-3">
+          <Button
+            size="sm"
+            onClick={() => setModal("deposit")}
+            disabled={isLocked || isMutating}
+            className="h-9 gap-1.5 font-medium text-xs bg-emerald-600 hover:bg-emerald-700 text-white"
+          >
+            <ArrowDownLeftIcon className="size-3.5" />
+            Deposit
+          </Button>
+
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={() => setModal("withdraw")}
+            disabled={isLocked || isMutating || (activeWallet?.balance || 0) <= 0}
+            className="h-9 gap-1.5 font-medium text-xs"
+          >
+            <ArrowUpRightIcon className="size-3.5" />
+            Withdraw
+          </Button>
+
+          <Button
+            size="sm"
+            variant={isLocked ? "destructive" : "secondary"}
+            onClick={() => setModal("lock")}
+            disabled={isMutating}
+            className="h-9 gap-1.5 font-medium text-xs"
+          >
+            {isLocked ? <UnlockIcon className="size-3.5" /> : <LockIcon className="size-3.5" />}
+            {isLocked ? "Unfreeze" : "Freeze"}
+          </Button>
+        </div>
+      </Card>
+
+      {/* Action Modals */}
+      <AnimatePresence>
+        {modal !== "idle" && (
+          <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 10 }}
+              className="w-full max-w-md bg-card border border-border rounded-xl shadow-2xl overflow-hidden p-6"
+            >
+              {/* Modal Header */}
+              <div className="flex items-center justify-between pb-4 border-b border-border/40">
+                <h3 className="font-semibold text-base">
+                  {modal === "create-wallet" && "Create New Multi-Currency Wallet"}
+                  {modal === "deposit" && `Deposit Funds into ${activeWallet?.currency} Wallet`}
+                  {modal === "withdraw" && `Withdraw Funds from ${activeWallet?.currency} Wallet`}
+                  {modal === "lock" && (isLocked ? "Unlock / Unfreeze Wallet" : "Freeze / Lock Wallet")}
+                </h3>
+                <Button variant="ghost" size="sm" onClick={() => setModal("idle")} className="h-7 w-7 p-0">
+                  <XIcon className="size-4" />
+                </Button>
+              </div>
+
+              {/* Modal Content */}
+              <div className="py-4 space-y-4">
+                {modal === "create-wallet" && (
+                  <>
+                    <p className="text-xs text-muted-foreground">
+                      Choose currency for your new event-sourced ledger stream:
+                    </p>
+                    <div className="grid grid-cols-3 gap-2">
+                      {CURRENCY_OPTIONS.map((c) => (
+                        <button
+                          key={c.value}
+                          onClick={() => setSelectedCurrency(c.value)}
+                          className={cn(
+                            "p-3 rounded-lg border text-center transition-all",
+                            selectedCurrency === c.value
+                              ? "border-primary bg-primary/10 text-primary font-semibold"
+                              : "border-border/60 hover:bg-muted/50 text-muted-foreground"
+                          )}
+                        >
+                          <div className="text-lg">{c.symbol}</div>
+                          <div className="text-xs mt-1">{c.value}</div>
+                        </button>
+                      ))}
+                    </div>
+                  </>
+                )}
+
+                {(modal === "deposit" || modal === "withdraw") && (
+                  <>
+                    <div className="space-y-2">
+                      <label className="text-xs font-medium text-muted-foreground">Amount ({activeWallet?.currency}):</label>
+                      <Input
+                        type="number"
+                        min="1"
+                        step="any"
+                        value={amountInput}
+                        onChange={(e) => setAmountInput(e.target.value)}
+                        placeholder="e.g. 500"
+                        className="text-lg font-semibold"
+                      />
+                    </div>
+
+                    {modal === "deposit" && (
+                      <div className="flex gap-2">
+                        {["100", "500", "1000", "5000"].map((preset) => (
+                          <Button
+                            key={preset}
+                            variant="outline"
+                            size="sm"
+                            onClick={() => setAmountInput(preset)}
+                            className="flex-1 text-xs"
+                          >
+                            +${preset}
+                          </Button>
+                        ))}
+                      </div>
+                    )}
+                  </>
+                )}
+
+                {modal === "lock" && (
+                  <div className="space-y-2">
+                    <p className="text-xs text-muted-foreground">
+                      {isLocked
+                        ? "Are you sure you want to unfreeze this wallet? Normal transactions will resume immediately."
+                        : "Freezing this wallet will immediately block all withdrawals and transfers until unfreezed."}
+                    </p>
+                    <Input
+                      value={lockReason}
+                      onChange={(e) => setLockReason(e.target.value)}
+                      placeholder="Reason for audit log..."
+                      className="text-xs"
+                    />
+                  </div>
+                )}
+              </div>
+
+              {/* Modal Footer */}
+              <div className="flex justify-end gap-2 pt-4 border-t border-border/40">
+                <Button variant="outline" size="sm" onClick={() => setModal("idle")}>
+                  Cancel
+                </Button>
+
+                {modal === "create-wallet" && (
+                  <Button size="sm" onClick={handleCreateWallet} disabled={isMutating}>
+                    {isMutating ? <LoaderCircleIcon className="size-3.5 animate-spin mr-1.5" /> : null}
+                    Create Wallet
+                  </Button>
+                )}
+
+                {modal === "deposit" && (
+                  <Button size="sm" onClick={handleDeposit} disabled={isMutating} className="bg-emerald-600 hover:bg-emerald-700 text-white">
+                    {isMutating ? <LoaderCircleIcon className="size-3.5 animate-spin mr-1.5" /> : null}
+                    Confirm Deposit
+                  </Button>
+                )}
+
+                {modal === "withdraw" && (
+                  <Button size="sm" onClick={handleWithdraw} disabled={isMutating}>
+                    {isMutating ? <LoaderCircleIcon className="size-3.5 animate-spin mr-1.5" /> : null}
+                    Confirm Withdrawal
+                  </Button>
+                )}
+
+                {modal === "lock" && (
+                  <Button
+                    size="sm"
+                    variant={isLocked ? "default" : "destructive"}
+                    onClick={handleToggleLock}
+                    disabled={isMutating}
+                  >
+                    {isMutating ? <LoaderCircleIcon className="size-3.5 animate-spin mr-1.5" /> : null}
+                    {isLocked ? "Unfreeze Now" : "Freeze Now"}
+                  </Button>
+                )}
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 }
