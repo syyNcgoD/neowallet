@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import Link from "next/link"
-import { NavMain } from "@/components/nav-main"
-import { NavSecondary } from "@/components/nav-secondary"
-import { NavUser } from "@/components/nav-user"
+import * as React from "react";
+import Link from "next/link";
+import { NavMain } from "@/components/nav-main";
+import { NavSecondary } from "@/components/nav-secondary";
+import { NavUser } from "@/components/nav-user";
 import {
   Sidebar,
   SidebarContent,
@@ -13,7 +13,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
 import {
   LayoutDashboardIcon,
   WalletIcon,
@@ -28,14 +28,13 @@ import {
   TrendingUpIcon,
   BitcoinIcon,
   BellIcon,
-  LogInIcon,
-  UserPlusIcon,
-} from "lucide-react"
+} from "lucide-react";
+import { useAuth } from "@/contexts/auth-context";
 
 const data = {
-  user: {
-    name: "Abderrahim G.",
-    email: "abderrahim@fintech.com",
+  defaultUser: {
+    name: "User",
+    email: "user@neowallet.com",
     avatar: "/avatars/user.jpg",
   },
   navDaily: [
@@ -53,18 +52,22 @@ const data = {
     { title: "Analytics", url: "/analytics", icon: <ChartAreaIcon /> },
     { title: "Budgets", url: "/budgets", icon: <TargetIcon /> },
   ],
-  navAuth: [
-    { title: "Sign In", url: "/sign-in", icon: <LogInIcon /> },
-    { title: "Sign Up", url: "/sign-up", icon: <UserPlusIcon /> },
-  ],
   navSecondary: [
     { title: "Notifications", url: "/notifications", icon: <BellIcon /> },
     { title: "Settings", url: "/settings", icon: <SettingsIcon /> },
     { title: "Help & Support", url: "/support", icon: <LifeBuoyIcon /> },
   ],
-}
+};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { user } = useAuth();
+
+  const currentUser = {
+    name: user?.email ? user.email.split("@")[0] : data.defaultUser.name,
+    email: user?.email || data.defaultUser.email,
+    avatar: data.defaultUser.avatar,
+  };
+
   return (
     <Sidebar variant="inset" {...props}>
       <SidebarHeader>
@@ -88,12 +91,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavMain items={data.navDaily} label="Daily" />
         <NavMain items={data.navMoney} label="Money" />
         <NavMain items={data.navInsights} label="Insights" />
-        <NavMain items={data.navAuth} label="Auth" />
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={currentUser} />
       </SidebarFooter>
     </Sidebar>
-  )
+  );
 }
