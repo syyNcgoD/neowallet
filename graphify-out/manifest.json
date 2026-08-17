@@ -1,0 +1,1717 @@
+{
+  "NeoWallet.slnx": {
+    "mtime": 1786895396.5605226,
+    "ast_hash": "1b6cba0e7bf27e542ad233a0a6afe5ec",
+    "semantic_hash": "1b6cba0e7bf27e542ad233a0a6afe5ec"
+  },
+  "frontend/components.json": {
+    "mtime": 1786898989.9251633,
+    "ast_hash": "519f93133ded707d8847caceca85dbac",
+    "semantic_hash": "519f93133ded707d8847caceca85dbac"
+  },
+  "frontend/eslint.config.mjs": {
+    "mtime": 1786898989.9251633,
+    "ast_hash": "ada768d8ca4d718e291615e785a46551",
+    "semantic_hash": "ada768d8ca4d718e291615e785a46551"
+  },
+  "frontend/next.config.ts": {
+    "mtime": 1786948689.791121,
+    "ast_hash": "d019d88c6ecda802b871f7e16b3c288c",
+    "semantic_hash": "d019d88c6ecda802b871f7e16b3c288c"
+  },
+  "frontend/package.json": {
+    "mtime": 1786903699.6556537,
+    "ast_hash": "813ebe8f0881e73bbfbc487dc8190eee",
+    "semantic_hash": "813ebe8f0881e73bbfbc487dc8190eee"
+  },
+  "frontend/postcss.config.mjs": {
+    "mtime": 1786898989.929726,
+    "ast_hash": "481fac0fdecd70e1821cc30b86030c1a",
+    "semantic_hash": "481fac0fdecd70e1821cc30b86030c1a"
+  },
+  "frontend/src/app/(auth)/layout.tsx": {
+    "mtime": 1786898989.9571483,
+    "ast_hash": "ee13ce0e2808a039ba1d5e525fd2d13c",
+    "semantic_hash": "ee13ce0e2808a039ba1d5e525fd2d13c"
+  },
+  "frontend/src/app/(auth)/sign-in/page.tsx": {
+    "mtime": 1786948795.9346533,
+    "ast_hash": "c8cdfe9366e71690512baec60e14537b",
+    "semantic_hash": "c8cdfe9366e71690512baec60e14537b"
+  },
+  "frontend/src/app/(auth)/sign-up/page.tsx": {
+    "mtime": 1786948783.7472777,
+    "ast_hash": "7195a9b8adf774e61bf33ac17c0aab29",
+    "semantic_hash": "7195a9b8adf774e61bf33ac17c0aab29"
+  },
+  "frontend/src/app/(dashboard)/accounts/loading.tsx": {
+    "mtime": 1786898989.9587595,
+    "ast_hash": "0da02d295373bf3a00205c1c24db4c87",
+    "semantic_hash": "0da02d295373bf3a00205c1c24db4c87"
+  },
+  "frontend/src/app/(dashboard)/accounts/page.tsx": {
+    "mtime": 1786898989.9592822,
+    "ast_hash": "5aef693cfe4c485364723d5ebad64903",
+    "semantic_hash": "5aef693cfe4c485364723d5ebad64903"
+  },
+  "frontend/src/app/(dashboard)/analytics/loading.tsx": {
+    "mtime": 1786898989.9592822,
+    "ast_hash": "5b417a3b46e14ae1b2bfe49a21d9917f",
+    "semantic_hash": "5b417a3b46e14ae1b2bfe49a21d9917f"
+  },
+  "frontend/src/app/(dashboard)/analytics/page.tsx": {
+    "mtime": 1786898989.959817,
+    "ast_hash": "2fa1d93c038ad97fc3d1fe7a097a63d6",
+    "semantic_hash": "2fa1d93c038ad97fc3d1fe7a097a63d6"
+  },
+  "frontend/src/app/(dashboard)/budgets/loading.tsx": {
+    "mtime": 1786904168.8947227,
+    "ast_hash": "391843cbf707e8285016d7c22cf0e3d1",
+    "semantic_hash": "391843cbf707e8285016d7c22cf0e3d1"
+  },
+  "frontend/src/app/(dashboard)/budgets/page.tsx": {
+    "mtime": 1786898989.960345,
+    "ast_hash": "783d9c9da60d37f5f4ac7f1f5b48a246",
+    "semantic_hash": "783d9c9da60d37f5f4ac7f1f5b48a246"
+  },
+  "frontend/src/app/(dashboard)/cards/loading.tsx": {
+    "mtime": 1786904113.776588,
+    "ast_hash": "65f9224950d31785e4b25da0f50f081b",
+    "semantic_hash": "65f9224950d31785e4b25da0f50f081b"
+  },
+  "frontend/src/app/(dashboard)/cards/page.tsx": {
+    "mtime": 1786898989.960345,
+    "ast_hash": "eec735efb3963ebcf5600cd19c1facef",
+    "semantic_hash": "eec735efb3963ebcf5600cd19c1facef"
+  },
+  "frontend/src/app/(dashboard)/crypto/loading.tsx": {
+    "mtime": 1786898989.9613554,
+    "ast_hash": "185304a45bb92eaf4d8a88008cebde75",
+    "semantic_hash": "185304a45bb92eaf4d8a88008cebde75"
+  },
+  "frontend/src/app/(dashboard)/crypto/page.tsx": {
+    "mtime": 1786898989.9617796,
+    "ast_hash": "0a62991e0a57547298ceb84f71a02064",
+    "semantic_hash": "0a62991e0a57547298ceb84f71a02064"
+  },
+  "frontend/src/app/(dashboard)/dashboard/loading.tsx": {
+    "mtime": 1786898989.9622862,
+    "ast_hash": "6a6a1625afefb8dd20a54a1f5dde1c2e",
+    "semantic_hash": "6a6a1625afefb8dd20a54a1f5dde1c2e"
+  },
+  "frontend/src/app/(dashboard)/dashboard/page.tsx": {
+    "mtime": 1786898989.9622862,
+    "ast_hash": "549239f81924eef5c115f980a828edc1",
+    "semantic_hash": "549239f81924eef5c115f980a828edc1"
+  },
+  "frontend/src/app/(dashboard)/investments/loading.tsx": {
+    "mtime": 1786898989.9628286,
+    "ast_hash": "dba4493032d83ac927ad786f3625556b",
+    "semantic_hash": "dba4493032d83ac927ad786f3625556b"
+  },
+  "frontend/src/app/(dashboard)/investments/page.tsx": {
+    "mtime": 1786898989.9633539,
+    "ast_hash": "6edcf8947b24774c87292d937aecaf23",
+    "semantic_hash": "6edcf8947b24774c87292d937aecaf23"
+  },
+  "frontend/src/app/(dashboard)/layout.tsx": {
+    "mtime": 1786898989.9633539,
+    "ast_hash": "d04564d2013812c2501c7fa1905adafe",
+    "semantic_hash": "d04564d2013812c2501c7fa1905adafe"
+  },
+  "frontend/src/app/(dashboard)/notifications/loading.tsx": {
+    "mtime": 1786904185.0751698,
+    "ast_hash": "afb01ba92e76a506d6dbf1e22a850b53",
+    "semantic_hash": "afb01ba92e76a506d6dbf1e22a850b53"
+  },
+  "frontend/src/app/(dashboard)/notifications/page.tsx": {
+    "mtime": 1786898989.963919,
+    "ast_hash": "702c456119af0edfa2d48f135b9ce3ef",
+    "semantic_hash": "702c456119af0edfa2d48f135b9ce3ef"
+  },
+  "frontend/src/app/(dashboard)/settings/loading.tsx": {
+    "mtime": 1786904152.797805,
+    "ast_hash": "3c0ff870abcd5f7bbe6bc703c8510a0c",
+    "semantic_hash": "3c0ff870abcd5f7bbe6bc703c8510a0c"
+  },
+  "frontend/src/app/(dashboard)/settings/page.tsx": {
+    "mtime": 1786898989.9644473,
+    "ast_hash": "7b3b21619a0d57087a4c761a3ee4ada3",
+    "semantic_hash": "7b3b21619a0d57087a4c761a3ee4ada3"
+  },
+  "frontend/src/app/(dashboard)/support/loading.tsx": {
+    "mtime": 1786898989.9649787,
+    "ast_hash": "b3059e58661a8b5b01e26d99052b3f57",
+    "semantic_hash": "b3059e58661a8b5b01e26d99052b3f57"
+  },
+  "frontend/src/app/(dashboard)/support/page.tsx": {
+    "mtime": 1786898989.9649787,
+    "ast_hash": "552bfe62ba0e2da886384cc2fa32787a",
+    "semantic_hash": "552bfe62ba0e2da886384cc2fa32787a"
+  },
+  "frontend/src/app/(dashboard)/transactions/loading.tsx": {
+    "mtime": 1786898989.9649787,
+    "ast_hash": "9277c4f920dc1594de0b40bc45361c85",
+    "semantic_hash": "9277c4f920dc1594de0b40bc45361c85"
+  },
+  "frontend/src/app/(dashboard)/transactions/page.tsx": {
+    "mtime": 1786898989.9649787,
+    "ast_hash": "d3922d76cca41501b9012c8299fad22f",
+    "semantic_hash": "d3922d76cca41501b9012c8299fad22f"
+  },
+  "frontend/src/app/(dashboard)/transfers/loading.tsx": {
+    "mtime": 1786904130.479733,
+    "ast_hash": "3ae47ca6710bae47f84afcf64957c871",
+    "semantic_hash": "3ae47ca6710bae47f84afcf64957c871"
+  },
+  "frontend/src/app/(dashboard)/transfers/page.tsx": {
+    "mtime": 1786898989.9659872,
+    "ast_hash": "fa3eb87870fc8bb624e2bf09a73fff52",
+    "semantic_hash": "fa3eb87870fc8bb624e2bf09a73fff52"
+  },
+  "frontend/src/app/error.tsx": {
+    "mtime": 1786904060.9444344,
+    "ast_hash": "80c7b5d56abb1ba61facd60287b33dd2",
+    "semantic_hash": "80c7b5d56abb1ba61facd60287b33dd2"
+  },
+  "frontend/src/app/global-error.tsx": {
+    "mtime": 1786904075.3180575,
+    "ast_hash": "35f29c8ad44231c0c23b3866b88c3678",
+    "semantic_hash": "35f29c8ad44231c0c23b3866b88c3678"
+  },
+  "frontend/src/app/layout.tsx": {
+    "mtime": 1786903757.7834468,
+    "ast_hash": "3c267bbcff960fd562e9e44939873bbb",
+    "semantic_hash": "3c267bbcff960fd562e9e44939873bbb"
+  },
+  "frontend/src/app/not-found.tsx": {
+    "mtime": 1786898989.9675357,
+    "ast_hash": "7fe2eef33b003542748ad7074373e1e5",
+    "semantic_hash": "7fe2eef33b003542748ad7074373e1e5"
+  },
+  "frontend/src/app/page.tsx": {
+    "mtime": 1786898989.9675357,
+    "ast_hash": "9ce41068bad8833774d1cee6dbfe7949",
+    "semantic_hash": "9ce41068bad8833774d1cee6dbfe7949"
+  },
+  "frontend/src/components/accounts/account-grid.tsx": {
+    "mtime": 1786898989.9680603,
+    "ast_hash": "720091dd7f50e4a12dfc044c331cec94",
+    "semantic_hash": "720091dd7f50e4a12dfc044c331cec94"
+  },
+  "frontend/src/components/accounts/account-summary.tsx": {
+    "mtime": 1786898989.9680603,
+    "ast_hash": "8c1f249fae250cf9d521b36362e57367",
+    "semantic_hash": "8c1f249fae250cf9d521b36362e57367"
+  },
+  "frontend/src/components/accounts/accounts-page-client.tsx": {
+    "mtime": 1786903405.4140544,
+    "ast_hash": "a96de7d0c989c28ab36675d72e7d3a1e",
+    "semantic_hash": "a96de7d0c989c28ab36675d72e7d3a1e"
+  },
+  "frontend/src/components/accounts/add-account.tsx": {
+    "mtime": 1786898989.9690664,
+    "ast_hash": "ab4a7310473b3dddf59ead4e96700b9e",
+    "semantic_hash": "ab4a7310473b3dddf59ead4e96700b9e"
+  },
+  "frontend/src/components/analytics/ai-insights.tsx": {
+    "mtime": 1786898989.9690664,
+    "ast_hash": "de762c47b39d5860e37428ae89deaee4",
+    "semantic_hash": "de762c47b39d5860e37428ae89deaee4"
+  },
+  "frontend/src/components/analytics/category-donut.tsx": {
+    "mtime": 1786903204.591495,
+    "ast_hash": "94b2b0dcda0111bfae2360d8179294f8",
+    "semantic_hash": "94b2b0dcda0111bfae2360d8179294f8"
+  },
+  "frontend/src/components/analytics/month-comparison.tsx": {
+    "mtime": 1786898989.9700668,
+    "ast_hash": "19dbe996030a0653be1ea31dcf0cc493",
+    "semantic_hash": "19dbe996030a0653be1ea31dcf0cc493"
+  },
+  "frontend/src/components/analytics/recurring-detector.tsx": {
+    "mtime": 1786898989.9700668,
+    "ast_hash": "c7478b86af17361600e655e5b0872cfe",
+    "semantic_hash": "c7478b86af17361600e655e5b0872cfe"
+  },
+  "frontend/src/components/analytics/spending-heatmap.tsx": {
+    "mtime": 1786898989.9710674,
+    "ast_hash": "466067d721a0ce1abcec45f63b852304",
+    "semantic_hash": "466067d721a0ce1abcec45f63b852304"
+  },
+  "frontend/src/components/app-sidebar.tsx": {
+    "mtime": 1786898989.9710674,
+    "ast_hash": "e69dad24c7576f9ac47a389e0d54bd9f",
+    "semantic_hash": "e69dad24c7576f9ac47a389e0d54bd9f"
+  },
+  "frontend/src/components/budgets/budget-rings.tsx": {
+    "mtime": 1786898989.9710674,
+    "ast_hash": "6e1c90441f2f9a5ce9d58ee63876bfcf",
+    "semantic_hash": "6e1c90441f2f9a5ce9d58ee63876bfcf"
+  },
+  "frontend/src/components/budgets/month-projection.tsx": {
+    "mtime": 1786898989.9720669,
+    "ast_hash": "36e61fcb336918c1f6df084aa2073048",
+    "semantic_hash": "36e61fcb336918c1f6df084aa2073048"
+  },
+  "frontend/src/components/budgets/savings-goals.tsx": {
+    "mtime": 1786898989.9720669,
+    "ast_hash": "a1d9f56b87bb1454a4041ba79463f003",
+    "semantic_hash": "a1d9f56b87bb1454a4041ba79463f003"
+  },
+  "frontend/src/components/budgets/spending-calendar.tsx": {
+    "mtime": 1786898989.9720669,
+    "ast_hash": "942908b4099be84779821b6a2abccfb5",
+    "semantic_hash": "942908b4099be84779821b6a2abccfb5"
+  },
+  "frontend/src/components/cards/card-controls.tsx": {
+    "mtime": 1786898989.9730673,
+    "ast_hash": "33bd4c1e2b97854eab9567e0b1bf3f43",
+    "semantic_hash": "33bd4c1e2b97854eab9567e0b1bf3f43"
+  },
+  "frontend/src/components/cards/card-list.tsx": {
+    "mtime": 1786898989.9730673,
+    "ast_hash": "79fc8568889920cf1de876990f2c591a",
+    "semantic_hash": "79fc8568889920cf1de876990f2c591a"
+  },
+  "frontend/src/components/cards/cards-page-client.tsx": {
+    "mtime": 1786903011.7678668,
+    "ast_hash": "4e3d6b2a88dee537ca535f60d1c1697a",
+    "semantic_hash": "4e3d6b2a88dee537ca535f60d1c1697a"
+  },
+  "frontend/src/components/cards/interactive-card.tsx": {
+    "mtime": 1786898989.9730673,
+    "ast_hash": "94ec61ac6071135223c1272a9d037486",
+    "semantic_hash": "94ec61ac6071135223c1272a9d037486"
+  },
+  "frontend/src/components/cards/virtual-card-generator.tsx": {
+    "mtime": 1786898989.9740672,
+    "ast_hash": "305a3cfc892c5d48bd09ecbf59ba2e17",
+    "semantic_hash": "305a3cfc892c5d48bd09ecbf59ba2e17"
+  },
+  "frontend/src/components/command-palette.tsx": {
+    "mtime": 1786898989.9740672,
+    "ast_hash": "a4e1083645d835335d6c039fc01afafe",
+    "semantic_hash": "a4e1083645d835335d6c039fc01afafe"
+  },
+  "frontend/src/components/crypto/coin-insight.tsx": {
+    "mtime": 1786898989.9740672,
+    "ast_hash": "31d577ae1a41d521759001f055b5a0b3",
+    "semantic_hash": "31d577ae1a41d521759001f055b5a0b3"
+  },
+  "frontend/src/components/crypto/crypto-page-client.tsx": {
+    "mtime": 1786898989.9740672,
+    "ast_hash": "748778a4961ac2a729cb7a76bec48251",
+    "semantic_hash": "748778a4961ac2a729cb7a76bec48251"
+  },
+  "frontend/src/components/crypto/market-overview.tsx": {
+    "mtime": 1786898989.9755735,
+    "ast_hash": "3d2b5b6f92dfc4d9af0ffb1b2b7d3e7a",
+    "semantic_hash": "3d2b5b6f92dfc4d9af0ffb1b2b7d3e7a"
+  },
+  "frontend/src/components/crypto/my-balance.tsx": {
+    "mtime": 1786898989.9755735,
+    "ast_hash": "135d8827e8f8550a6d737cc9f742f2c9",
+    "semantic_hash": "135d8827e8f8550a6d737cc9f742f2c9"
+  },
+  "frontend/src/components/crypto/my-portfolio.tsx": {
+    "mtime": 1786898989.9755735,
+    "ast_hash": "67b11035d204ed5033dd97f28d9b02f8",
+    "semantic_hash": "67b11035d204ed5033dd97f28d9b02f8"
+  },
+  "frontend/src/components/crypto/top-coins.tsx": {
+    "mtime": 1786898989.9765809,
+    "ast_hash": "fed1a39187579b91c5f9e9be871f3a3a",
+    "semantic_hash": "fed1a39187579b91c5f9e9be871f3a3a"
+  },
+  "frontend/src/components/crypto/trade-form.tsx": {
+    "mtime": 1786898989.9770882,
+    "ast_hash": "32f663aebcf622cb470e2c4a4274aa28",
+    "semantic_hash": "32f663aebcf622cb470e2c4a4274aa28"
+  },
+  "frontend/src/components/dashboard/account-cards.tsx": {
+    "mtime": 1786949084.355533,
+    "ast_hash": "ad710302156bc8211d8024c39016eeb2",
+    "semantic_hash": "ad710302156bc8211d8024c39016eeb2"
+  },
+  "frontend/src/components/dashboard/dashboard-customizer.tsx": {
+    "mtime": 1786898989.9781005,
+    "ast_hash": "1a7c5162a20b7ba44add5d3a1e51d55b",
+    "semantic_hash": "1a7c5162a20b7ba44add5d3a1e51d55b"
+  },
+  "frontend/src/components/dashboard/financial-overview.tsx": {
+    "mtime": 1786898989.9791067,
+    "ast_hash": "5e1048705c28499e271106c729c5a7e5",
+    "semantic_hash": "5e1048705c28499e271106c729c5a7e5"
+  },
+  "frontend/src/components/dashboard/health-score.tsx": {
+    "mtime": 1786898989.9791067,
+    "ast_hash": "ea8eef577c0bfb75a0e5e8037485bc03",
+    "semantic_hash": "ea8eef577c0bfb75a0e5e8037485bc03"
+  },
+  "frontend/src/components/dashboard/money-movement.tsx": {
+    "mtime": 1786898989.9791067,
+    "ast_hash": "1ca16a3cd2b4e5bfc58e27629410dea1",
+    "semantic_hash": "1ca16a3cd2b4e5bfc58e27629410dea1"
+  },
+  "frontend/src/components/dashboard/quick-transfer.tsx": {
+    "mtime": 1786902294.4309175,
+    "ast_hash": "bd5dc6f4f0c73876a14978457d2f1f37",
+    "semantic_hash": "bd5dc6f4f0c73876a14978457d2f1f37"
+  },
+  "frontend/src/components/dashboard/recent-transactions.tsx": {
+    "mtime": 1786902320.7965724,
+    "ast_hash": "74fbe8379db728a701273b08ec2e162f",
+    "semantic_hash": "74fbe8379db728a701273b08ec2e162f"
+  },
+  "frontend/src/components/dashboard/spending-limit.tsx": {
+    "mtime": 1786898989.9801075,
+    "ast_hash": "5240540dfc944c0e686a9a0f16e7fbff",
+    "semantic_hash": "5240540dfc944c0e686a9a0f16e7fbff"
+  },
+  "frontend/src/components/dynamic-breadcrumb.tsx": {
+    "mtime": 1786898989.9811063,
+    "ast_hash": "3d0f7ebf7485afb579624e90d0af180b",
+    "semantic_hash": "3d0f7ebf7485afb579624e90d0af180b"
+  },
+  "frontend/src/components/empty-state.tsx": {
+    "mtime": 1786898989.9811063,
+    "ast_hash": "ce5ea268be402ade39ff7f461335157a",
+    "semantic_hash": "ce5ea268be402ade39ff7f461335157a"
+  },
+  "frontend/src/components/globe-demo.tsx": {
+    "mtime": 1786948757.4947712,
+    "ast_hash": "7d5c7afd49076e4bed8388f813edc2c2",
+    "semantic_hash": "7d5c7afd49076e4bed8388f813edc2c2"
+  },
+  "frontend/src/components/investments/holdings-table.tsx": {
+    "mtime": 1786898989.9823968,
+    "ast_hash": "b681e5d254e54678538e54dfeba281e6",
+    "semantic_hash": "b681e5d254e54678538e54dfeba281e6"
+  },
+  "frontend/src/components/investments/live-ticker.tsx": {
+    "mtime": 1786898989.9823968,
+    "ast_hash": "fed2e0af97345ba16aec8bc6aa91576a",
+    "semantic_hash": "fed2e0af97345ba16aec8bc6aa91576a"
+  },
+  "frontend/src/components/investments/performance-chart.tsx": {
+    "mtime": 1786898989.9829931,
+    "ast_hash": "1a6c000b1c2e886dd3756405f1716c75",
+    "semantic_hash": "1a6c000b1c2e886dd3756405f1716c75"
+  },
+  "frontend/src/components/investments/portfolio-allocation.tsx": {
+    "mtime": 1786898989.9829931,
+    "ast_hash": "a74c6160a68ff19e3d5697f0b2a2439d",
+    "semantic_hash": "a74c6160a68ff19e3d5697f0b2a2439d"
+  },
+  "frontend/src/components/investments/watchlist.tsx": {
+    "mtime": 1786898989.9834993,
+    "ast_hash": "84c596fe4372bcdc3fc8fb0df77bbb53",
+    "semantic_hash": "84c596fe4372bcdc3fc8fb0df77bbb53"
+  },
+  "frontend/src/components/nav-main.tsx": {
+    "mtime": 1786898989.9834993,
+    "ast_hash": "c39aa33104a169a11b488515d6e535e7",
+    "semantic_hash": "c39aa33104a169a11b488515d6e535e7"
+  },
+  "frontend/src/components/nav-secondary.tsx": {
+    "mtime": 1786898989.9834993,
+    "ast_hash": "76d7264da0197e3fe0d81f3f40397028",
+    "semantic_hash": "76d7264da0197e3fe0d81f3f40397028"
+  },
+  "frontend/src/components/nav-user.tsx": {
+    "mtime": 1786901325.7138119,
+    "ast_hash": "5c096e3d6d9701e7d3963db5460ea83a",
+    "semantic_hash": "5c096e3d6d9701e7d3963db5460ea83a"
+  },
+  "frontend/src/components/notifications/notifications-page-client.tsx": {
+    "mtime": 1786898989.984897,
+    "ast_hash": "5641a9dc73522d7671091844ed56cdf3",
+    "semantic_hash": "5641a9dc73522d7671091844ed56cdf3"
+  },
+  "frontend/src/components/settings/settings-page-client.tsx": {
+    "mtime": 1786903436.5319629,
+    "ast_hash": "11652a212c1532de1908cc04efe3a9f9",
+    "semantic_hash": "11652a212c1532de1908cc04efe3a9f9"
+  },
+  "frontend/src/components/support/support-page-client.tsx": {
+    "mtime": 1786898989.9859295,
+    "ast_hash": "374bfd79c5b11c40840bcff04061e86a",
+    "semantic_hash": "374bfd79c5b11c40840bcff04061e86a"
+  },
+  "frontend/src/components/theme-toggle.tsx": {
+    "mtime": 1786898989.9869359,
+    "ast_hash": "c4460ade1800b5318b8201f74b0a09d2",
+    "semantic_hash": "c4460ade1800b5318b8201f74b0a09d2"
+  },
+  "frontend/src/components/transactions/transaction-actions.tsx": {
+    "mtime": 1786898989.9869359,
+    "ast_hash": "de5075ea27ea16634cc2f570b6cfb921",
+    "semantic_hash": "de5075ea27ea16634cc2f570b6cfb921"
+  },
+  "frontend/src/components/transactions/transaction-filters.tsx": {
+    "mtime": 1786898989.9869359,
+    "ast_hash": "b2671db4718214377c2bdd859861634b",
+    "semantic_hash": "b2671db4718214377c2bdd859861634b"
+  },
+  "frontend/src/components/transactions/transaction-summary.tsx": {
+    "mtime": 1786898989.9879367,
+    "ast_hash": "60fe54a221cc9b34f62770b586acf305",
+    "semantic_hash": "60fe54a221cc9b34f62770b586acf305"
+  },
+  "frontend/src/components/transactions/transaction-table.tsx": {
+    "mtime": 1786898989.9879367,
+    "ast_hash": "2c310019615babda71664260a1eec96d",
+    "semantic_hash": "2c310019615babda71664260a1eec96d"
+  },
+  "frontend/src/components/transactions/transactions-page-client.tsx": {
+    "mtime": 1786902692.717374,
+    "ast_hash": "2561c611c44fe51219474b427d5e19e0",
+    "semantic_hash": "2561c611c44fe51219474b427d5e19e0"
+  },
+  "frontend/src/components/transfers/quick-send.tsx": {
+    "mtime": 1786902844.9431286,
+    "ast_hash": "fc78aa5b5877c86fdeccb528020bee56",
+    "semantic_hash": "fc78aa5b5877c86fdeccb528020bee56"
+  },
+  "frontend/src/components/transfers/transfer-list.tsx": {
+    "mtime": 1786898989.9894006,
+    "ast_hash": "38d7685de2dd769892022a557b9311e1",
+    "semantic_hash": "38d7685de2dd769892022a557b9311e1"
+  },
+  "frontend/src/components/transfers/transfer-stats.tsx": {
+    "mtime": 1786898989.9894006,
+    "ast_hash": "a5e77643fcf2385c94cb4d4911e83f0a",
+    "semantic_hash": "a5e77643fcf2385c94cb4d4911e83f0a"
+  },
+  "frontend/src/components/transfers/transfers-page-client.tsx": {
+    "mtime": 1786902855.5864036,
+    "ast_hash": "45f58d58e8586dda1b8b9dbd9c72a7a3",
+    "semantic_hash": "45f58d58e8586dda1b8b9dbd9c72a7a3"
+  },
+  "frontend/src/components/ui/avatar.tsx": {
+    "mtime": 1786898989.989982,
+    "ast_hash": "027beea3f5aab3ffb39aaf085cb78f95",
+    "semantic_hash": "027beea3f5aab3ffb39aaf085cb78f95"
+  },
+  "frontend/src/components/ui/badge.tsx": {
+    "mtime": 1786898989.989982,
+    "ast_hash": "1ff3e04a7fd408f9bd7520187dce5d19",
+    "semantic_hash": "1ff3e04a7fd408f9bd7520187dce5d19"
+  },
+  "frontend/src/components/ui/breadcrumb.tsx": {
+    "mtime": 1786898989.989982,
+    "ast_hash": "261e67ca7178cf92508dcd3040952128",
+    "semantic_hash": "261e67ca7178cf92508dcd3040952128"
+  },
+  "frontend/src/components/ui/button.tsx": {
+    "mtime": 1786949066.5375068,
+    "ast_hash": "e76e148a9632e0a43af2b58c39748f37",
+    "semantic_hash": "e76e148a9632e0a43af2b58c39748f37"
+  },
+  "frontend/src/components/ui/calendar.tsx": {
+    "mtime": 1786898989.990989,
+    "ast_hash": "92fbc21d0019733cdc5bade940c072eb",
+    "semantic_hash": "92fbc21d0019733cdc5bade940c072eb"
+  },
+  "frontend/src/components/ui/card.tsx": {
+    "mtime": 1786898989.9915183,
+    "ast_hash": "ee74a83be6bb8fc3473cb6cceffe8813",
+    "semantic_hash": "ee74a83be6bb8fc3473cb6cceffe8813"
+  },
+  "frontend/src/components/ui/chart.tsx": {
+    "mtime": 1786898989.9920232,
+    "ast_hash": "8efa47dccc69771f76700acd57a15c7a",
+    "semantic_hash": "8efa47dccc69771f76700acd57a15c7a"
+  },
+  "frontend/src/components/ui/checkbox.tsx": {
+    "mtime": 1786898989.9920232,
+    "ast_hash": "7b82a750e3e4e3456c9c972d40f41e1f",
+    "semantic_hash": "7b82a750e3e4e3456c9c972d40f41e1f"
+  },
+  "frontend/src/components/ui/collapsible.tsx": {
+    "mtime": 1786898989.9920232,
+    "ast_hash": "ae1823f0a81ea5b71da6ef2c9721a9d2",
+    "semantic_hash": "ae1823f0a81ea5b71da6ef2c9721a9d2"
+  },
+  "frontend/src/components/ui/command.tsx": {
+    "mtime": 1786898989.9930303,
+    "ast_hash": "5c3bb8ac905705f658e6bfa21ec1e586",
+    "semantic_hash": "5c3bb8ac905705f658e6bfa21ec1e586"
+  },
+  "frontend/src/components/ui/dialog.tsx": {
+    "mtime": 1786898989.9930303,
+    "ast_hash": "89fd7888d5bbc59f2eae651ffc05fc70",
+    "semantic_hash": "89fd7888d5bbc59f2eae651ffc05fc70"
+  },
+  "frontend/src/components/ui/dropdown-menu.tsx": {
+    "mtime": 1786898989.9940302,
+    "ast_hash": "89728fd5784555d58a9ad1c72b6a803d",
+    "semantic_hash": "89728fd5784555d58a9ad1c72b6a803d"
+  },
+  "frontend/src/components/ui/globe.tsx": {
+    "mtime": 1786948743.1894517,
+    "ast_hash": "545035badc6bf8f4719535fccd6f8f8c",
+    "semantic_hash": "545035badc6bf8f4719535fccd6f8f8c"
+  },
+  "frontend/src/components/ui/input-group.tsx": {
+    "mtime": 1786898989.9940302,
+    "ast_hash": "48095ac6b5f02278fa974736c5ff3525",
+    "semantic_hash": "48095ac6b5f02278fa974736c5ff3525"
+  },
+  "frontend/src/components/ui/input.tsx": {
+    "mtime": 1786898989.9940302,
+    "ast_hash": "da33823853390b57ac04230a67657585",
+    "semantic_hash": "da33823853390b57ac04230a67657585"
+  },
+  "frontend/src/components/ui/popover.tsx": {
+    "mtime": 1786898989.995536,
+    "ast_hash": "f4581d52d39b76ae56cf76c1e602fd9c",
+    "semantic_hash": "f4581d52d39b76ae56cf76c1e602fd9c"
+  },
+  "frontend/src/components/ui/progress.tsx": {
+    "mtime": 1786898989.9960754,
+    "ast_hash": "09578d0909eb84ccabc70186aeed1b5b",
+    "semantic_hash": "09578d0909eb84ccabc70186aeed1b5b"
+  },
+  "frontend/src/components/ui/select.tsx": {
+    "mtime": 1786898989.9960754,
+    "ast_hash": "fc7d964889fe17cca9fc412266dba5d1",
+    "semantic_hash": "fc7d964889fe17cca9fc412266dba5d1"
+  },
+  "frontend/src/components/ui/separator.tsx": {
+    "mtime": 1786898989.9960754,
+    "ast_hash": "bb51ace4279e49d0a4628fafa6ea10b9",
+    "semantic_hash": "bb51ace4279e49d0a4628fafa6ea10b9"
+  },
+  "frontend/src/components/ui/sheet.tsx": {
+    "mtime": 1786898989.997098,
+    "ast_hash": "dc77250eabf1036cb4f1666c7e02ce51",
+    "semantic_hash": "dc77250eabf1036cb4f1666c7e02ce51"
+  },
+  "frontend/src/components/ui/sidebar.tsx": {
+    "mtime": 1786898989.9975257,
+    "ast_hash": "97abb3f97504017ef8cef64aaeafe3d9",
+    "semantic_hash": "97abb3f97504017ef8cef64aaeafe3d9"
+  },
+  "frontend/src/components/ui/skeleton.tsx": {
+    "mtime": 1786898989.9980297,
+    "ast_hash": "58a45c5aceb0b4cb1c16d06758ea16d6",
+    "semantic_hash": "58a45c5aceb0b4cb1c16d06758ea16d6"
+  },
+  "frontend/src/components/ui/slider.tsx": {
+    "mtime": 1786898989.9980297,
+    "ast_hash": "94eefb46dc5fa16500186588b9f7697b",
+    "semantic_hash": "94eefb46dc5fa16500186588b9f7697b"
+  },
+  "frontend/src/components/ui/switch.tsx": {
+    "mtime": 1786898989.9980297,
+    "ast_hash": "1ccd7a9459c8788b62fb81ac6774776c",
+    "semantic_hash": "1ccd7a9459c8788b62fb81ac6774776c"
+  },
+  "frontend/src/components/ui/table.tsx": {
+    "mtime": 1786898989.9990375,
+    "ast_hash": "7424f42ca135637e99ac19646cbb6625",
+    "semantic_hash": "7424f42ca135637e99ac19646cbb6625"
+  },
+  "frontend/src/components/ui/tabs.tsx": {
+    "mtime": 1786898989.9990375,
+    "ast_hash": "aa67dc7b086fe22106b124f2c5a7fd3b",
+    "semantic_hash": "aa67dc7b086fe22106b124f2c5a7fd3b"
+  },
+  "frontend/src/components/ui/textarea.tsx": {
+    "mtime": 1786898989.9996164,
+    "ast_hash": "378ccca2b6eee051a23c1e6d7bc80952",
+    "semantic_hash": "378ccca2b6eee051a23c1e6d7bc80952"
+  },
+  "frontend/src/components/ui/tooltip.tsx": {
+    "mtime": 1786898989.9996164,
+    "ast_hash": "498f1fcb6267150c8026b8e17a400607",
+    "semantic_hash": "498f1fcb6267150c8026b8e17a400607"
+  },
+  "frontend/src/contexts/auth-context.tsx": {
+    "mtime": 1786901167.332407,
+    "ast_hash": "82f61549d388557ecc26be44db8b78d5",
+    "semantic_hash": "82f61549d388557ecc26be44db8b78d5"
+  },
+  "frontend/src/data/globe.json": {
+    "mtime": 1786898990.002624,
+    "ast_hash": "43261552bc66cae069dc404b2b8231b9",
+    "semantic_hash": "43261552bc66cae069dc404b2b8231b9"
+  },
+  "frontend/src/data/seed.ts": {
+    "mtime": 1786898990.0036242,
+    "ast_hash": "139503e65273fee10ad5f8efc326599c",
+    "semantic_hash": "139503e65273fee10ad5f8efc326599c"
+  },
+  "frontend/src/hooks/use-api-keys.ts": {
+    "mtime": 1786901952.4628506,
+    "ast_hash": "f0a857b55b9a38ab486007dd39563113",
+    "semantic_hash": "f0a857b55b9a38ab486007dd39563113"
+  },
+  "frontend/src/hooks/use-audit.ts": {
+    "mtime": 1786901930.7367437,
+    "ast_hash": "cc9e6b9dafa5da6cdd1a9af04e44f790",
+    "semantic_hash": "cc9e6b9dafa5da6cdd1a9af04e44f790"
+  },
+  "frontend/src/hooks/use-mobile.ts": {
+    "mtime": 1786898990.0036242,
+    "ast_hash": "654e2ca2e9fddc27eb7e3954900dc48e",
+    "semantic_hash": "654e2ca2e9fddc27eb7e3954900dc48e"
+  },
+  "frontend/src/hooks/use-payments.ts": {
+    "mtime": 1786901967.4367003,
+    "ast_hash": "1cd02cf2487213cabb7c8cc83351a028",
+    "semantic_hash": "1cd02cf2487213cabb7c8cc83351a028"
+  },
+  "frontend/src/hooks/use-wallets.ts": {
+    "mtime": 1786901909.8450868,
+    "ast_hash": "14671b73028dcee387ffa2fcc0909986",
+    "semantic_hash": "14671b73028dcee387ffa2fcc0909986"
+  },
+  "frontend/src/lib/api/audit.ts": {
+    "mtime": 1786901570.7827027,
+    "ast_hash": "d52fd098161e439c2b9720aad78ab739",
+    "semantic_hash": "d52fd098161e439c2b9720aad78ab739"
+  },
+  "frontend/src/lib/api/auth.ts": {
+    "mtime": 1786901587.7465303,
+    "ast_hash": "69993bb6f42c1baf6fdad762824a6a4f",
+    "semantic_hash": "69993bb6f42c1baf6fdad762824a6a4f"
+  },
+  "frontend/src/lib/api/client.ts": {
+    "mtime": 1786901525.41163,
+    "ast_hash": "650bba46923d02bb092ec45fd624fb64",
+    "semantic_hash": "650bba46923d02bb092ec45fd624fb64"
+  },
+  "frontend/src/lib/api/payments.ts": {
+    "mtime": 1786901557.716283,
+    "ast_hash": "fac962c00da1c7cededf0bba016e03d1",
+    "semantic_hash": "fac962c00da1c7cededf0bba016e03d1"
+  },
+  "frontend/src/lib/api/wallets.ts": {
+    "mtime": 1786901538.50773,
+    "ast_hash": "f534730adb28823dc28467b256bca6b8",
+    "semantic_hash": "f534730adb28823dc28467b256bca6b8"
+  },
+  "frontend/src/lib/auth/auth-service.ts": {
+    "mtime": 1786901157.1435819,
+    "ast_hash": "53f558ca09b5832c7bfc87f6e4341973",
+    "semantic_hash": "53f558ca09b5832c7bfc87f6e4341973"
+  },
+  "frontend/src/lib/query-client.ts": {
+    "mtime": 1786901810.8763149,
+    "ast_hash": "e4ba58d1f47cd5cf21f421ab6f268178",
+    "semantic_hash": "e4ba58d1f47cd5cf21f421ab6f268178"
+  },
+  "frontend/src/lib/signalr/wallet-hub.ts": {
+    "mtime": 1786903838.416592,
+    "ast_hash": "25d220dfdb0234dc53dbfffffbc61c58",
+    "semantic_hash": "25d220dfdb0234dc53dbfffffbc61c58"
+  },
+  "frontend/src/lib/utils.ts": {
+    "mtime": 1786898990.0036242,
+    "ast_hash": "1d8011eb18769078bf77502b220daa5e",
+    "semantic_hash": "1d8011eb18769078bf77502b220daa5e"
+  },
+  "frontend/src/middleware.ts": {
+    "mtime": 1786901179.8880236,
+    "ast_hash": "be1af10ffaa275f5d53762b8435f7e75",
+    "semantic_hash": "be1af10ffaa275f5d53762b8435f7e75"
+  },
+  "frontend/src/providers/query-provider.tsx": {
+    "mtime": 1786901832.5058892,
+    "ast_hash": "a7ed685ea67410dcf8112b3a9ab46716",
+    "semantic_hash": "a7ed685ea67410dcf8112b3a9ab46716"
+  },
+  "frontend/src/providers/signalr-provider.tsx": {
+    "mtime": 1786903729.1215293,
+    "ast_hash": "d3bc5cbb86bd115aa5487ce9d541852e",
+    "semantic_hash": "d3bc5cbb86bd115aa5487ce9d541852e"
+  },
+  "frontend/src/types/api.ts": {
+    "mtime": 1786901501.5597656,
+    "ast_hash": "7b2818929cbe4bf3b702bccf6d4ca182",
+    "semantic_hash": "7b2818929cbe4bf3b702bccf6d4ca182"
+  },
+  "frontend/src/types/auth.ts": {
+    "mtime": 1786901144.0512724,
+    "ast_hash": "bd8416484b062aa06d6baf8157fd99ce",
+    "semantic_hash": "bd8416484b062aa06d6baf8157fd99ce"
+  },
+  "frontend/tsconfig.json": {
+    "mtime": 1786898990.0046241,
+    "ast_hash": "0a2f4ed9289b65cd3feb4fb4ab3a4fcd",
+    "semantic_hash": "0a2f4ed9289b65cd3feb4fb4ab3a4fcd"
+  },
+  "load-tests/k6-load-test.js": {
+    "mtime": 1786895497.7246063,
+    "ast_hash": "0723f791fac9a525821931bbcb91d64e",
+    "semantic_hash": "0723f791fac9a525821931bbcb91d64e"
+  },
+  "src/NeoWallet.Api/Common/ApiController.cs": {
+    "mtime": 1786893742.1455326,
+    "ast_hash": "81eeca57f755f3786ebcfad16bdc8004",
+    "semantic_hash": "81eeca57f755f3786ebcfad16bdc8004"
+  },
+  "src/NeoWallet.Api/Controllers/AuditController.cs": {
+    "mtime": 1786893895.7947912,
+    "ast_hash": "351bed359d9795d1af3f0fc09739f387",
+    "semantic_hash": "351bed359d9795d1af3f0fc09739f387"
+  },
+  "src/NeoWallet.Api/Controllers/AuthController.cs": {
+    "mtime": 1786894332.7739947,
+    "ast_hash": "0783894137f76824fe4f7f28b8f1fde3",
+    "semantic_hash": "0783894137f76824fe4f7f28b8f1fde3"
+  },
+  "src/NeoWallet.Api/Controllers/PaymentsController.cs": {
+    "mtime": 1786893877.5068145,
+    "ast_hash": "cd1f7cce5b261fa0acd013cafcc21f2e",
+    "semantic_hash": "cd1f7cce5b261fa0acd013cafcc21f2e"
+  },
+  "src/NeoWallet.Api/Controllers/WalletsController.cs": {
+    "mtime": 1786894321.1662722,
+    "ast_hash": "b3bfecc153290b392a0d3f21bda0792e",
+    "semantic_hash": "b3bfecc153290b392a0d3f21bda0792e"
+  },
+  "src/NeoWallet.Api/Extensions/OpenTelemetryExtensions.cs": {
+    "mtime": 1786893909.3773153,
+    "ast_hash": "66ddfaec13b513fbbb3c11576beb334d",
+    "semantic_hash": "66ddfaec13b513fbbb3c11576beb334d"
+  },
+  "src/NeoWallet.Api/Extensions/SwaggerExtensions.cs": {
+    "mtime": 1786893925.9233446,
+    "ast_hash": "fce8332d650bbac1dd07eea821f79d14",
+    "semantic_hash": "fce8332d650bbac1dd07eea821f79d14"
+  },
+  "src/NeoWallet.Api/Hubs/WalletHub.cs": {
+    "mtime": 1786893810.8193183,
+    "ast_hash": "9b55f36eb5a41b39d81f2caedb7f846a",
+    "semantic_hash": "9b55f36eb5a41b39d81f2caedb7f846a"
+  },
+  "src/NeoWallet.Api/Middlewares/CorrelationIdMiddleware.cs": {
+    "mtime": 1786893768.54968,
+    "ast_hash": "078c5025236911e4de1dfb1f9581d419",
+    "semantic_hash": "078c5025236911e4de1dfb1f9581d419"
+  },
+  "src/NeoWallet.Api/Middlewares/ExceptionHandlingMiddleware.cs": {
+    "mtime": 1786893801.914065,
+    "ast_hash": "d6ef8643535a7a1ebfd6ed0b060785b5",
+    "semantic_hash": "d6ef8643535a7a1ebfd6ed0b060785b5"
+  },
+  "src/NeoWallet.Api/NeoWallet.Api.csproj": {
+    "mtime": 1786893692.128179,
+    "ast_hash": "c4f305c092456c6b43abf4eeb66fa3c5",
+    "semantic_hash": "c4f305c092456c6b43abf4eeb66fa3c5"
+  },
+  "src/NeoWallet.Api/Program.cs": {
+    "mtime": 1786948726.7295544,
+    "ast_hash": "e39e0931245212530fc6c95f111e2c08",
+    "semantic_hash": "e39e0931245212530fc6c95f111e2c08"
+  },
+  "src/NeoWallet.Api/Services/SignalRNotificationService.cs": {
+    "mtime": 1786893825.7357075,
+    "ast_hash": "6e40d9b852e8b7424355f3eff0846288",
+    "semantic_hash": "6e40d9b852e8b7424355f3eff0846288"
+  },
+  "src/NeoWallet.Api/appsettings.json": {
+    "mtime": 1786904745.6427014,
+    "ast_hash": "076740760532298c506517beb46b732d",
+    "semantic_hash": "076740760532298c506517beb46b732d"
+  },
+  "src/NeoWallet.Application/Common/Abstractions/Messaging/ICommand.cs": {
+    "mtime": 1786801553.9581034,
+    "ast_hash": "dd166dee03fd5cff532680f48a39557d",
+    "semantic_hash": "dd166dee03fd5cff532680f48a39557d"
+  },
+  "src/NeoWallet.Application/Common/Abstractions/Messaging/IIdempotentCommand.cs": {
+    "mtime": 1786801566.5825286,
+    "ast_hash": "7f6181040e7d1a82e4660701355e55ba",
+    "semantic_hash": "7f6181040e7d1a82e4660701355e55ba"
+  },
+  "src/NeoWallet.Application/Common/Abstractions/Messaging/IQuery.cs": {
+    "mtime": 1786801559.5017228,
+    "ast_hash": "c21dcdb3f1424ba85bb11906e25ec89b",
+    "semantic_hash": "c21dcdb3f1424ba85bb11906e25ec89b"
+  },
+  "src/NeoWallet.Application/Common/Behaviors/IdempotencyBehavior.cs": {
+    "mtime": 1786801618.8072157,
+    "ast_hash": "46a8f5bf34c7ba18b2de2ec74db94850",
+    "semantic_hash": "46a8f5bf34c7ba18b2de2ec74db94850"
+  },
+  "src/NeoWallet.Application/Common/Behaviors/LoggingBehavior.cs": {
+    "mtime": 1786801599.5173528,
+    "ast_hash": "dbcfe66b298065602f2bf35c2ff0649d",
+    "semantic_hash": "dbcfe66b298065602f2bf35c2ff0649d"
+  },
+  "src/NeoWallet.Application/Common/Behaviors/PerformanceBehavior.cs": {
+    "mtime": 1786801604.5128195,
+    "ast_hash": "a0b0241a4c3a2249dd920e37c0e4818b",
+    "semantic_hash": "a0b0241a4c3a2249dd920e37c0e4818b"
+  },
+  "src/NeoWallet.Application/Common/Behaviors/ValidationBehavior.cs": {
+    "mtime": 1786801589.5865915,
+    "ast_hash": "f5220367e2ce82db542b99de4a3e5e76",
+    "semantic_hash": "f5220367e2ce82db542b99de4a3e5e76"
+  },
+  "src/NeoWallet.Application/Common/Interfaces/IApiKeyService.cs": {
+    "mtime": 1786801923.3600497,
+    "ast_hash": "4e3bb0a17dab7e03f1398a005005608c",
+    "semantic_hash": "4e3bb0a17dab7e03f1398a005005608c"
+  },
+  "src/NeoWallet.Application/Common/Interfaces/IAuditStore.cs": {
+    "mtime": 1786889296.4147768,
+    "ast_hash": "8b5aeeb81ba38045d997d8e7780f7530",
+    "semantic_hash": "8b5aeeb81ba38045d997d8e7780f7530"
+  },
+  "src/NeoWallet.Application/Common/Interfaces/IDateTimeProvider.cs": {
+    "mtime": 1786801582.4168162,
+    "ast_hash": "0d9d377751b2feca8ca4f9c9e6a6dd3a",
+    "semantic_hash": "0d9d377751b2feca8ca4f9c9e6a6dd3a"
+  },
+  "src/NeoWallet.Application/Common/Interfaces/IIdempotencyStore.cs": {
+    "mtime": 1786801571.64689,
+    "ast_hash": "f088a9b6ac9888078f9e1c6e0b32f83c",
+    "semantic_hash": "f088a9b6ac9888078f9e1c6e0b32f83c"
+  },
+  "src/NeoWallet.Application/Common/Interfaces/IJwtProvider.cs": {
+    "mtime": 1786801903.209118,
+    "ast_hash": "b866197b0fa65c9de0c8f7ef4b3b190a",
+    "semantic_hash": "b866197b0fa65c9de0c8f7ef4b3b190a"
+  },
+  "src/NeoWallet.Application/Common/Interfaces/IPasswordHasher.cs": {
+    "mtime": 1786801894.7003732,
+    "ast_hash": "b4c0b6c7b7773234dcf66c564b323c28",
+    "semantic_hash": "b4c0b6c7b7773234dcf66c564b323c28"
+  },
+  "src/NeoWallet.Application/Common/Interfaces/IPaymentGateway.cs": {
+    "mtime": 1786885336.4890041,
+    "ast_hash": "3cb014e01a6ea1c9aaa21ce67cfece08",
+    "semantic_hash": "3cb014e01a6ea1c9aaa21ce67cfece08"
+  },
+  "src/NeoWallet.Application/Common/Interfaces/IReconciliationService.cs": {
+    "mtime": 1786889313.975509,
+    "ast_hash": "7947e78e1b03475ab2e3ac37a973f4c0",
+    "semantic_hash": "7947e78e1b03475ab2e3ac37a973f4c0"
+  },
+  "src/NeoWallet.Application/Common/Interfaces/ITotpProvider.cs": {
+    "mtime": 1786801917.4305046,
+    "ast_hash": "488ac21594c0c0a16dfb5949fe397c89",
+    "semantic_hash": "488ac21594c0c0a16dfb5949fe397c89"
+  },
+  "src/NeoWallet.Application/Common/Interfaces/IWalletNotificationService.cs": {
+    "mtime": 1786893676.047226,
+    "ast_hash": "eb957347f84a9844b053eac8c9d0d55c",
+    "semantic_hash": "eb957347f84a9844b053eac8c9d0d55c"
+  },
+  "src/NeoWallet.Application/Common/Interfaces/IWalletReadService.cs": {
+    "mtime": 1786801860.7243657,
+    "ast_hash": "dbf8f01002f7b2a205c0939caf626168",
+    "semantic_hash": "dbf8f01002f7b2a205c0939caf626168"
+  },
+  "src/NeoWallet.Application/DTOs/Audit/AuditDtos.cs": {
+    "mtime": 1786889345.5441291,
+    "ast_hash": "ff9cd32d345db9aadc89c79512bbb50e",
+    "semantic_hash": "ff9cd32d345db9aadc89c79512bbb50e"
+  },
+  "src/NeoWallet.Application/DTOs/Identity/AuthResponseDto.cs": {
+    "mtime": 1786801638.0959024,
+    "ast_hash": "39c74670233341b35ba4b14e6372002d",
+    "semantic_hash": "39c74670233341b35ba4b14e6372002d"
+  },
+  "src/NeoWallet.Application/DTOs/Payment/PaymentDtos.cs": {
+    "mtime": 1786885311.2747705,
+    "ast_hash": "67d842ef7201be1e9786a3f4047568fe",
+    "semantic_hash": "67d842ef7201be1e9786a3f4047568fe"
+  },
+  "src/NeoWallet.Application/DTOs/Wallet/WalletDto.cs": {
+    "mtime": 1786802376.8801985,
+    "ast_hash": "1a4a41fbf184cffe7a1488f5ed03d559",
+    "semantic_hash": "1a4a41fbf184cffe7a1488f5ed03d559"
+  },
+  "src/NeoWallet.Application/DependencyInjection.cs": {
+    "mtime": 1786802124.0967143,
+    "ast_hash": "2f09ea67368c6af328e5c081a4375039",
+    "semantic_hash": "2f09ea67368c6af328e5c081a4375039"
+  },
+  "src/NeoWallet.Application/Features/Audit/Queries/GetAuditTrail/GetAuditTrailQuery.cs": {
+    "mtime": 1786889391.260179,
+    "ast_hash": "459da8cf42c2b3d6e576a1e5e3866641",
+    "semantic_hash": "459da8cf42c2b3d6e576a1e5e3866641"
+  },
+  "src/NeoWallet.Application/Features/Audit/Queries/VerifyAuditChain/VerifyAuditChainQuery.cs": {
+    "mtime": 1786889366.0024314,
+    "ast_hash": "101d92250fd445156fd91880a7d047af",
+    "semantic_hash": "101d92250fd445156fd91880a7d047af"
+  },
+  "src/NeoWallet.Application/Features/Identity/Commands/CreateApiKey/CreateApiKeyCommand.cs": {
+    "mtime": 1786802108.5045655,
+    "ast_hash": "f2bc96c7b7b87097f3423bcafa1a43ed",
+    "semantic_hash": "f2bc96c7b7b87097f3423bcafa1a43ed"
+  },
+  "src/NeoWallet.Application/Features/Identity/Commands/DisableTwoFactor/DisableTwoFactorCommand.cs": {
+    "mtime": 1786802092.5266566,
+    "ast_hash": "f42ae00e14a30a0b1c8f2c3aedbd8f2a",
+    "semantic_hash": "f42ae00e14a30a0b1c8f2c3aedbd8f2a"
+  },
+  "src/NeoWallet.Application/Features/Identity/Commands/EnableTwoFactor/EnableTwoFactorCommand.cs": {
+    "mtime": 1786802074.6388443,
+    "ast_hash": "8c2bf135f96e1e66db22ff86d15655fe",
+    "semantic_hash": "8c2bf135f96e1e66db22ff86d15655fe"
+  },
+  "src/NeoWallet.Application/Features/Identity/Commands/Login/LoginCommand.cs": {
+    "mtime": 1786802053.3019514,
+    "ast_hash": "5e551a4524799aecf98404a6aed8c460",
+    "semantic_hash": "5e551a4524799aecf98404a6aed8c460"
+  },
+  "src/NeoWallet.Application/Features/Identity/Commands/RefreshToken/RefreshTokenCommand.cs": {
+    "mtime": 1786802062.4083295,
+    "ast_hash": "35e8b6a1b54d352017bf4390d6db00ad",
+    "semantic_hash": "35e8b6a1b54d352017bf4390d6db00ad"
+  },
+  "src/NeoWallet.Application/Features/Identity/Commands/RegisterUser/RegisterUserCommand.cs": {
+    "mtime": 1786802043.0808985,
+    "ast_hash": "a416689316f975976ae08cd19c195681",
+    "semantic_hash": "a416689316f975976ae08cd19c195681"
+  },
+  "src/NeoWallet.Application/Features/Identity/Commands/RevokeApiKey/RevokeApiKeyCommand.cs": {
+    "mtime": 1786802117.0368567,
+    "ast_hash": "2a1f84d26e29248bac66480296f09ed1",
+    "semantic_hash": "2a1f84d26e29248bac66480296f09ed1"
+  },
+  "src/NeoWallet.Application/Features/Identity/Commands/VerifyTwoFactor/VerifyTwoFactorCommand.cs": {
+    "mtime": 1786802083.3716726,
+    "ast_hash": "516dbed1d319e0203994b9ee9b2610fb",
+    "semantic_hash": "516dbed1d319e0203994b9ee9b2610fb"
+  },
+  "src/NeoWallet.Application/Features/Reconciliation/Commands/RunReconciliation/RunReconciliationCommand.cs": {
+    "mtime": 1786889414.3480015,
+    "ast_hash": "e1e4a0589c2f640ec30a7fe3e8ac35d2",
+    "semantic_hash": "e1e4a0589c2f640ec30a7fe3e8ac35d2"
+  },
+  "src/NeoWallet.Application/Features/Reconciliation/Workers/ReconciliationWorker.cs": {
+    "mtime": 1786889583.0469906,
+    "ast_hash": "01050e58aebe5f3029141aa977651802",
+    "semantic_hash": "01050e58aebe5f3029141aa977651802"
+  },
+  "src/NeoWallet.Application/Features/Sagas/Payment/Consumers/CreditWalletAfterPaymentConsumer.cs": {
+    "mtime": 1786885501.9668744,
+    "ast_hash": "9a97bdad7a4a560f61de10384c6ddaff",
+    "semantic_hash": "9a97bdad7a4a560f61de10384c6ddaff"
+  },
+  "src/NeoWallet.Application/Features/Sagas/Payment/Consumers/InitiateGatewayPaymentConsumer.cs": {
+    "mtime": 1786885486.5545962,
+    "ast_hash": "beff48426d5fa14da392ff0b9cb42be7",
+    "semantic_hash": "beff48426d5fa14da392ff0b9cb42be7"
+  },
+  "src/NeoWallet.Application/Features/Sagas/Payment/Contracts/PaymentSagaContracts.cs": {
+    "mtime": 1786885400.4169064,
+    "ast_hash": "ab839d24d2c97fdeaa877ed012d451e9",
+    "semantic_hash": "ab839d24d2c97fdeaa877ed012d451e9"
+  },
+  "src/NeoWallet.Application/Features/Sagas/Payment/DepositPaymentState.cs": {
+    "mtime": 1786885429.425546,
+    "ast_hash": "40995edae1b95475f3e342d850211696",
+    "semantic_hash": "40995edae1b95475f3e342d850211696"
+  },
+  "src/NeoWallet.Application/Features/Sagas/Payment/DepositPaymentStateMachine.cs": {
+    "mtime": 1786885460.0729532,
+    "ast_hash": "1cc799d8672bdfbcf46faeb3dfa24f2d",
+    "semantic_hash": "1cc799d8672bdfbcf46faeb3dfa24f2d"
+  },
+  "src/NeoWallet.Application/Features/Sagas/Transfer/Consumers/CompensateSourceWalletConsumer.cs": {
+    "mtime": 1786885287.1849988,
+    "ast_hash": "5ea6db2bb7933cb3e644e117a6883bf3",
+    "semantic_hash": "5ea6db2bb7933cb3e644e117a6883bf3"
+  },
+  "src/NeoWallet.Application/Features/Sagas/Transfer/Consumers/CreditTargetWalletConsumer.cs": {
+    "mtime": 1786885253.5373366,
+    "ast_hash": "685105a9817c8c4a8b4ee71d72986e6c",
+    "semantic_hash": "685105a9817c8c4a8b4ee71d72986e6c"
+  },
+  "src/NeoWallet.Application/Features/Sagas/Transfer/Consumers/DeductSourceWalletConsumer.cs": {
+    "mtime": 1786885225.7936182,
+    "ast_hash": "c22af40a268ee3778dd509d62675f08c",
+    "semantic_hash": "c22af40a268ee3778dd509d62675f08c"
+  },
+  "src/NeoWallet.Application/Features/Sagas/Transfer/Contracts/TransferSagaContracts.cs": {
+    "mtime": 1786885113.1786325,
+    "ast_hash": "ac91a5aab2d36281707515352a32afa8",
+    "semantic_hash": "ac91a5aab2d36281707515352a32afa8"
+  },
+  "src/NeoWallet.Application/Features/Sagas/Transfer/TransferState.cs": {
+    "mtime": 1786885154.3674066,
+    "ast_hash": "104124d498ad33c8791c65f2c1e6ad26",
+    "semantic_hash": "104124d498ad33c8791c65f2c1e6ad26"
+  },
+  "src/NeoWallet.Application/Features/Sagas/Transfer/TransferStateMachine.cs": {
+    "mtime": 1786885175.613882,
+    "ast_hash": "162d49493804a7b698ee81412e806022",
+    "semantic_hash": "162d49493804a7b698ee81412e806022"
+  },
+  "src/NeoWallet.Application/Features/Wallets/Commands/CreateWallet/CreateWalletCommand.cs": {
+    "mtime": 1786801648.316001,
+    "ast_hash": "a9f39c4d473429b9a87e831a2a9a33fc",
+    "semantic_hash": "a9f39c4d473429b9a87e831a2a9a33fc"
+  },
+  "src/NeoWallet.Application/Features/Wallets/Commands/DepositMoney/DepositMoneyCommand.cs": {
+    "mtime": 1786801656.8129482,
+    "ast_hash": "505bc5091dab9373c558bc85c110ae03",
+    "semantic_hash": "505bc5091dab9373c558bc85c110ae03"
+  },
+  "src/NeoWallet.Application/Features/Wallets/Commands/LockWallet/LockWalletCommand.cs": {
+    "mtime": 1786801845.6365054,
+    "ast_hash": "841a2dda7f2557bb5e9efa64d1fa43c5",
+    "semantic_hash": "841a2dda7f2557bb5e9efa64d1fa43c5"
+  },
+  "src/NeoWallet.Application/Features/Wallets/Commands/TransferMoney/TransferMoneyCommand.cs": {
+    "mtime": 1786802260.4507842,
+    "ast_hash": "463fe1e5831136499da5aca62fc06e6f",
+    "semantic_hash": "463fe1e5831136499da5aca62fc06e6f"
+  },
+  "src/NeoWallet.Application/Features/Wallets/Commands/UnlockWallet/UnlockWalletCommand.cs": {
+    "mtime": 1786801852.9974003,
+    "ast_hash": "324278f8e440eed11744473f8b98d959",
+    "semantic_hash": "324278f8e440eed11744473f8b98d959"
+  },
+  "src/NeoWallet.Application/Features/Wallets/Commands/WithdrawMoney/WithdrawMoneyCommand.cs": {
+    "mtime": 1786801665.9665234,
+    "ast_hash": "c760a45d2ada01b6db89cb1b57be2d08",
+    "semantic_hash": "c760a45d2ada01b6db89cb1b57be2d08"
+  },
+  "src/NeoWallet.Application/Features/Wallets/Queries/GetTransactionHistory/GetTransactionHistoryQuery.cs": {
+    "mtime": 1786801877.727383,
+    "ast_hash": "5f185eaa634a379b1d422fc5cd73f9f1",
+    "semantic_hash": "5f185eaa634a379b1d422fc5cd73f9f1"
+  },
+  "src/NeoWallet.Application/Features/Wallets/Queries/GetWalletSummary/GetWalletSummaryQuery.cs": {
+    "mtime": 1786801869.8174236,
+    "ast_hash": "78c691e90752c6da9cc629ef515ddc40",
+    "semantic_hash": "78c691e90752c6da9cc629ef515ddc40"
+  },
+  "src/NeoWallet.Application/NeoWallet.Application.csproj": {
+    "mtime": 1786904940.4517984,
+    "ast_hash": "30fa584e41808d5e8a60ae782f2ca0a4",
+    "semantic_hash": "30fa584e41808d5e8a60ae782f2ca0a4"
+  },
+  "src/NeoWallet.Domain/Aggregates/Payment.cs": {
+    "mtime": 1786885094.5373194,
+    "ast_hash": "bc171e1cd8c231c2d4dcfad93bd6b949",
+    "semantic_hash": "bc171e1cd8c231c2d4dcfad93bd6b949"
+  },
+  "src/NeoWallet.Domain/Aggregates/User.cs": {
+    "mtime": 1786783592.6878173,
+    "ast_hash": "7226c0a41de31bf6c1b169a4a584cae0",
+    "semantic_hash": "7226c0a41de31bf6c1b169a4a584cae0"
+  },
+  "src/NeoWallet.Domain/Aggregates/Wallet.cs": {
+    "mtime": 1786717399.5340848,
+    "ast_hash": "232a293d9c33bd6e33be44cb1d1be1e5",
+    "semantic_hash": "232a293d9c33bd6e33be44cb1d1be1e5"
+  },
+  "src/NeoWallet.Domain/Common/AggregateRoot.cs": {
+    "mtime": 1786717399.5350919,
+    "ast_hash": "1d654f13754c7a4f6616008d030a2228",
+    "semantic_hash": "1d654f13754c7a4f6616008d030a2228"
+  },
+  "src/NeoWallet.Domain/Common/Entity.cs": {
+    "mtime": 1786717399.5355976,
+    "ast_hash": "0d38adfefc71876d3bf493545c6b6a69",
+    "semantic_hash": "0d38adfefc71876d3bf493545c6b6a69"
+  },
+  "src/NeoWallet.Domain/Common/Error.cs": {
+    "mtime": 1786889803.9985998,
+    "ast_hash": "8a0f441b2cf9ff3bfc7672e38f5409cc",
+    "semantic_hash": "8a0f441b2cf9ff3bfc7672e38f5409cc"
+  },
+  "src/NeoWallet.Domain/Common/Guard.cs": {
+    "mtime": 1786717399.5366044,
+    "ast_hash": "a6175617f49ff5c5abbabe5afd8f2cfe",
+    "semantic_hash": "a6175617f49ff5c5abbabe5afd8f2cfe"
+  },
+  "src/NeoWallet.Domain/Common/IDomainEvent.cs": {
+    "mtime": 1786717399.5366044,
+    "ast_hash": "10e02aec878ac73fa20b3aac5f42b788",
+    "semantic_hash": "10e02aec878ac73fa20b3aac5f42b788"
+  },
+  "src/NeoWallet.Domain/Common/Result.cs": {
+    "mtime": 1786717399.5376048,
+    "ast_hash": "6d2143335ebf5588d356268303e47f14",
+    "semantic_hash": "6d2143335ebf5588d356268303e47f14"
+  },
+  "src/NeoWallet.Domain/Entities/AuditLogEntry.cs": {
+    "mtime": 1786889194.2559986,
+    "ast_hash": "edbcfb9a579f444d64b5f9872783507c",
+    "semantic_hash": "edbcfb9a579f444d64b5f9872783507c"
+  },
+  "src/NeoWallet.Domain/Entities/ReconciliationReport.cs": {
+    "mtime": 1786889211.3310852,
+    "ast_hash": "d09d89e44df793a37a97d7fc03425f69",
+    "semantic_hash": "d09d89e44df793a37a97d7fc03425f69"
+  },
+  "src/NeoWallet.Domain/Entities/RefreshToken.cs": {
+    "mtime": 1786783415.9443069,
+    "ast_hash": "53c156301199fba8077b0099435a3e62",
+    "semantic_hash": "53c156301199fba8077b0099435a3e62"
+  },
+  "src/NeoWallet.Domain/Enums/PaymentGatewayProvider.cs": {
+    "mtime": 1786884985.0126638,
+    "ast_hash": "351509da33085d78a0e54734502727f0",
+    "semantic_hash": "351509da33085d78a0e54734502727f0"
+  },
+  "src/NeoWallet.Domain/Enums/PaymentStatus.cs": {
+    "mtime": 1786884973.5823793,
+    "ast_hash": "029608a04b04d7cf1d00dad529611888",
+    "semantic_hash": "029608a04b04d7cf1d00dad529611888"
+  },
+  "src/NeoWallet.Domain/Enums/TransactionType.cs": {
+    "mtime": 1786717399.5386055,
+    "ast_hash": "8c908ea3457f825738fe0ef0a28cb986",
+    "semantic_hash": "8c908ea3457f825738fe0ef0a28cb986"
+  },
+  "src/NeoWallet.Domain/Enums/TwoFactorType.cs": {
+    "mtime": 1786783369.9226494,
+    "ast_hash": "6a50e9b46fefe8053e14c291dc6fe29f",
+    "semantic_hash": "6a50e9b46fefe8053e14c291dc6fe29f"
+  },
+  "src/NeoWallet.Domain/Enums/UserRole.cs": {
+    "mtime": 1786783361.5540292,
+    "ast_hash": "2eaff7507346b7ffd6ba8014ce23e2e2",
+    "semantic_hash": "2eaff7507346b7ffd6ba8014ce23e2e2"
+  },
+  "src/NeoWallet.Domain/Enums/WalletStatus.cs": {
+    "mtime": 1786717399.5391111,
+    "ast_hash": "6911597bd2c5a76a010a240a36cb71c0",
+    "semantic_hash": "6911597bd2c5a76a010a240a36cb71c0"
+  },
+  "src/NeoWallet.Domain/Errors/DomainErrors.cs": {
+    "mtime": 1786889264.307695,
+    "ast_hash": "8d6922ef23775c19cf955c0b8745620a",
+    "semantic_hash": "8d6922ef23775c19cf955c0b8745620a"
+  },
+  "src/NeoWallet.Domain/Events/AllRefreshTokensRevoked.cs": {
+    "mtime": 1786783476.46601,
+    "ast_hash": "3e9ba543b5cd4d70371b9847e50166b8",
+    "semantic_hash": "3e9ba543b5cd4d70371b9847e50166b8"
+  },
+  "src/NeoWallet.Domain/Events/ApiKeyCreated.cs": {
+    "mtime": 1786783535.084515,
+    "ast_hash": "0ecd88ccb16aec51f8a45fda717206af",
+    "semantic_hash": "0ecd88ccb16aec51f8a45fda717206af"
+  },
+  "src/NeoWallet.Domain/Events/ApiKeyRevoked.cs": {
+    "mtime": 1786783545.7944539,
+    "ast_hash": "ca2dc5a79a249a160a9a98a94fc78a30",
+    "semantic_hash": "ca2dc5a79a249a160a9a98a94fc78a30"
+  },
+  "src/NeoWallet.Domain/Events/MoneyDeposited.cs": {
+    "mtime": 1786717399.540547,
+    "ast_hash": "aee2f8a6fb94b0b82d10342847acbec6",
+    "semantic_hash": "aee2f8a6fb94b0b82d10342847acbec6"
+  },
+  "src/NeoWallet.Domain/Events/MoneyTransferredIn.cs": {
+    "mtime": 1786717399.540547,
+    "ast_hash": "661375f4ad0c38db8efdba0eeb4e7779",
+    "semantic_hash": "661375f4ad0c38db8efdba0eeb4e7779"
+  },
+  "src/NeoWallet.Domain/Events/MoneyTransferredOut.cs": {
+    "mtime": 1786717399.5422153,
+    "ast_hash": "56a4630612e07c7b02b673fac9fee8b9",
+    "semantic_hash": "56a4630612e07c7b02b673fac9fee8b9"
+  },
+  "src/NeoWallet.Domain/Events/MoneyWithdrawn.cs": {
+    "mtime": 1786717399.5422153,
+    "ast_hash": "0b2987c54aff4a07c919195ca08247d6",
+    "semantic_hash": "0b2987c54aff4a07c919195ca08247d6"
+  },
+  "src/NeoWallet.Domain/Events/PaymentFailed.cs": {
+    "mtime": 1786885073.3054106,
+    "ast_hash": "4b101894880568772b462d1b193cbe0e",
+    "semantic_hash": "4b101894880568772b462d1b193cbe0e"
+  },
+  "src/NeoWallet.Domain/Events/PaymentInitiated.cs": {
+    "mtime": 1786885016.4837773,
+    "ast_hash": "20b2e937c3f894d11894070464421cda",
+    "semantic_hash": "20b2e937c3f894d11894070464421cda"
+  },
+  "src/NeoWallet.Domain/Events/PaymentSettled.cs": {
+    "mtime": 1786885052.665545,
+    "ast_hash": "115d0506505ac9a89ba3bf1188ccb3c3",
+    "semantic_hash": "115d0506505ac9a89ba3bf1188ccb3c3"
+  },
+  "src/NeoWallet.Domain/Events/PaymentVerified.cs": {
+    "mtime": 1786885036.0640976,
+    "ast_hash": "5449086fba2e67d344e367cde5870b7d",
+    "semantic_hash": "5449086fba2e67d344e367cde5870b7d"
+  },
+  "src/NeoWallet.Domain/Events/RefreshTokenCreated.cs": {
+    "mtime": 1786783450.5566828,
+    "ast_hash": "7af6d2bf1cfe88d86c0e38b3517e60e3",
+    "semantic_hash": "7af6d2bf1cfe88d86c0e38b3517e60e3"
+  },
+  "src/NeoWallet.Domain/Events/RefreshTokenRevoked.cs": {
+    "mtime": 1786783462.7165234,
+    "ast_hash": "271ff20f651504eb414885400c5b200e",
+    "semantic_hash": "271ff20f651504eb414885400c5b200e"
+  },
+  "src/NeoWallet.Domain/Events/TwoFactorDisabled.cs": {
+    "mtime": 1786783514.16082,
+    "ast_hash": "3fd991455538964643ae3148bf4c9207",
+    "semantic_hash": "3fd991455538964643ae3148bf4c9207"
+  },
+  "src/NeoWallet.Domain/Events/TwoFactorEnabled.cs": {
+    "mtime": 1786783496.631639,
+    "ast_hash": "368b4d8d88f31d92678b82fe84177ffa",
+    "semantic_hash": "368b4d8d88f31d92678b82fe84177ffa"
+  },
+  "src/NeoWallet.Domain/Events/UserCreated.cs": {
+    "mtime": 1786783438.2116525,
+    "ast_hash": "d802248a4644dc2405f4e84f2509e5f4",
+    "semantic_hash": "d802248a4644dc2405f4e84f2509e5f4"
+  },
+  "src/NeoWallet.Domain/Events/WalletCreated.cs": {
+    "mtime": 1786717399.5429099,
+    "ast_hash": "ee4155d330590b7344e4d5a648813b10",
+    "semantic_hash": "ee4155d330590b7344e4d5a648813b10"
+  },
+  "src/NeoWallet.Domain/Events/WalletLocked.cs": {
+    "mtime": 1786717399.5439165,
+    "ast_hash": "cf7a97eb229bf2777ec4e69c573264b1",
+    "semantic_hash": "cf7a97eb229bf2777ec4e69c573264b1"
+  },
+  "src/NeoWallet.Domain/Events/WalletUnlocked.cs": {
+    "mtime": 1786717399.5439165,
+    "ast_hash": "28b682400bcef9a609d3cd3f0571839a",
+    "semantic_hash": "28b682400bcef9a609d3cd3f0571839a"
+  },
+  "src/NeoWallet.Domain/NeoWallet.Domain.csproj": {
+    "mtime": 1786717399.4809275,
+    "ast_hash": "a09b26111c660da58a84b7d66e16c694",
+    "semantic_hash": "a09b26111c660da58a84b7d66e16c694"
+  },
+  "src/NeoWallet.Domain/Repositories/IAggregateRepository.cs": {
+    "mtime": 1786717399.5449777,
+    "ast_hash": "64723f7a0d9460e633db44ef8dd01708",
+    "semantic_hash": "64723f7a0d9460e633db44ef8dd01708"
+  },
+  "src/NeoWallet.Domain/Repositories/IUserRepository.cs": {
+    "mtime": 1786783605.963082,
+    "ast_hash": "572e2f073e0a8a53476634ee18b800ad",
+    "semantic_hash": "572e2f073e0a8a53476634ee18b800ad"
+  },
+  "src/NeoWallet.Domain/Repositories/IWalletRepository.cs": {
+    "mtime": 1786717399.5449777,
+    "ast_hash": "33d5b053527ed9664a525190f1022a5f",
+    "semantic_hash": "33d5b053527ed9664a525190f1022a5f"
+  },
+  "src/NeoWallet.Domain/Services/ITransferService.cs": {
+    "mtime": 1786717399.545985,
+    "ast_hash": "752bba30a03e327b3a6dc95a61d16153",
+    "semantic_hash": "752bba30a03e327b3a6dc95a61d16153"
+  },
+  "src/NeoWallet.Domain/Services/TransferService.cs": {
+    "mtime": 1786717399.545985,
+    "ast_hash": "886b616438895e29801782f42bf010e2",
+    "semantic_hash": "886b616438895e29801782f42bf010e2"
+  },
+  "src/NeoWallet.Domain/ValueObjects/ApiKey.cs": {
+    "mtime": 1786783425.4745672,
+    "ast_hash": "cf8849a823cc7ec460d48de095ae18b8",
+    "semantic_hash": "cf8849a823cc7ec460d48de095ae18b8"
+  },
+  "src/NeoWallet.Domain/ValueObjects/Currency.cs": {
+    "mtime": 1786897536.8725572,
+    "ast_hash": "55a3e020bab1a18c3b9c9c1dda57e4ed",
+    "semantic_hash": "55a3e020bab1a18c3b9c9c1dda57e4ed"
+  },
+  "src/NeoWallet.Domain/ValueObjects/Email.cs": {
+    "mtime": 1786897775.0153923,
+    "ast_hash": "4f761e4689f9371700ca78eea80b6c44",
+    "semantic_hash": "4f761e4689f9371700ca78eea80b6c44"
+  },
+  "src/NeoWallet.Domain/ValueObjects/Money.cs": {
+    "mtime": 1786897573.7444081,
+    "ast_hash": "d78a4a7416db9dc3c6c966df4d358e50",
+    "semantic_hash": "d78a4a7416db9dc3c6c966df4d358e50"
+  },
+  "src/NeoWallet.Domain/ValueObjects/OwnerId.cs": {
+    "mtime": 1786897641.143956,
+    "ast_hash": "c0684d16b44c1d2a7c3e623917c21fdf",
+    "semantic_hash": "c0684d16b44c1d2a7c3e623917c21fdf"
+  },
+  "src/NeoWallet.Domain/ValueObjects/PasswordHash.cs": {
+    "mtime": 1786897823.8310497,
+    "ast_hash": "a7b9d9d3649829c480c6e549a6cf54ac",
+    "semantic_hash": "a7b9d9d3649829c480c6e549a6cf54ac"
+  },
+  "src/NeoWallet.Domain/ValueObjects/PaymentId.cs": {
+    "mtime": 1786897729.6896684,
+    "ast_hash": "65900b499ff9379c110548c1903be76b",
+    "semantic_hash": "65900b499ff9379c110548c1903be76b"
+  },
+  "src/NeoWallet.Domain/ValueObjects/TotpSecret.cs": {
+    "mtime": 1786897877.565129,
+    "ast_hash": "8addeef74d02611578134c80ca20c33d",
+    "semantic_hash": "8addeef74d02611578134c80ca20c33d"
+  },
+  "src/NeoWallet.Domain/ValueObjects/TransactionId.cs": {
+    "mtime": 1786897689.0130847,
+    "ast_hash": "b5cbb5c54354e2a5f130f03721ffe1da",
+    "semantic_hash": "b5cbb5c54354e2a5f130f03721ffe1da"
+  },
+  "src/NeoWallet.Domain/ValueObjects/WalletId.cs": {
+    "mtime": 1786897599.7682426,
+    "ast_hash": "e6c0e3f35213e868f664b47b8108208e",
+    "semantic_hash": "e6c0e3f35213e868f664b47b8108208e"
+  },
+  "src/NeoWallet.Infrastructure/Audit/MartenAuditStore.cs": {
+    "mtime": 1786889617.8718266,
+    "ast_hash": "6868938aaa4db9abf894b3751f711bb4",
+    "semantic_hash": "6868938aaa4db9abf894b3751f711bb4"
+  },
+  "src/NeoWallet.Infrastructure/Authentication/ApiKeyService.cs": {
+    "mtime": 1786801985.7067306,
+    "ast_hash": "c94c836d057a9d0c8400d76ddd857703",
+    "semantic_hash": "c94c836d057a9d0c8400d76ddd857703"
+  },
+  "src/NeoWallet.Infrastructure/Authentication/JwtProvider.cs": {
+    "mtime": 1786801946.5365858,
+    "ast_hash": "bd2b6eb099ca64cc051fa1bedb2118b3",
+    "semantic_hash": "bd2b6eb099ca64cc051fa1bedb2118b3"
+  },
+  "src/NeoWallet.Infrastructure/Authentication/Options/JwtSettings.cs": {
+    "mtime": 1786783764.5874276,
+    "ast_hash": "63fb1a5c8f56e612438796dcb18d367a",
+    "semantic_hash": "63fb1a5c8f56e612438796dcb18d367a"
+  },
+  "src/NeoWallet.Infrastructure/Authentication/PasswordHasher.cs": {
+    "mtime": 1786801933.2042747,
+    "ast_hash": "a4a4f6c0e57ce9b3ecddb7ae23b2b8ab",
+    "semantic_hash": "a4a4f6c0e57ce9b3ecddb7ae23b2b8ab"
+  },
+  "src/NeoWallet.Infrastructure/Authentication/TotpProvider.cs": {
+    "mtime": 1786801964.3605332,
+    "ast_hash": "c834a6cb4f3e174a4b6ec0ccd34a34ed",
+    "semantic_hash": "c834a6cb4f3e174a4b6ec0ccd34a34ed"
+  },
+  "src/NeoWallet.Infrastructure/DependencyInjection.cs": {
+    "mtime": 1786894932.596828,
+    "ast_hash": "01cc5f2e60b5bbb24a1b156e4385a067",
+    "semantic_hash": "01cc5f2e60b5bbb24a1b156e4385a067"
+  },
+  "src/NeoWallet.Infrastructure/Gateways/MockPaymentGateway.cs": {
+    "mtime": 1786885364.3040261,
+    "ast_hash": "a2f1b143742eedf6213a0322db843ecc",
+    "semantic_hash": "a2f1b143742eedf6213a0322db843ecc"
+  },
+  "src/NeoWallet.Infrastructure/NeoWallet.Infrastructure.csproj": {
+    "mtime": 1786904858.8672874,
+    "ast_hash": "68c55dd990e7fa0b7862e15afed5573f",
+    "semantic_hash": "68c55dd990e7fa0b7862e15afed5573f"
+  },
+  "src/NeoWallet.Infrastructure/Notifications/LoggingDiscrepancyNotifier.cs": {
+    "mtime": 1786889654.791852,
+    "ast_hash": "be5c6318dedd5acd29c5bce850245c69",
+    "semantic_hash": "be5c6318dedd5acd29c5bce850245c69"
+  },
+  "src/NeoWallet.Infrastructure/Persistence/Options/MartenSettings.cs": {
+    "mtime": 1786717399.5758252,
+    "ast_hash": "68d46180758cf4e92f0fa4f66b3edaf2",
+    "semantic_hash": "68d46180758cf4e92f0fa4f66b3edaf2"
+  },
+  "src/NeoWallet.Infrastructure/Persistence/Repositories/MartenAggregateRepository.cs": {
+    "mtime": 1786898638.5268018,
+    "ast_hash": "c849e8652329952303ce9f0b8e9ee0a2",
+    "semantic_hash": "c849e8652329952303ce9f0b8e9ee0a2"
+  },
+  "src/NeoWallet.Infrastructure/Persistence/Repositories/MartenUserRepository.cs": {
+    "mtime": 1786783885.9526813,
+    "ast_hash": "6905440cf6d3c4200a4b60657c82e2bd",
+    "semantic_hash": "6905440cf6d3c4200a4b60657c82e2bd"
+  },
+  "src/NeoWallet.Infrastructure/Persistence/Repositories/MartenWalletRepository.cs": {
+    "mtime": 1786898620.495149,
+    "ast_hash": "f3894290f2fedbc13e07515aec915b9f",
+    "semantic_hash": "f3894290f2fedbc13e07515aec915b9f"
+  },
+  "src/NeoWallet.Infrastructure/Projections/TransactionHistoryProjection.cs": {
+    "mtime": 1786717399.5784688,
+    "ast_hash": "8e13ce60dd7e7d6617edc76890cc6781",
+    "semantic_hash": "8e13ce60dd7e7d6617edc76890cc6781"
+  },
+  "src/NeoWallet.Infrastructure/Projections/UserSummaryProjection.cs": {
+    "mtime": 1786783866.1196485,
+    "ast_hash": "80805fb31d862e08b6cecd609d3054e1",
+    "semantic_hash": "80805fb31d862e08b6cecd609d3054e1"
+  },
+  "src/NeoWallet.Infrastructure/Projections/WalletSummaryProjection.cs": {
+    "mtime": 1786717399.5791323,
+    "ast_hash": "4720b2ab4017ed036fb99ba5577a2222",
+    "semantic_hash": "4720b2ab4017ed036fb99ba5577a2222"
+  },
+  "src/NeoWallet.Infrastructure/ReadModels/TransactionHistory.cs": {
+    "mtime": 1786717399.5799942,
+    "ast_hash": "8a726f1f84ac32c132b46c4818a395d5",
+    "semantic_hash": "8a726f1f84ac32c132b46c4818a395d5"
+  },
+  "src/NeoWallet.Infrastructure/ReadModels/UserSummary.cs": {
+    "mtime": 1786783855.8452392,
+    "ast_hash": "dec51d23d00e93c1a3991849f3213cfb",
+    "semantic_hash": "dec51d23d00e93c1a3991849f3213cfb"
+  },
+  "src/NeoWallet.Infrastructure/ReadModels/WalletSummary.cs": {
+    "mtime": 1786717399.5804987,
+    "ast_hash": "9f60171c6ee3506d8cc33ee029ac23b3",
+    "semantic_hash": "9f60171c6ee3506d8cc33ee029ac23b3"
+  },
+  "src/NeoWallet.Infrastructure/Reconciliation/ReconciliationService.cs": {
+    "mtime": 1786889674.9262147,
+    "ast_hash": "ce821db1523681d043ec0ae578005db3",
+    "semantic_hash": "ce821db1523681d043ec0ae578005db3"
+  },
+  "src/NeoWallet.Infrastructure/Services/MartenWalletReadService.cs": {
+    "mtime": 1786802388.6487253,
+    "ast_hash": "21540a64e7591f1709a0db982e5c06c6",
+    "semantic_hash": "21540a64e7591f1709a0db982e5c06c6"
+  },
+  "src/NeoWallet.Infrastructure/Services/MemoryIdempotencyStore.cs": {
+    "mtime": 1786802284.0797944,
+    "ast_hash": "9ad3ba879d951e466bec4714913dde7f",
+    "semantic_hash": "9ad3ba879d951e466bec4714913dde7f"
+  },
+  "tests/NeoWallet.Api.IntegrationTests/Common/CustomWebApplicationFactory.cs": {
+    "mtime": 1786894023.6515834,
+    "ast_hash": "acbbed5476549164d3f71efb1ec5ae2d",
+    "semantic_hash": "acbbed5476549164d3f71efb1ec5ae2d"
+  },
+  "tests/NeoWallet.Api.IntegrationTests/Controllers/AuditControllerTests.cs": {
+    "mtime": 1786894511.472183,
+    "ast_hash": "c54eb3b6dd32d79b194d71cae461c621",
+    "semantic_hash": "c54eb3b6dd32d79b194d71cae461c621"
+  },
+  "tests/NeoWallet.Api.IntegrationTests/Controllers/AuthControllerTests.cs": {
+    "mtime": 1786894476.2107577,
+    "ast_hash": "76f7d902a0175596c18c138c4d112642",
+    "semantic_hash": "76f7d902a0175596c18c138c4d112642"
+  },
+  "tests/NeoWallet.Api.IntegrationTests/Controllers/HealthAndRootEndpointTests.cs": {
+    "mtime": 1786894434.1486406,
+    "ast_hash": "5e6752cb71b9538ebde76a3aa6d65721",
+    "semantic_hash": "5e6752cb71b9538ebde76a3aa6d65721"
+  },
+  "tests/NeoWallet.Api.IntegrationTests/Controllers/WalletsControllerTests.cs": {
+    "mtime": 1786894454.9871101,
+    "ast_hash": "f2a349e555d294c2ba003915beedc050",
+    "semantic_hash": "f2a349e555d294c2ba003915beedc050"
+  },
+  "tests/NeoWallet.Api.IntegrationTests/NeoWallet.Api.IntegrationTests.csproj": {
+    "mtime": 1786893989.1609044,
+    "ast_hash": "a3d5956b6972ad8fa6d8c3e0b93ed487",
+    "semantic_hash": "a3d5956b6972ad8fa6d8c3e0b93ed487"
+  },
+  "tests/NeoWallet.Application.UnitTests/Common/Behaviors/IdempotencyBehaviorTests.cs": {
+    "mtime": 1786802638.4639053,
+    "ast_hash": "dbe436f1d05edacd7b79eaecc140a40f",
+    "semantic_hash": "dbe436f1d05edacd7b79eaecc140a40f"
+  },
+  "tests/NeoWallet.Application.UnitTests/Common/Behaviors/ValidationBehaviorTests.cs": {
+    "mtime": 1786802622.271962,
+    "ast_hash": "4a2d972bbec819659b518f38470aeb17",
+    "semantic_hash": "4a2d972bbec819659b518f38470aeb17"
+  },
+  "tests/NeoWallet.Application.UnitTests/Features/AuditAndReconciliationTests.cs": {
+    "mtime": 1786889879.1223764,
+    "ast_hash": "dc9d728386e34a84b322247e4e61c0a9",
+    "semantic_hash": "dc9d728386e34a84b322247e4e61c0a9"
+  },
+  "tests/NeoWallet.Application.UnitTests/Features/Identity/IdentityCommandHandlersTests.cs": {
+    "mtime": 1786802665.0011942,
+    "ast_hash": "4d2dbb2bd351296571a1929ad238a4a0",
+    "semantic_hash": "4d2dbb2bd351296571a1929ad238a4a0"
+  },
+  "tests/NeoWallet.Application.UnitTests/Features/Wallets/WalletCommandHandlersTests.cs": {
+    "mtime": 1786802651.5646744,
+    "ast_hash": "b31506c582dd385d5b24da9aabc95c16",
+    "semantic_hash": "b31506c582dd385d5b24da9aabc95c16"
+  },
+  "tests/NeoWallet.Application.UnitTests/NeoWallet.Application.UnitTests.csproj": {
+    "mtime": 1786904998.1645312,
+    "ast_hash": "18de69e2154e6109762685ea60ea407f",
+    "semantic_hash": "18de69e2154e6109762685ea60ea407f"
+  },
+  "tests/NeoWallet.Application.UnitTests/Sagas/DepositPaymentStateMachineTests.cs": {
+    "mtime": 1786888123.5748675,
+    "ast_hash": "19eb2873fc59b1e44f2b6b15a5eb3cd8",
+    "semantic_hash": "19eb2873fc59b1e44f2b6b15a5eb3cd8"
+  },
+  "tests/NeoWallet.Application.UnitTests/Sagas/TransferStateMachineTests.cs": {
+    "mtime": 1786888101.7969563,
+    "ast_hash": "7fb28392ff1fe51283791a43e1f89f12",
+    "semantic_hash": "7fb28392ff1fe51283791a43e1f89f12"
+  },
+  "tests/NeoWallet.ArchitectureTests/ArchitectureTests.cs": {
+    "mtime": 1786896765.2535903,
+    "ast_hash": "ec546c59e82497bff462ea6dde51ef80",
+    "semantic_hash": "ec546c59e82497bff462ea6dde51ef80"
+  },
+  "tests/NeoWallet.ArchitectureTests/NeoWallet.ArchitectureTests.csproj": {
+    "mtime": 1786895903.7188864,
+    "ast_hash": "5cdaec76d1da861cc8524c0ebb936468",
+    "semantic_hash": "5cdaec76d1da861cc8524c0ebb936468"
+  },
+  "tests/NeoWallet.Benchmarks/AuditHashChainingBenchmark.cs": {
+    "mtime": 1786895440.6054811,
+    "ast_hash": "9f0686ade2d29a36cbfadcdd8e40b081",
+    "semantic_hash": "9f0686ade2d29a36cbfadcdd8e40b081"
+  },
+  "tests/NeoWallet.Benchmarks/NeoWallet.Benchmarks.csproj": {
+    "mtime": 1786895344.1888723,
+    "ast_hash": "c1670ef097706d380821f8f8e8ed92c2",
+    "semantic_hash": "c1670ef097706d380821f8f8e8ed92c2"
+  },
+  "tests/NeoWallet.Benchmarks/PasswordHashingBenchmark.cs": {
+    "mtime": 1786895411.7535915,
+    "ast_hash": "91063a5febb84d9789fd2e885fe688c4",
+    "semantic_hash": "91063a5febb84d9789fd2e885fe688c4"
+  },
+  "tests/NeoWallet.Benchmarks/Program.cs": {
+    "mtime": 1786895471.670187,
+    "ast_hash": "9d483ea85c0039e57c6f2f4fb9edee59",
+    "semantic_hash": "9d483ea85c0039e57c6f2f4fb9edee59"
+  },
+  "tests/NeoWallet.Domain.UnitTests/Aggregates/PaymentTests.cs": {
+    "mtime": 1786888075.6753142,
+    "ast_hash": "d8349144149961dfa64ee72c52000ac0",
+    "semantic_hash": "d8349144149961dfa64ee72c52000ac0"
+  },
+  "tests/NeoWallet.Domain.UnitTests/Aggregates/UserTests.cs": {
+    "mtime": 1786785446.993495,
+    "ast_hash": "015dd5530f247645f1d744df94fdf103",
+    "semantic_hash": "015dd5530f247645f1d744df94fdf103"
+  },
+  "tests/NeoWallet.Domain.UnitTests/Aggregates/WalletTests.cs": {
+    "mtime": 1786717399.49204,
+    "ast_hash": "0010ca002a75f3efc3026f2dfa238c04",
+    "semantic_hash": "0010ca002a75f3efc3026f2dfa238c04"
+  },
+  "tests/NeoWallet.Domain.UnitTests/Common/EntityAndAggregateRootTests.cs": {
+    "mtime": 1786717399.4925776,
+    "ast_hash": "1c880beacbb8e52f54a3d95bf2c25b57",
+    "semantic_hash": "1c880beacbb8e52f54a3d95bf2c25b57"
+  },
+  "tests/NeoWallet.Domain.UnitTests/Common/GuardTests.cs": {
+    "mtime": 1786717399.4932423,
+    "ast_hash": "657851e1b661c3540d08b6f089500acb",
+    "semantic_hash": "657851e1b661c3540d08b6f089500acb"
+  },
+  "tests/NeoWallet.Domain.UnitTests/Common/ResultTests.cs": {
+    "mtime": 1786717399.4932423,
+    "ast_hash": "c1a3dabb64c5970f541ab1b060f8ec4d",
+    "semantic_hash": "c1a3dabb64c5970f541ab1b060f8ec4d"
+  },
+  "tests/NeoWallet.Domain.UnitTests/Entities/AuditLogEntryTests.cs": {
+    "mtime": 1786889850.6583803,
+    "ast_hash": "99059dd87a3f4372971fab5a9db9a441",
+    "semantic_hash": "99059dd87a3f4372971fab5a9db9a441"
+  },
+  "tests/NeoWallet.Domain.UnitTests/Entities/ReconciliationReportTests.cs": {
+    "mtime": 1786889863.0088732,
+    "ast_hash": "ecbcb3a83fcb3e819b46b5e2dfabe2da",
+    "semantic_hash": "ecbcb3a83fcb3e819b46b5e2dfabe2da"
+  },
+  "tests/NeoWallet.Domain.UnitTests/NeoWallet.Domain.UnitTests.csproj": {
+    "mtime": 1786717399.4937587,
+    "ast_hash": "5a70e3c013505b48e0695f711037c190",
+    "semantic_hash": "5a70e3c013505b48e0695f711037c190"
+  },
+  "tests/NeoWallet.Domain.UnitTests/Services/TransferServiceTests.cs": {
+    "mtime": 1786717399.494305,
+    "ast_hash": "01eb4df518ae0cef58748cf74c34daa1",
+    "semantic_hash": "01eb4df518ae0cef58748cf74c34daa1"
+  },
+  "tests/NeoWallet.Domain.UnitTests/ValueObjects/CurrencyTests.cs": {
+    "mtime": 1786717399.4953783,
+    "ast_hash": "5b0a1c3ff49ead1c7efc307a6d78526b",
+    "semantic_hash": "5b0a1c3ff49ead1c7efc307a6d78526b"
+  },
+  "tests/NeoWallet.Domain.UnitTests/ValueObjects/EmailTests.cs": {
+    "mtime": 1786785422.891269,
+    "ast_hash": "f4e26b8956ca3681b9f1126a3b9ef9f5",
+    "semantic_hash": "f4e26b8956ca3681b9f1126a3b9ef9f5"
+  },
+  "tests/NeoWallet.Domain.UnitTests/ValueObjects/MoneyTests.cs": {
+    "mtime": 1786717399.495944,
+    "ast_hash": "0fd88caa918619eea3ffaad4eaaed396",
+    "semantic_hash": "0fd88caa918619eea3ffaad4eaaed396"
+  },
+  "tests/NeoWallet.Domain.UnitTests/ValueObjects/StronglyTypedIdTests.cs": {
+    "mtime": 1786717399.496467,
+    "ast_hash": "8e5d456e29b6e8b35f1abaa5558271d3",
+    "semantic_hash": "8e5d456e29b6e8b35f1abaa5558271d3"
+  },
+  "tests/NeoWallet.Domain.UnitTests/ValueObjects/TotpSecretTests.cs": {
+    "mtime": 1786785431.9025664,
+    "ast_hash": "01e864ab545db0d595a486408d972b6c",
+    "semantic_hash": "01e864ab545db0d595a486408d972b6c"
+  },
+  "tests/NeoWallet.Infrastructure.IntegrationTests/Fixtures/PostgreSqlFixture.cs": {
+    "mtime": 1786717399.5810416,
+    "ast_hash": "69b8cbddcc78b1bf42ed2995821d26bc",
+    "semantic_hash": "69b8cbddcc78b1bf42ed2995821d26bc"
+  },
+  "tests/NeoWallet.Infrastructure.IntegrationTests/Gateways/MockPaymentGatewayTests.cs": {
+    "mtime": 1786888258.7898626,
+    "ast_hash": "d628bb29364e39ec6a97006ed4ae5ffd",
+    "semantic_hash": "d628bb29364e39ec6a97006ed4ae5ffd"
+  },
+  "tests/NeoWallet.Infrastructure.IntegrationTests/NeoWallet.Infrastructure.IntegrationTests.csproj": {
+    "mtime": 1786717399.497543,
+    "ast_hash": "87729527aa59efa3b172416ae19ba9f8",
+    "semantic_hash": "87729527aa59efa3b172416ae19ba9f8"
+  },
+  "tests/NeoWallet.Infrastructure.IntegrationTests/Projections/TransactionHistoryProjectionTests.cs": {
+    "mtime": 1786717399.4980938,
+    "ast_hash": "e52f907f38817fa9dea0d3d5238d8787",
+    "semantic_hash": "e52f907f38817fa9dea0d3d5238d8787"
+  },
+  "tests/NeoWallet.Infrastructure.IntegrationTests/Projections/UserSummaryProjectionTests.cs": {
+    "mtime": 1786785516.039001,
+    "ast_hash": "1cd54704dfdc13e7d1918075c6460b36",
+    "semantic_hash": "1cd54704dfdc13e7d1918075c6460b36"
+  },
+  "tests/NeoWallet.Infrastructure.IntegrationTests/Projections/WalletSummaryProjectionTests.cs": {
+    "mtime": 1786717399.4986129,
+    "ast_hash": "ed1b211ad04149cd2e7e0ffb32fdc97f",
+    "semantic_hash": "ed1b211ad04149cd2e7e0ffb32fdc97f"
+  },
+  "tests/NeoWallet.Infrastructure.IntegrationTests/Repositories/MartenIntegrationTests.cs": {
+    "mtime": 1786898272.3362575,
+    "ast_hash": "605b842d121de5094b5d86dff5df6830",
+    "semantic_hash": "605b842d121de5094b5d86dff5df6830"
+  },
+  "tests/NeoWallet.Infrastructure.IntegrationTests/Repositories/MartenWalletRepositoryUnitTests.cs": {
+    "mtime": 1786717399.4998088,
+    "ast_hash": "8e9dd0e2691c98e87e1399dbe42076c4",
+    "semantic_hash": "8e9dd0e2691c98e87e1399dbe42076c4"
+  },
+  "tests/NeoWallet.Infrastructure.IntegrationTests/Security/ApiKeyServiceTests.cs": {
+    "mtime": 1786785503.2110012,
+    "ast_hash": "0835da8740b3ba9cac33acac29e2084f",
+    "semantic_hash": "0835da8740b3ba9cac33acac29e2084f"
+  },
+  "tests/NeoWallet.Infrastructure.IntegrationTests/Security/JwtProviderTests.cs": {
+    "mtime": 1786790033.6828184,
+    "ast_hash": "d4732ccc611d743a203a41c4635f2439",
+    "semantic_hash": "d4732ccc611d743a203a41c4635f2439"
+  },
+  "tests/NeoWallet.Infrastructure.IntegrationTests/Security/PasswordHasherTests.cs": {
+    "mtime": 1786785460.22432,
+    "ast_hash": "4118c07ee614d9506ba6ca79bfd38261",
+    "semantic_hash": "4118c07ee614d9506ba6ca79bfd38261"
+  },
+  "tests/NeoWallet.Infrastructure.IntegrationTests/Security/TotpProviderTests.cs": {
+    "mtime": 1786785485.735065,
+    "ast_hash": "fd09c4473d6ae44a9c41587c6f164d10",
+    "semantic_hash": "fd09c4473d6ae44a9c41587c6f164d10"
+  }
+}
