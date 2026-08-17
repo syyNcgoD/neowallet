@@ -26,6 +26,8 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { cn } from "@/lib/utils"
+import { useQuery } from "@tanstack/react-query"
+import { apiClient } from "@/lib/api/client"
 import { holdings as seedHoldings, type Holding } from "@/data/seed"
 
 type SortDir = "asc" | "desc" | null
@@ -54,27 +56,35 @@ export function HoldingsTable() {
   const [sortDir, setSortDir] = useState<SortDir>(null)
   const prevPrices = useRef<Record<string, number>>({ ...prices })
 
-  // Live price simulation
+  // Query live real stock prices from Finnhub via backend
+  const { data: liveStocks } = useQuery<{ symbol: string; currentPrice: number }[]>({
+    queryKey: ["live-stock-quotes-table"],
+    queryFn: async () => {
+      try {
+        const res = await apiClient.get<{ symbol: string; currentPrice: number }[]>("/market/stocks");
+        return res.data;
+      } catch {
+        return [];
+      }
+    },
+    refetchInterval: 15000,
+  });
+
+  // Sync live real prices
   useEffect(() => {
-    const interval = setInterval(() => {
+    if (liveStocks && liveStocks.length > 0) {
       setPrices((prev) => {
-        const next = { ...prev }
-        const flashes: Record<string, "up" | "down" | null> = {}
-        for (const h of seedHoldings) {
-          const change = 1 + (Math.random() - 0.5) * 0.006 // +/- 0.3%
-          const newPrice = Math.round(prev[h.id] * change * 100) / 100
-          if (newPrice !== prev[h.id]) {
-            flashes[h.id] = newPrice > prev[h.id] ? "up" : "down"
+        const next = { ...prev };
+        for (const s of liveStocks) {
+          const matched = seedHoldings.find((h) => h.symbol.toUpperCase() === s.symbol.toUpperCase());
+          if (matched && s.currentPrice > 0) {
+            next[matched.id] = s.currentPrice;
           }
-          next[h.id] = newPrice
         }
-        prevPrices.current = prev
-        setFlashMap(flashes)
-        return next
-      })
-    }, 3000)
-    return () => clearInterval(interval)
-  }, [])
+        return next;
+      });
+    }
+  }, [liveStocks]);
 
   // Clear flash after animation
   useEffect(() => {
