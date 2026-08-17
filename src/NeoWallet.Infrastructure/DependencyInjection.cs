@@ -35,7 +35,12 @@ public static class DependencyInjection
 
         if (string.IsNullOrWhiteSpace(martenSettings.ConnectionString))
         {
-            martenSettings.ConnectionString = configuration.GetConnectionString("Postgres")
+            martenSettings.ConnectionString = configuration["Marten:ConnectionString"]
+                ?? configuration.GetConnectionString("Postgres")
+                ?? configuration["DATABASE_URL"]
+                ?? configuration["DATABASE_PUBLIC_URL"]
+                ?? Environment.GetEnvironmentVariable("DATABASE_URL")
+                ?? Environment.GetEnvironmentVariable("DATABASE_PUBLIC_URL")
                 ?? "Host=localhost;Port=5432;Database=neowallet;Username=postgres;Password=postgres;";
         }
 
@@ -43,7 +48,7 @@ public static class DependencyInjection
         {
             opts.ConnectionString = martenSettings.ConnectionString;
             opts.SchemaName = martenSettings.SchemaName;
-            opts.AutoCreateSchemaObjects = martenSettings.AutoCreateSchemaObjects;
+            opts.AutoCreateSchemaObjects = true;
         });
 
         // JWT Settings
@@ -53,6 +58,7 @@ public static class DependencyInjection
         {
             options.Connection(martenSettings.ConnectionString);
             options.DatabaseSchemaName = martenSettings.SchemaName;
+            options.AutoCreateSchemaObjects = JasperFx.CodeGeneration.AutoCreate.All;
 
             // Register Wallet Domain Event Types
             options.Events.AddEventType(typeof(WalletCreated));
