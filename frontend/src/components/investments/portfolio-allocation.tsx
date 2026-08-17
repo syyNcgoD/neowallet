@@ -1,18 +1,20 @@
-"use client"
+"use client";
 
-import { useMemo, useState, useCallback } from "react"
-import { PieChart, Pie, Cell } from "recharts"
+import { useMemo, useState, useCallback } from "react";
+import { PieChart, Pie, Cell } from "recharts";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 import {
   ChartContainer,
   type ChartConfig,
-} from "@/components/ui/chart"
-import { holdings } from "@/data/seed"
+} from "@/components/ui/chart";
+import { holdings } from "@/data/seed";
+import { useQuery } from "@tanstack/react-query";
+import { apiClient } from "@/lib/api/client";
 
 const SECTOR_COLORS = [
   "var(--color-chart-1)",
@@ -20,50 +22,69 @@ const SECTOR_COLORS = [
   "var(--color-chart-3)",
   "var(--color-chart-4)",
   "var(--color-chart-5)",
-]
+];
 
 export function PortfolioAllocation() {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null)
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+  // Fetch real-time live stock quotes
+  const { data: liveStocks } = useQuery<{ symbol: string; currentPrice: number }[]>({
+    queryKey: ["live-stock-quotes-allocation"],
+    queryFn: async () => {
+      try {
+        const res = await apiClient.get<{ symbol: string; currentPrice: number }[]>("/market/stocks");
+        return res.data;
+      } catch {
+        return [];
+      }
+    },
+    refetchInterval: 15000,
+  });
 
   const { sectorData, totalValue } = useMemo(() => {
-    const map = new Map<string, number>()
+    const map = new Map<string, number>();
+
     for (const h of holdings) {
-      const value = h.quantity * h.currentPrice
-      map.set(h.sector, (map.get(h.sector) ?? 0) + value)
+      const live = liveStocks?.find((s) => s.symbol.toUpperCase() === h.symbol.toUpperCase());
+      const price = live && live.currentPrice > 0 ? live.currentPrice : h.currentPrice;
+      const value = h.quantity * price;
+      map.set(h.sector, (map.get(h.sector) ?? 0) + value);
     }
+
     const data = Array.from(map.entries()).map(([sector, value], i) => ({
       name: sector,
       value: Math.round(value * 100) / 100,
       fill: SECTOR_COLORS[i % SECTOR_COLORS.length],
-    }))
-    const total = data.reduce((s, d) => s + d.value, 0)
-    return { sectorData: data, totalValue: total }
-  }, [])
+    }));
+
+    const total = data.reduce((s, d) => s + d.value, 0);
+    return { sectorData: data, totalValue: total };
+  }, [liveStocks]);
 
   const chartConfig = useMemo<ChartConfig>(() => {
-    const config: ChartConfig = {}
+    const config: ChartConfig = {};
     sectorData.forEach((s) => {
-      config[s.name] = { label: s.name, color: s.fill }
-    })
-    return config
-  }, [sectorData])
+      config[s.name] = { label: s.name, color: s.fill };
+    });
+    return config;
+  }, [sectorData]);
 
   const onPieEnter = useCallback((_: unknown, index: number) => {
-    setActiveIndex(index)
-  }, [])
+    setActiveIndex(index);
+  }, []);
 
   const onPieLeave = useCallback(() => {
-    setActiveIndex(null)
-  }, [])
+    setActiveIndex(null);
+  }, []);
 
   const centerLabel = useMemo(() => {
     if (activeIndex !== null && sectorData[activeIndex]) {
-      const s = sectorData[activeIndex]
-      const pct = ((s.value / totalValue) * 100).toFixed(1)
-      return { title: s.name, value: s.value, pct }
+      const s = sectorData[activeIndex];
+      const pct = ((s.value / totalValue) * 100).toFixed(1);
+      return { title: s.name, value: s.value, pct };
     }
-    return { title: "Total Value", value: totalValue, pct: null }
-  }, [activeIndex, sectorData, totalValue])
+    return { title: "Total Value", value: totalValue, pct: null };
+  }, [activeIndex, sectorData, totalValue]);
 
   return (
     <Card>
@@ -134,7 +155,7 @@ export function PortfolioAllocation() {
         {/* Legend */}
         <div className="mt-2 grid gap-1.5 text-xs">
           {sectorData.map((entry) => {
-            const pct = ((entry.value / totalValue) * 100).toFixed(1)
+            const pct = ((entry.value / totalValue) * 100).toFixed(1);
             return (
               <div
                 key={entry.name}
@@ -155,10 +176,10 @@ export function PortfolioAllocation() {
                   {pct}%
                 </span>
               </div>
-            )
+            );
           })}
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }

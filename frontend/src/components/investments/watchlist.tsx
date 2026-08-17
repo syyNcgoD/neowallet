@@ -1,26 +1,66 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Image from "next/image"
-import { LineChart, Line } from "recharts"
-import { X, Plus } from "lucide-react"
+import { useMemo, useState } from "react";
+import Image from "next/image";
+import { LineChart, Line } from "recharts";
+import { X, Plus } from "lucide-react";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
-import { watchlistItems, type WatchlistItem } from "@/data/seed"
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { watchlistItems, type WatchlistItem } from "@/data/seed";
+import { useQuery } from "@tanstack/react-query";
+import { apiClient } from "@/lib/api/client";
+
+interface StockQuoteApi {
+  symbol: string;
+  companyName: string;
+  currentPrice: number;
+  change: number;
+  percentChange: number;
+}
 
 export function Watchlist() {
-  const [items, setItems] = useState<WatchlistItem[]>(watchlistItems)
+  const [removedIds, setRemovedIds] = useState<Set<string>>(new Set());
+
+  // Fetch real-time live stock quotes
+  const { data: liveStocks } = useQuery<StockQuoteApi[]>({
+    queryKey: ["live-stock-quotes-watchlist"],
+    queryFn: async () => {
+      try {
+        const res = await apiClient.get<StockQuoteApi[]>("/market/stocks");
+        return res.data;
+      } catch {
+        return [];
+      }
+    },
+    refetchInterval: 15000,
+  });
+
+  const items = useMemo<WatchlistItem[]>(() => {
+    return watchlistItems
+      .filter((w) => !removedIds.has(w.id))
+      .map((w) => {
+        const live = liveStocks?.find((s) => s.symbol.toUpperCase() === w.symbol.toUpperCase());
+        if (live && live.currentPrice > 0) {
+          return {
+            ...w,
+            currentPrice: live.currentPrice,
+            dayChange: live.percentChange,
+          };
+        }
+        return w;
+      });
+  }, [liveStocks, removedIds]);
 
   const removeItem = (id: string) => {
-    setItems((prev) => prev.filter((w) => w.id !== id))
-  }
+    setRemovedIds((prev) => new Set(prev).add(id));
+  };
 
   return (
     <Card>
@@ -30,7 +70,7 @@ export function Watchlist() {
       <CardContent className="px-0">
         <div className="divide-y">
           {items.map((w) => {
-            const positive = w.dayChange >= 0
+            const positive = w.dayChange >= 0;
             return (
               <div
                 key={w.id}
@@ -98,7 +138,7 @@ export function Watchlist() {
                   <X className="size-3.5" />
                 </button>
               </div>
-            )
+            );
           })}
 
           {items.length === 0 && (
@@ -116,5 +156,5 @@ export function Watchlist() {
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }
